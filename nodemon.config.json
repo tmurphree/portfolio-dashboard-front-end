@@ -1,0 +1,4 @@
+{
+  "ext": "js,vue",
+  "exec": "npm run test:unit"
+}
