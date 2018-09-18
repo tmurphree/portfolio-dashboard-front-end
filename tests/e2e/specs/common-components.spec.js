@@ -1,3 +1,7 @@
+/**
+ * @description Tests for the top bar and side nav.
+*/
+
 
 describe('the top bar', () => {
   beforeEach(function() {
@@ -5,7 +9,7 @@ describe('the top bar', () => {
   });
 
   it('has the logo', () => {
-    cy.contains('nav span','Portfolio Dashboard');
+    cy.contains('div','Portfolio Dashboard');
   });
 
   it('has the appropriate menu items', function() {
