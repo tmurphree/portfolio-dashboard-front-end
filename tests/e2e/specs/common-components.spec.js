@@ -19,3 +19,12 @@ describe('the top bar', () => {
     });
   });
 });
+
+describe('the side bar', function() {
+  beforeEach(function() {
+    cy.visit('/');
+  });
+
+
+  
+});
