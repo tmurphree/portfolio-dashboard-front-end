@@ -3,7 +3,7 @@
 */
 
 
-describe('the top bar', () => {
+describe('top bar', () => {
   beforeEach(function() {
     cy.visit('/');
   });
@@ -20,10 +20,18 @@ describe('the top bar', () => {
   });
 });
 
-describe('the side bar', function() {
+describe('side bar', function() {
   beforeEach(function() {
     cy.visit('/');
   });
+
+  it('has a sidebar that goes all the way down', function() {
+    cy.get('[data-cy-sidebar]')
+      .should(($sidebar) => {
+        expect($sidebar).to.have.css('overflow', 'hidden');
+      });
+  });
+  
 
 
   
