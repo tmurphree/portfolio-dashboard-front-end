@@ -27,9 +27,10 @@ describe('side bar', function() {
 
   it('has a sidebar that goes all the way down', function() {
     cy.get('[data-cy-sidebar]')
-      .should(($sidebar) => {
-        expect($sidebar).to.have.css('overflow', 'hidden');
-      });
+      .should('have.css', 'overflow', 'hidden')
+      .should('have.css', 'max-width', '25%')
+      .its('height').should('be.gte', '600px');
+      
   });
   
 
