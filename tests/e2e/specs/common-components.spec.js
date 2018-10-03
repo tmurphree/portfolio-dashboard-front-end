@@ -71,8 +71,4 @@ describe('side bar', function() {
       cy.url().should('contain', element.expectedUrl);
     });
   });
-  
-  
-  
-  
 });
