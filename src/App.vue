@@ -9,6 +9,7 @@
         <router-link class="nav-link top-nav-link" to="/save" data-cy-save>Save</router-link>
         <router-link class="nav-link top-nav-link" to="/about" data-cy-about>About</router-link>
         <router-link class="nav-link top-nav-link" to="/help" data-cy-help>Help</router-link>
+        <div class="disclaimer" data-cy-disclaimer>Do NOT base actual trades on the data from this site.  This site is UNFIT to be the basis for any real-world trading.</div>
       </nav>
 
       <div class="container-fluid">
@@ -20,13 +21,13 @@
                 </h6>
               <ul class="nav flex-column">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#">
+                  <a class="nav-link active" href="/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                     Upload or edit current assets <span class="sr-only">(current)</span>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="/current-graph">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                     Graph view
                   </a>
@@ -80,6 +81,10 @@
 </script>
 
 <style lang="scss">
+  .disclaimer {
+    color:rgb(255, 0, 0);
+  }
+
   .top-nav-link {
     color: #12ead6;
   }

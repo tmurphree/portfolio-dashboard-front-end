@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="upload-or-edit">
     <img alt="Vue logo" src="../assets/logo.png">
     <h1>Welcome to Your Vue.js App</h1>
 

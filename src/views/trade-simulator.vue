@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h1>Asset allocation</h1>
+    <h1>trade simulator</h1>
   </div>
 </template>

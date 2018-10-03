@@ -18,6 +18,14 @@ describe('top bar', () => {
         .should('have.attr', 'href', '#/' + element.toLocaleLowerCase());
     });
   });
+
+  it('has a disclaimer', function() {
+    cy.get('[data-cy-disclaimer]')
+      .should('be.visible')
+      .should('have.text','Do NOT base actual trades on the data from this site.  This site is UNFIT to be the basis for any real-world trading.')
+      .should('have.css','color','rgb(255, 0, 0)');
+  });
+  
 });
 
 describe('side bar', function() {
@@ -48,6 +56,25 @@ describe('side bar', function() {
         expect($link[4].innerText).to.contain('Trade simulator');
       });
   });
+  
+  it('goes to the appropriate partials on click', function() {
+    const urlMapper = [
+      { expectedUrl: '/upload-or-edit', linkText: 'Upload or edit current assets' },
+      { expectedUrl: '/current-graph', linkText: 'Graph view' },
+      { expectedUrl: '/current-table', linkText: 'Table view' },
+      { expectedUrl: '/monitored', linkText: 'Monitored securities' },
+      { expectedUrl: '/trade-simulator', linkText: 'Trade simulator' },
+    ];
+
+    urlMapper.forEach(element => {
+      cy.contains(element.linkText).click();
+      cy.url().should('contain', element.expectedUrl);
+    });
+    
+
+    cy.url().should('include', '/uplad-or-edit');
+  });
+  
   
   
   
