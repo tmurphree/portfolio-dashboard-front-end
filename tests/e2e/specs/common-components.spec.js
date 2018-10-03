@@ -59,7 +59,7 @@ describe('side bar', function() {
   
   it('goes to the appropriate partials on click', function() {
     const urlMapper = [
-      { expectedUrl: '/upload-or-edit', linkText: 'Upload or edit current assets' },
+      // { expectedUrl: '/upload-or-edit', linkText: 'Upload or edit current assets' },
       { expectedUrl: '/current-graph', linkText: 'Graph view' },
       { expectedUrl: '/current-table', linkText: 'Table view' },
       { expectedUrl: '/monitored', linkText: 'Monitored securities' },
@@ -70,9 +70,6 @@ describe('side bar', function() {
       cy.contains(element.linkText).click();
       cy.url().should('contain', element.expectedUrl);
     });
-    
-
-    cy.url().should('include', '/uplad-or-edit');
   });
   
   

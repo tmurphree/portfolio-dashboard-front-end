@@ -1,28 +1,63 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from './views/upload-or-edit.vue';
+
+import About from './views/about.vue';
+import AssetAllocation from './views/asset-allocation.vue';
+import CurrentGraph from './views/current-graph.vue';
+import CurrentTable from './views/current-table.vue';
+import Help from './views/help.vue';
+import Monitored from './views/monitored.vue';
+import TradeSimulator from './views/trade-simulator.vue';
+import UploadOrEdit from './views/upload-or-edit.vue';
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/about.vue')
+      component: About,
+    },
+    {
+      path: '/asset-allocation',
+      name: 'asset-allocation',
+      component: AssetAllocation,
+    },
+    {
+      path: '/current-graph',
+      name: 'current-graph',
+      component: CurrentGraph,
+    },
+    {
+      path: '/current-table',
+      name: 'current-table',
+      component: CurrentTable,
+    },
+    {
+      path: '/help',
+      name: 'help',
+      component: Help,
+    },
+    {
+      path: '/monitored',
+      name: 'monitored',
+      component: Monitored,
+    },
+    {
+      path: '/trade-simulator',
+      name: 'trade-simulator',
+      component: TradeSimulator,
+    },
+    {
+      path: '/',
+      name: 'home',
+      component: UploadOrEdit,
     },
     {
       path: '/upload-or-edit',
       name: 'upload-or-edit',
-      component: () => import('./views/upload-or-edit.vue')
+      component: UploadOrEdit,
     }
   ]
 });
