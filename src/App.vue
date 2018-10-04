@@ -15,7 +15,7 @@
 
       <div class="container-fluid">
         <div class="row">
-          <nav class="col-md-3 d-none d-md-block bg-light sidebar" data-cy-sidebar>
+          <nav class="col-md-3 d-md-block bg-light sidebar" data-cy-sidebar>
             <div class="sidebar-sticky">
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                   <span>Current assets</span>
@@ -91,7 +91,12 @@
   }
 
   .sidebar {
-    height: calc(100vh - 40px);
     overflow: hidden;
+  }
+
+  @media (min-width: 768px) { 
+    .sidebar {
+      height: calc(100vh - 40px);
+    }
   }
 </style>

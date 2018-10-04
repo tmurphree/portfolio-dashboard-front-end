@@ -47,3 +47,6 @@ npm run test:e2e
 ## Future Implementations
 * Allow users to log in with Google or a local username / password.  
 * Allow logged-in users to save portfolios.  
+
+## Known issues  
+* The file name for 'App.vue' is capitalized and the other .vue files are all lowercase.  I encountered a bug where the project wouldn't load consistently if I followed the all-lowercase naming convention on that file.  I'll submit an issue on this when I have the time.  
