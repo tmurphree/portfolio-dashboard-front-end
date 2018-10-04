@@ -25,6 +25,22 @@ describe('top bar', () => {
       .should('have.text','Do NOT base actual trades on the data from this site.  This site is UNFIT to be the basis for any real-world trading.')
       .should('have.css','color','rgb(255, 0, 0)');
   });
+
+  it('shows up on all screen sizes', function() {
+    function checkVisibility(selector) {
+      cy
+        .get(selector)
+        .should('be.visible');
+    }
+    
+    cy.viewport('macbook-11');
+    checkVisibility('[data-cy-top-bar]');
+    cy.viewport('ipad-2');
+    checkVisibility('[data-cy-top-bar]');
+    cy.viewport('iphone-5');
+    checkVisibility('[data-cy-top-bar]');
+  });
+  
   
 });
 
@@ -70,5 +86,20 @@ describe('side bar', function() {
       cy.contains(element.linkText).click();
       cy.url().should('contain', element.expectedUrl);
     });
+  });
+
+  it('shows up on all screen sizes', function() {
+    function checkVisibility(selector) {
+      cy
+        .get(selector)
+        .should('be.visible');
+    }
+    
+    cy.viewport('macbook-11');
+    checkVisibility('[data-cy-sidebar]');
+    cy.viewport('ipad-2');
+    checkVisibility('[data-cy-sidebar]');
+    cy.viewport('iphone-5');
+    checkVisibility('[data-cy-sidebar]');
   });
 });

@@ -4,6 +4,7 @@
       <nav class="navbar navbar-dark bg-dark 
         flex-md-nowrap justify-content-start 
         p-0 shadow"
+        data-cy-top-bar
       >
         <div class="navbar-brand col-sm-3">Portfolio Dashboard</div>
         <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
