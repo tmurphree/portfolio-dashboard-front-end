@@ -72,22 +72,20 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-
-      };
-    }
-  };
+export default {
+  data () {
+    return {};
+  }
+};
 </script>
 
 <style lang="scss">
   .disclaimer {
-    color:rgb(255, 0, 0);
+    color:rgba(255, 0, 0, 1);
   }
 
   .top-nav-link {
-    color: #12ead6;
+    color: rgba(85, 178, 170, 1);
   }
 
   .sidebar {

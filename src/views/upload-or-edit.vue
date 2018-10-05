@@ -1,6 +1,6 @@
 <template>
   <div class="upload-or-edit">
-    <section>
+    <section id="welcome" class="collapsable">
       <h1>Welcome to the portfolio dashboard</h1>
       <p>
         I'm assuming you want to dive right in with little to no preamble, but if you want some 
@@ -13,28 +13,43 @@
     </section>
     <section>
       <h2>Current portfolio:</h2>
-      <table class="table table-striped" cy-portfolio-table>
+      <table class="table table-bordered table-hover table-striped" cy-portfolio-table>
           <thead class="thead-dark">
             <th scope="col">Symbol</th>
             <th scope="col">Friendly name</th>
             <th scope="col">Num shares</th>
             <th scope="col">Value</th>
+            <th scope="col">% of portfolio</th>
             <th scope="col">Asset class(es)</th>
+            <th scope="col">Actions</th>
           </thead>
           <tbody>
             <tr>
-              <td>1111</td>
-              <td>2222</td>
+              <td>ABCLV</td>
+              <td>ABC Corp large value</td>
               <td>3333</td>
               <td>4444</td>
-              <td>5555</td>
+              <td>50</td>
+              <td>50% large cap domestic, 50% mid cap domestic</td>
+              <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
             </tr>
             <tr>
-              <td>1111</td>
-              <td>2222</td>
+              <td>ABCLV</td>
+              <td>ABC Corp large value</td>
               <td>3333</td>
               <td>4444</td>
-              <td>5555</td>
+              <td>50</td>
+              <td>50% large cap domestic, 50% mid cap domestic</td>
+              <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
+            </tr>
+            <tr>
+              <td>ABCWB</td>
+              <td>ABC Corp world bond</td>
+              <td>3333</td>
+              <td>4444</td>
+              <td>50</td>
+              <td>International bond</td>
+              <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
             </tr>
           </tbody>
         </table>
@@ -50,3 +65,47 @@
     </section>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {};
+  },
+  methods: {
+    hideWelcome() {
+      document.querySelector('#welcome').classList.add('collapsed');
+    }
+  },
+  mounted() {
+    setTimeout(() => {
+      this.hideWelcome();
+    }, 15000);
+  }
+};
+</script>
+
+<style>
+  @keyframes asdf {
+    /* from {height: 100%;} */
+    to {height: 0;}
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(85, 193, 143, 1);
+  }
+
+  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: rgba(255, 255, 4, 1);
+  }
+
+  .collapsable {
+    overflow: hidden;
+    transition: max-height 4s ease-out;
+    height: auto;
+    max-height: 600px;
+  }
+
+  .collapsable.collapsed {
+    max-height: 0;
+  }
+</style>
