@@ -29,17 +29,17 @@
               <td>ABC Corp large value</td>
               <td>3333</td>
               <td>4444</td>
-              <td>50</td>
+              <td>33</td>
               <td>50% large cap domestic, 50% mid cap domestic</td>
               <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
             </tr>
             <tr>
-              <td>ABCLV</td>
-              <td>ABC Corp large value</td>
+              <td>ABCSG</td>
+              <td>ABC Corp small cap growth</td>
               <td>3333</td>
               <td>4444</td>
-              <td>50</td>
-              <td>50% large cap domestic, 50% mid cap domestic</td>
+              <td>34</td>
+              <td>100% small cap domestic</td>
               <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
             </tr>
             <tr>
@@ -47,7 +47,7 @@
               <td>ABC Corp world bond</td>
               <td>3333</td>
               <td>4444</td>
-              <td>50</td>
+              <td>33</td>
               <td>International bond</td>
               <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
             </tr>
@@ -55,13 +55,19 @@
         </table>
     </section>
     <section>
-      <h2>Upload</h2>
+      
 
     </section>
     <section>
-      <h2>Edit</h2>
+      <h2 class="sr-only">Edit</h2>
       <button class="btn btn-success mr-2 mb-1" data-cy-add-security>Add security</button>
       <button class="btn btn-danger mr-2 mb-1">Clear current portfolio</button>
+      <button class="btn btn-primary mr-2 mb-1" disabled>Upload a CSV file</button>
+    </section>
+    <section class="mt-4 d-none d-lg-block">
+      <div id="dropzone" class="dropzone" data-cy-dropzone>
+        <h2>Drag a CSV file here to upload it</h2>
+      </div>
     </section>
   </div>
 </template>
@@ -73,31 +79,26 @@ export default {
   },
   methods: {
     hideWelcome() {
-      document.querySelector('#welcome').classList.add('collapsed');
+      setTimeout(() => {
+        document.querySelector('#welcome').classList.add('collapsed');
+      }, 15000);
+    },
+    recordInitialVisit() {
+      //TODO: set a value in the store so that we don't show the welcome
+      //every time
+
+      return this;
     }
   },
   mounted() {
-    setTimeout(() => {
-      this.hideWelcome();
-    }, 15000);
+    this
+      .recordInitialVisit()
+      .hideWelcome();
   }
 };
 </script>
 
 <style>
-  @keyframes asdf {
-    /* from {height: 100%;} */
-    to {height: 0;}
-  }
-
-  .table-striped tbody tr:nth-of-type(odd) {
-    background-color: rgba(85, 193, 143, 1);
-  }
-
-  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-    background-color: rgba(255, 255, 4, 1);
-  }
-
   .collapsable {
     overflow: hidden;
     transition: max-height 4s ease-out;
@@ -107,5 +108,19 @@ export default {
 
   .collapsable.collapsed {
     max-height: 0;
+  }
+
+  .dropzone {
+    border: 2px dashed rgba(0, 0, 0, 1);
+    text-decoration: line-through; 
+    color: gray;
+  }
+
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(85, 193, 143, 1);
+  }
+
+  .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: rgba(255, 255, 4, 1);
   }
 </style>
