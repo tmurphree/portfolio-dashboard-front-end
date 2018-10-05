@@ -17,7 +17,9 @@ describe('the upload-or-edit component', function() {
   //https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
   //for drag and drop
   it.skip('lets you drag and drop for file upload', function() {
-  
+    cy.get('[data-cy-dropzone]')
+      .debug();
+
   });
 
   //skip until you get the API ready
@@ -27,7 +29,12 @@ describe('the upload-or-edit component', function() {
   
 
   it('lets you enter securities in one at a time', function() {
-    
+    const currentPortfolioContentLength = cy.get('[cy-portfolio-table] tr').its('length');
+
+    cy.get('[data-cy-add-security]').click();
+
+    cy.get('[cy-portfolio-table] tr').its('length')
+      .should('eq', currentPortfolioContentLength + 1);
   });
 
   it('lets you edit the securities in your portfolio', function() {
