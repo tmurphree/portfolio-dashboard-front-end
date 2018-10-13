@@ -58,15 +58,36 @@
     </section>
     <section>
       <h2 class="sr-only">Edit</h2>
-      <button class="btn btn-success mr-2 mb-1" data-cy-add-security>Add security</button>
-      <button class="btn btn-danger mr-2 mb-1">Clear current portfolio</button>
+
+      <button class="btn btn-danger mr-2 mb-1" data-cy-clear-port @click="clearPortfolio">
+        Clear current portfolio
+      </button>
       <input type="file" name="file-input" id="file-input" accept=".csv" class="d-none">
-      <button class="btn btn-primary mr-2 mb-1" data-cy-upload>Upload a CSV file</button>
+      <button class="btn btn-primary mr-2 mb-1" data-cy-upload @click="uploadCsvFile">
+        Upload a CSV file
+      </button>
     </section>
-    <section class="mt-4 d-none d-lg-block">
-      <div id="dropzone" class="dropzone" data-cy-dropzone>
-        <h2>Drag a CSV file here to upload it</h2>
-      </div>
+    <section id="data-entry" class="mt-4">
+      <section data-cy-add-security-form>
+        <form action="">
+          <label for="txt-symbol">Symbol:</label>
+          <input name="txt-symbol" type="text" required>
+          <label for="txt-friendly-name">Friendly name<sup>*</sup>:</label>
+          <input name="txt-friendly-name" type="text">
+          <label for="num-num-shares">Number of shares:</label>
+          <input name="num-num-shares" type="number" required>
+          <br>
+          <button class="btn btn-success mr-2 mb-1" data-cy-add-security @click="addSecurity">
+            Add security
+          </button>
+          <p><sup>*</sup>optional</p>
+        </form>
+      </section>
+      <section class="d-none d-lg-block">
+          <div id="dropzone" class="dropzone" data-cy-dropzone>
+            <h2>Drag a CSV file here to upload it</h2>
+          </div>
+        </section>
     </section>
   </div>
 </template>
@@ -74,9 +95,18 @@
 <script>
 export default {
   data () {
-    return {};
+    return {
+      dropzone: undefined,
+
+    };
   },
   methods: {
+    addSecurity() {
+      alert('addSecurity does not work as intended at the moment -- please check back later.');
+    },
+    clearPortfolio() {
+      alert('clearPortfolio does not work as intended at the moment -- please check back later.');
+    },
     hideWelcome() {
       setTimeout(() => {
         document.querySelector('#welcome').classList.add('collapsed');
@@ -90,24 +120,13 @@ export default {
 
       return this;
     },
-    setEventListeners() {
-      let fileInput = document.querySelector('#file-input');
-      let uploadButton = document.querySelector('button[data-cy-upload]');
-
-      if (fileInput && uploadButton) {
-        uploadButton.addEventListener('click', (event) => {
-          // fileInput.click();
-          alert('This does not work as intended at the moment -- please check back later.');
-        });
-      }
-
-      return this;
-    }
+    uploadCsvFile() {
+      alert('uploadCsvFile does not work as intended at the moment -- please check back later.');
+    },
   },
   mounted() {
     this
       .recordInitialVisit()
-      .setEventListeners()
       .hideWelcome();
   }
 };
@@ -124,9 +143,27 @@ export default {
   .collapsable.collapsed {
     max-height: 0;
   }
+  
+  #data-entry {
+    display: inline-flex;
+  }
+
+  #data-entry section {
+    width: 50%;
+  }
+
+  #data-entry section label {
+    width: 50%;
+  }
+
+  #data-entry section input {
+    text-align: right;
+    width: 40%;
+  }
 
   .dropzone {
     border: 2px dashed rgba(0, 0, 0, 1);
+    height: 100%;
     text-decoration: line-through; 
     color: gray;
   }
