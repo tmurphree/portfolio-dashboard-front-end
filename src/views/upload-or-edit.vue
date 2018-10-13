@@ -55,14 +55,13 @@
         </table>
     </section>
     <section>
-      
-
     </section>
     <section>
       <h2 class="sr-only">Edit</h2>
       <button class="btn btn-success mr-2 mb-1" data-cy-add-security>Add security</button>
       <button class="btn btn-danger mr-2 mb-1">Clear current portfolio</button>
-      <button class="btn btn-primary mr-2 mb-1" disabled>Upload a CSV file</button>
+      <input type="file" name="file-input" id="file-input" accept=".csv" class="d-none">
+      <button class="btn btn-primary mr-2 mb-1" data-cy-upload>Upload a CSV file</button>
     </section>
     <section class="mt-4 d-none d-lg-block">
       <div id="dropzone" class="dropzone" data-cy-dropzone>
@@ -82,10 +81,25 @@ export default {
       setTimeout(() => {
         document.querySelector('#welcome').classList.add('collapsed');
       }, 15000);
+
+      return this;
     },
     recordInitialVisit() {
       //TODO: set a value in the store so that we don't show the welcome
       //every time
+
+      return this;
+    },
+    setEventListeners() {
+      let fileInput = document.querySelector('#file-input');
+      let uploadButton = document.querySelector('button[data-cy-upload]');
+
+      if (fileInput && uploadButton) {
+        uploadButton.addEventListener('click', (event) => {
+          // fileInput.click();
+          alert('This does not work as intended at the moment -- please check back later.');
+        });
+      }
 
       return this;
     }
@@ -93,6 +107,7 @@ export default {
   mounted() {
     this
       .recordInitialVisit()
+      .setEventListeners()
       .hideWelcome();
   }
 };

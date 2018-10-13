@@ -4,13 +4,14 @@ describe('the upload-or-edit component', function() {
   });
   
   it('has a file input', function() {
-    cy.get('input[type=file]');
+    cy.get('input[type=file]')
+      .should('have.attr', 'accept','.csv')
+      .should('not.have.attr','multiple')
+      .should('not.have.attr','required');
   });
 
   it('has an "upload" button', function() {
-    cy.get('[data-cy-upload]')
-      //disabled until we get the API ready
-      .should('have.prop', 'disabled');
+    cy.get('[data-cy-upload]');
   });
 
   //skip until you get the API ready
