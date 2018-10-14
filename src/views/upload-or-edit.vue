@@ -40,7 +40,7 @@
               <td>4444</td>
               <td>34</td>
               <td>100% small cap domestic</td>
-              <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
+              <td><button class="mb-1 toggle-vis">Edit</button> <br> <button class="toggle-vis">Remove</button></td>
             </tr>
             <tr>
               <td>ABCWB</td>
@@ -53,8 +53,6 @@
             </tr>
           </tbody>
         </table>
-    </section>
-    <section>
     </section>
     <section>
       <h2 class="sr-only">Edit</h2>
@@ -93,6 +91,22 @@
 </template>
 
 <script>
+
+/**
+ * @description Hide or show an element or elements based on whether or not they
+ *    already have the d-none class.
+ * @param {string} selector querySelector search string.
+ * @returns {undefined}
+*/
+function hideShowToggle(selector) {
+  if (!selector || (typeof selector !== 'string')) {
+    throw new Error(`Expecting a string argument in hideShowToggle.`);
+  }
+
+  document.querySelectorAll(selector)
+    .forEach((el) => { el.classList.toggle('d-none'); });
+}
+
 export default {
   data () {
     return {
