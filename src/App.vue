@@ -15,7 +15,7 @@
 
       <div class="container-fluid">
         <div class="row">
-          <nav class="col-md-3 d-md-block bg-light sidebar" data-cy-sidebar role="navigation">
+          <nav class="col-md-2 d-md-block bg-light sidebar" data-cy-sidebar role="navigation">
             <div class="sidebar-sticky">
                 <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                   <span>Current assets</span>
@@ -60,7 +60,7 @@
               </ul>
             </div>
           </nav>
-          <div class="col-md-8">
+          <div class="col-md-10">
             <router-view/>
           </div>
         </div>
