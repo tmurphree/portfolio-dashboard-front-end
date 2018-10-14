@@ -4,6 +4,8 @@
 
 ~~[Coming soon: Click here for portfolio dashboard in production]()~~
 
+# This is a programming exercise.  There are no guarantees about the accuracy of the data on the site.  DO NOT base real financial decisions on the site.  
+
 ## Business Problem Solved  
 Save time and effort on checking important but time-consuming tasks.  It's important to maintain a portfolio composition / asset allocation that matches your risk profile, but it takes time to do it.  This site automates the process so you can spend more time thinking strategically.  
 
@@ -44,7 +46,8 @@ npm run test:e2e
 ## APIs
 * none: the back end part of the project ~~uses~~ will use the AlphaVantage stock price API
 
-## Future Implementations
+## Future Implementations  
+* Tag a security as needing monitoring and set thresholds for it.  Show the security against the specified thresholds in the "Monitored securities" page.  
 * Allow users to log in with Google or a local username / password.  
 * Allow logged-in users to save portfolios.  
 
