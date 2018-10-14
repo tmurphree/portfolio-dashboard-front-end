@@ -61,7 +61,11 @@
         Clear current portfolio
       </button>
       <input type="file" name="file-input" id="file-input" accept=".csv" class="d-none">
-      <button class="btn btn-primary mr-2 mb-1" data-cy-upload @click="uploadCsvFile">
+      <button 
+        class="btn btn-primary mr-2 mb-1 d-none d-lg-block" 
+        data-cy-upload 
+        @click="uploadCsvFile"
+      >
         Upload a CSV file
       </button>
     </section>
