@@ -16,7 +16,7 @@ export default new Vuex.Store({
         throw new Error(`Non-boolean received in showHomeViewWelcome mutation.`);
       }
 
-      this.showHomeViewWelcome = payload;
+      state.showHomeViewWelcome = payload;
     },
     /**
      * @description Update the portfolio. 
@@ -32,7 +32,7 @@ export default new Vuex.Store({
 
       if (payload.action) {
         if (payload.action === 'clear') {
-          this.portfolio = [];
+          state.portfolio = [];
           return;
         } else {
           throw new Error(`Only one valid action in portfolio mutation: 'clear'.`);
@@ -48,7 +48,7 @@ export default new Vuex.Store({
         });
       
       setTimeout(() => {
-        this.portfolio.push(payload);
+        state.portfolio.push(payload);
       }, 0);
     }
   },

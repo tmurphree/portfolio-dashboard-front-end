@@ -1,6 +1,6 @@
 <template>
-  <div class="upload-or-edit">
-    <section id="welcome" class="collapsable">
+  <div class="home">
+    <section v-if="this.$store.state.showHomeViewWelcome" id="welcome" class="collapsable">
       <h1>Welcome to the portfolio dashboard</h1>
       <p>
         I'm assuming you want to dive right in with little to no preamble, but if you want some 
@@ -115,13 +115,9 @@ export default {
   data () {
     return {
       dropzone: undefined,
-      showHomeViewWelcome: true,
     };
   },
   computed: {
-    // showHomeViewWelcome() {
-    //   return this.$store.state.showHomeViewWelcome;
-    // }
   },
   methods: {
     addSecurity() {
@@ -131,11 +127,27 @@ export default {
       alert('clearPortfolio does not work as intended at the moment -- please check back later.');
     },
     hideWelcome() {
-      document.querySelector('#welcome').classList.add('collapsed');
-      // this.showHomeViewWelcome = false;
-      // self.$store.commit('showHomeViewWelcome', false);
-      // setTimeout(() => {
-      // }, 3);
+      function pause(seconds) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            resolve();
+          }, seconds * 1000);
+        });
+      }
+
+      if (this.$store.state.showHomeViewWelcome) {
+        pause(15)
+          .then(() => {
+            document.querySelector('#welcome').classList.add('collapsed');
+            return pause(5);
+          })
+          .then(() => {
+            this.$store.commit('showHomeViewWelcome', false);
+          })
+          .catch((err) => {
+            console.error(`${err}`);
+          });        
+      }
 
       return this;
     },
@@ -153,7 +165,7 @@ export default {
 <style>
   .collapsable {
     overflow: hidden;
-    transition: max-height 4s ease-out 15s;
+    transition: max-height 4s ease-out;
     height: auto;
     max-height: 600px;
   }
