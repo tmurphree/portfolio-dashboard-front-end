@@ -36,7 +36,7 @@ describe('the upload-or-edit component', function() {
       .should('eq', currentPortfolioContentLength + 1);
   });
 
-  it('lets you edit the securities in your portfolio', function() {
+  it.skip('lets you edit the securities in your portfolio', function() {
     
   });
 });

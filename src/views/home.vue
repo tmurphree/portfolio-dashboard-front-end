@@ -115,8 +115,13 @@ export default {
   data () {
     return {
       dropzone: undefined,
-
+      showHomeViewWelcome: true,
     };
+  },
+  computed: {
+    // showHomeViewWelcome() {
+    //   return this.$store.state.showHomeViewWelcome;
+    // }
   },
   methods: {
     addSecurity() {
@@ -126,15 +131,11 @@ export default {
       alert('clearPortfolio does not work as intended at the moment -- please check back later.');
     },
     hideWelcome() {
-      setTimeout(() => {
-        document.querySelector('#welcome').classList.add('collapsed');
-      }, 15000);
-
-      return this;
-    },
-    recordInitialVisit() {
-      //TODO: set a value in the store so that we don't show the welcome
-      //every time
+      document.querySelector('#welcome').classList.add('collapsed');
+      // this.showHomeViewWelcome = false;
+      // self.$store.commit('showHomeViewWelcome', false);
+      // setTimeout(() => {
+      // }, 3);
 
       return this;
     },
@@ -144,7 +145,6 @@ export default {
   },
   mounted() {
     this
-      .recordInitialVisit()
       .hideWelcome();
   }
 };
@@ -153,7 +153,7 @@ export default {
 <style>
   .collapsable {
     overflow: hidden;
-    transition: max-height 4s ease-out;
+    transition: max-height 4s ease-out 15s;
     height: auto;
     max-height: 600px;
   }

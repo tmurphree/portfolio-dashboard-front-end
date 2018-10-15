@@ -50,6 +50,7 @@ npm run test:e2e
 * Tag a security as needing monitoring and set thresholds for it.  Show the security against the specified thresholds in the "Monitored securities" page.  
 * Allow users to log in with Google or a local username / password.  
 * Allow logged-in users to save portfolios.  
+* Automatically update asset allocations and friendly names based on a symbol.  
 
 ## Known issues  
 * The file name for 'App.vue' is capitalized and the other .vue files are all lowercase.  I encountered a bug where the project wouldn't load consistently if I followed the all-lowercase naming convention on that file.  I'll submit an issue on this when I have the time.  
