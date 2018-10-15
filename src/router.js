@@ -8,7 +8,7 @@ import CurrentTable from './views/current-table.vue';
 import Help from './views/help.vue';
 import Monitored from './views/monitored.vue';
 import TradeSimulator from './views/trade-simulator.vue';
-import UploadOrEdit from './views/upload-or-edit.vue';
+import Home from './views/home.vue';
 
 Vue.use(Router);
 
@@ -52,12 +52,12 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: UploadOrEdit,
+      component: Home,
     },
     {
-      path: '/upload-or-edit',
-      name: 'upload-or-edit',
-      component: UploadOrEdit,
+      path: '/home',
+      name: 'home',
+      component: Home,
     }
   ]
 });

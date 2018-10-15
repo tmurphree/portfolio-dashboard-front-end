@@ -39,6 +39,7 @@ describe('top bar', () => {
     checkVisibility('[data-cy-top-bar]');
     cy.viewport('iphone-5');
     checkVisibility('[data-cy-top-bar]');
+    cy.viewport('macbook-11');
   });
   
   
@@ -75,7 +76,7 @@ describe('side bar', function() {
   
   it('goes to the appropriate partials on click', function() {
     const urlMapper = [
-      // { expectedUrl: '/upload-or-edit', linkText: 'Upload or edit current assets' },
+      { expectedUrl: '/home', linkText: 'Home' },
       { expectedUrl: '/current-graph', linkText: 'Graph view' },
       { expectedUrl: '/current-table', linkText: 'Table view' },
       { expectedUrl: '/monitored', linkText: 'Monitored securities' },
