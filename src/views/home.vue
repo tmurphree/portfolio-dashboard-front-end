@@ -24,32 +24,14 @@
             <th scope="col">Actions</th>
           </thead>
           <tbody>
-            <tr>
-              <td>ABCLV</td>
-              <td>ABC Corp large value</td>
-              <td>3333</td>
-              <td>4444</td>
-              <td>33</td>
-              <td>50% large cap domestic, 50% mid cap domestic</td>
-              <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
-            </tr>
-            <tr>
-              <td>ABCSG</td>
-              <td>ABC Corp small cap growth</td>
-              <td>3333</td>
-              <td>4444</td>
-              <td>34</td>
-              <td>100% small cap domestic</td>
-              <td><button class="mb-1 toggle-vis">Edit</button> <br> <button class="toggle-vis">Remove</button></td>
-            </tr>
-            <tr>
-              <td>ABCWB</td>
-              <td>ABC Corp world bond</td>
-              <td>3333</td>
-              <td>4444</td>
-              <td>33</td>
-              <td>International bond</td>
-              <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
+            <tr v-for="item in this.$store.state.portfolio">
+                <td>{{ item.symbol }}</td>
+                <td>{{ item.friendlyName }}</td>
+                <td>{{ item.numShares }}</td>
+                <td>{{ item.numShares }}</td>
+                <td>{{ item.numShares }}</td>
+                <td>TODO: pretty print this</td>
+                <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
             </tr>
           </tbody>
         </table>

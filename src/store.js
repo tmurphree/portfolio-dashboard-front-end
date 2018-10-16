@@ -1,6 +1,9 @@
+'use strict';
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+const { initialData } = require('./services/initial-data.service');
 const templates = require('./services/object-templates.service');
 
 Vue.use(Vuex);
@@ -8,7 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     showHomeViewWelcome: true,
-    portfolio: [],
+    portfolio: [...initialData],
   },
   mutations: {
     showHomeViewWelcome(state, payload) {
@@ -54,5 +57,6 @@ export default new Vuex.Store({
   },
   actions: {
 
-  }
+  },
+  strict: process.env.NODE_ENV !== 'production'
 });
