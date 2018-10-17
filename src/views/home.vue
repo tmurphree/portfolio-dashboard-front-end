@@ -31,14 +31,16 @@
                 <td>{{ item.numShares }}</td>
                 <td>{{ item.numShares }}</td>
                 <td>TODO: pretty print this</td>
-                <td><button class="mb-1">Edit</button> <br> <button>Remove</button></td>
+                <td>
+                  <template v-if="true"><button class="mr-1">Edit</button><button>Remove</button></template>
+                  <template v-else><button class="mr-1">Save</button><button>Cancel</button></template>
+                </td>
             </tr>
           </tbody>
         </table>
     </section>
     <section>
       <h2 class="sr-only">Edit</h2>
-
       <button class="btn btn-danger mr-2 mb-1" data-cy-clear-port @click="clearPortfolio">
         Clear current portfolio
       </button>
@@ -54,12 +56,33 @@
     <section id="data-entry" class="mt-4">
       <section data-cy-add-security-form>
         <form action="">
-          <label for="txt-symbol">Symbol:</label>
-          <input name="txt-symbol" type="text" required>
-          <label for="txt-friendly-name">Friendly name<sup>*</sup>:</label>
-          <input name="txt-friendly-name" type="text">
-          <label for="num-num-shares">Number of shares:</label>
-          <input name="num-num-shares" type="number" required>
+          <label for="symbol">Symbol:</label>
+          <input id="symbol" name="symbol" type="text" required>
+          <label for="friendly-name">Friendly name<sup>*</sup>:</label>
+          <input id="friendly-name" name="friendly-name" type="text">
+          <label for="num-shares">Number of shares:</label>
+          <input id="num-shares" name="num-shares" type="number" required>
+          <fieldset>
+            <legend>Asset class(es)</legend>
+            <p><small>Stocks</small></p>
+            <label for="pct-stock-domestic-large">Large-cap domestic:</label>
+            <input id="pct-stock-domestic-large" name="pct-stock-domestic-large" type="number"><span>%</span>
+            <label for="pct-stock-domestic-mid">Mid-cap domestic:</label>
+            <input id="pct-stock-domestic-mid" name="pct-stock-domestic-mid" type="number"><span>%</span>
+            <label for="pct-stock-domestic-small">Small-cap domestic:</label>
+            <input id="pct-stock-domestic-small" name="pct-stock-domestic-small" type="number"><span>%</span>
+            <label for="pct-stock-international-large">Large-cap international:</label>
+            <input id="pct-stock-international-large" name="pct-stock-international-large" type="number"><span>%</span>
+            <label for="pct-stock-international-mid">Mid-cap international:</label>
+            <input id="pct-stock-international-mid" name="pct-stock-international-mid" type="number"><span>%</span>
+            <label for="pct-stock-international-small">Small-cap international:</label>
+            <input id="pct-stock-international-small" name="pct-stock-international-small" type="number"><span>%</span>
+            <p><small>Bonds</small></p>
+            <label for="pct-bond-domestic">Domestic bond:</label>
+            <input id="pct-bond-domestic" name="pct-bond-domestic" type="number"><span>%</span>
+            <label for="pct-bond-international">International bond:</label>
+            <input id="pct-bond-international" name="pct-bond-international" type="number"><span>%</span>
+          </fieldset>
           <br>
           <button class="btn btn-success mr-2 mb-1" data-cy-add-security @click="addSecurity">
             Add security
