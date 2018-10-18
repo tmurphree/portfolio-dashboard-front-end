@@ -32,8 +32,8 @@
                 <td>{{ item.numShares }}</td>
                 <td>TODO: pretty print this</td>
                 <td>
-                  <template v-if="true"><button class="mr-1">Edit</button><button>Remove</button></template>
-                  <template v-else><button class="mr-1">Save</button><button>Cancel</button></template>
+                  <template v-if="true"><button type="button" class="mr-1">Edit</button><button type="button" >Remove</button></template>
+                  <template v-else><button type="button" class="mr-1">Save</button><button type="button" >Cancel</button></template>
                 </td>
             </tr>
           </tbody>
@@ -41,11 +41,11 @@
     </section>
     <section>
       <h2 class="sr-only">Edit</h2>
-      <button class="btn btn-danger mr-2 mb-1" data-cy-clear-port @click="clearPortfolio">
+      <button type="button" class="btn btn-danger mr-2 mb-1" data-cy-clear-port @click="clearPortfolio">
         Clear current portfolio
       </button>
       <input type="file" name="file-input" id="file-input" accept=".csv" class="d-none">
-      <button 
+      <button type="button" 
         class="btn btn-primary mr-2 mb-1 d-none d-lg-block" 
         data-cy-upload 
         @click="uploadCsvFile"
@@ -57,34 +57,34 @@
       <section data-cy-add-security-form>
         <form action="">
           <label for="symbol">Symbol:</label>
-          <input id="symbol" name="symbol" type="text" required>
+          <input v-model="editedSecurity.symbol" id="symbol" name="symbol" type="text">
           <label for="friendly-name">Friendly name<sup>*</sup>:</label>
-          <input id="friendly-name" name="friendly-name" type="text">
+          <input v-model="editedSecurity.friendlyName" id="friendly-name" name="friendly-name" type="text">
           <label for="num-shares">Number of shares:</label>
-          <input id="num-shares" name="num-shares" type="number" required>
+          <input v-model.number="editedSecurity.numShares" id="num-shares" name="num-shares" type="number">
           <fieldset>
             <legend>Asset class(es)</legend>
             <p><small>Stocks</small></p>
             <label for="pct-stock-domestic-large">Large-cap domestic:</label>
-            <input id="pct-stock-domestic-large" name="pct-stock-domestic-large" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.stockDomesticLarge" id="pct-stock-domestic-large" name="pct-stock-domestic-large" type="number"><span>%</span>
             <label for="pct-stock-domestic-mid">Mid-cap domestic:</label>
-            <input id="pct-stock-domestic-mid" name="pct-stock-domestic-mid" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.stockDomesticMid" id="pct-stock-domestic-mid" name="pct-stock-domestic-mid" type="number"><span>%</span>
             <label for="pct-stock-domestic-small">Small-cap domestic:</label>
-            <input id="pct-stock-domestic-small" name="pct-stock-domestic-small" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.stockDomesticSmall" id="pct-stock-domestic-small" name="pct-stock-domestic-small" type="number"><span>%</span>
             <label for="pct-stock-international-large">Large-cap international:</label>
-            <input id="pct-stock-international-large" name="pct-stock-international-large" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.stockInternationalLarge" id="pct-stock-international-large" name="pct-stock-international-large" type="number"><span>%</span>
             <label for="pct-stock-international-mid">Mid-cap international:</label>
-            <input id="pct-stock-international-mid" name="pct-stock-international-mid" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.stockInternationalMid" id="pct-stock-international-mid" name="pct-stock-international-mid" type="number"><span>%</span>
             <label for="pct-stock-international-small">Small-cap international:</label>
-            <input id="pct-stock-international-small" name="pct-stock-international-small" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.stockInternationalSmall" id="pct-stock-international-small" name="pct-stock-international-small" type="number"><span>%</span>
             <p><small>Bonds</small></p>
             <label for="pct-bond-domestic">Domestic bond:</label>
-            <input id="pct-bond-domestic" name="pct-bond-domestic" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.bondDomestic" id="pct-bond-domestic" name="pct-bond-domestic" type="number"><span>%</span>
             <label for="pct-bond-international">International bond:</label>
-            <input id="pct-bond-international" name="pct-bond-international" type="number"><span>%</span>
+            <input v-model.number="editedSecurity.assetClasses.bondInternational" id="pct-bond-international" name="pct-bond-international" type="number"><span>%</span>
           </fieldset>
           <br>
-          <button class="btn btn-success mr-2 mb-1" data-cy-add-security @click="addSecurity">
+          <button type="button" class="btn btn-success mr-2 mb-1" data-cy-add-security @click="addSecurity">
             Add security
           </button>
           <p><sup>*</sup>optional</p>
@@ -100,6 +100,8 @@
 </template>
 
 <script>
+
+const securityTemplate = require('@/assets/services/object-templates.service').security;
 
 /**
  * @description Hide or show an element or elements based on whether or not they
@@ -117,21 +119,50 @@ function hideShowToggle(selector) {
 }
 
 export default {
-  data () {
+  data: function data() {
     return {
       dropzone: undefined,
+      editedSecurity: { ...securityTemplate },
     };
   },
   computed: {
   },
   methods: {
-    addSecurity() {
-      alert('addSecurity does not work as intended at the moment -- please check back later.');
+    addSecurity: function addSecurity() {
+      const self = this;
+      
+      this
+        .fillValues()
+        .validateNewSecurity()
+        .$store.commit('portfolio', this.editedSecurity);
+
+      setTimeout(() => {
+        self.resetEditedSecurity();
+      }, 100);
     },
-    clearPortfolio() {
+    clearPortfolio: function clearPortfolio() {
       alert('clearPortfolio does not work as intended at the moment -- please check back later.');
     },
-    hideWelcome() {
+    /**
+     * @description The decision was made to default assetClasses props to ''.  This makes it
+     *    easier for the user to enter data (he doesn't have to keep deleting zeroes before
+     *    entering the relevant data).  But that introduces string math to the mix: 
+     *    5 + '' + 12 === '512' because the first operation coerces the 5 to '5'.  The workaround
+     *    is to convert all '' to 0 before doing anything serious with it.
+     * @returns {object} this
+    */
+    fillValues: function ensureAllAssetClassesHaveNonStingValues() {
+      for (const key in this.editedSecurity.assetClasses) {
+        if (this.editedSecurity.assetClasses.hasOwnProperty(key) && 
+          this.editedSecurity.assetClasses[key] === ''
+        ) {
+          this.editedSecurity.assetClasses[key] = 0;
+        }
+      }
+
+      return this;
+    },
+    hideWelcome: function hideWelcome() {
       function pause(seconds) {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -156,7 +187,16 @@ export default {
 
       return this;
     },
-    uploadCsvFile() {
+    resetEditedSecurity: function resetEditedSecurity() {
+      console.log('hi from resetEditedSecurity');
+      this.editedSecurity = { ...securityTemplate };
+    },
+    validateNewSecurity: function validateNewSecurityProps() {
+      console.error('TODO: flesh out validateNewSecurity');
+
+      return this;
+    },
+    uploadCsvFile: function uploadCsvFile() {
       alert('uploadCsvFile does not work as intended at the moment -- please check back later.');
     },
   },

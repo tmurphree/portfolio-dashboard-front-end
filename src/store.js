@@ -3,8 +3,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-const { initialData } = require('./services/initial-data.service');
-const templates = require('./services/object-templates.service');
+const { initialData } = require('@/assets/services/initial-data.service');
+const templates = require('@/assets/services/object-templates.service');
 
 Vue.use(Vuex);
 
@@ -14,7 +14,7 @@ export default new Vuex.Store({
     portfolio: [...initialData],
   },
   mutations: {
-    showHomeViewWelcome(state, payload) {
+    showHomeViewWelcome: function showHomeViewWelcome(state, payload) {
       if (typeof payload !== 'boolean') {
         throw new Error(`Non-boolean received in showHomeViewWelcome mutation.`);
       }
@@ -28,7 +28,7 @@ export default new Vuex.Store({
      *  templates.security).
      * @returns {undefined}
     */
-    portfolio(state, payload) {
+    portfolio: function portfolio(state, payload) {
       if (typeof payload !== 'object') {
         throw new Error(`Non-object received in portfolio mutation.`);
       }
@@ -50,9 +50,10 @@ export default new Vuex.Store({
           }
         });
       
-      setTimeout(() => {
-        state.portfolio.push(payload);
-      }, 0);
+    
+      state.portfolio.push(payload);
+
+      return this;
     }
   },
   actions: {
