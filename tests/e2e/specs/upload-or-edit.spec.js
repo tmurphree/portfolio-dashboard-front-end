@@ -26,14 +26,32 @@ describe('the home view', function() {
   it.skip('gets an array of objects from the API after file upload', function() {
     
   });
+
+  function enterSecurityData() {
+    cy.get('#symbol')
+      .type('vtibx')
+      .get('#friendly-name')
+      .type('Vanguard Total International Bond Index Fund Investor Shares')
+      .get('#num-shares')
+      .type('200')
+      .get ('#pct-bond-international')
+      .type(100)
+      .type('{enter}');
+  }
   
   it('lets you enter securities in one at a time', function() {
-    const currentPortfolioContentLength = cy.get('[cy-portfolio-table] tr').its('length');
+    let currentPortfolioContentLength;
 
-    cy.get('[data-cy-add-security]').click();
+    cy.get('[cy-portfolio-table] tr')
+     .then($trArray => {
+       currentPortfolioContentLength = $trArray.length;
 
-    cy.get('[cy-portfolio-table] tr').its('length')
-      .should('eq', currentPortfolioContentLength + 1);
+       enterSecurityData();
+       
+       cy.get('[cy-portfolio-table] tr')
+         .its('length')
+         .should('be.gt', currentPortfolioContentLength);
+     });
   });
 
   it.skip('lets you edit the securities in your portfolio', function() {

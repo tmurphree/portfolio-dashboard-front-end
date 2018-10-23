@@ -62,7 +62,7 @@
           <input v-model="editedSecurity.friendlyName" id="friendly-name" name="friendly-name" type="text">
           <label for="num-shares">Number of shares:</label>
           <input v-model.number="editedSecurity.numShares" id="num-shares" name="num-shares" type="number">
-          <fieldset>
+          <fieldset id="asset-classes-fieldset">
             <legend>Asset class(es)</legend>
             <p><small>Stocks</small></p>
             <label for="pct-stock-domestic-large">Large-cap domestic:</label>
@@ -103,21 +103,6 @@
 
 import securityTemplate from '@/assets/services/object-templates.service';
 
-/**
- * @description Hide or show an element or elements based on whether or not they
- *    already have the d-none class.
- * @param {string} selector querySelector search string.
- * @returns {undefined}
-*/
-function hideShowToggle(selector) {
-  if (!selector || (typeof selector !== 'string')) {
-    throw new Error(`Expecting a string argument in hideShowToggle.`);
-  }
-
-  document.querySelectorAll(selector)
-    .forEach((el) => { el.classList.toggle('d-none'); });
-}
-
 export default {
   data: function data() {
     return {
@@ -128,8 +113,27 @@ export default {
   computed: {
   },
   methods: {
+    addEventListeners: function addEventListeners() {
+      document.querySelectorAll('#asset-classes-fieldset input')
+        .forEach(el => {
+          el.addEventListener('keyup', event => {
+            if (event.keyCode === 13) {
+              this.addSecurity();
+            }
+          });
+        });
+
+      // document.querySelector('#symbol')
+      //   .addEventListener('keyup', event => {
+      //     this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
+      //   });
+
+      return this;
+    },
     addSecurity: function addSecurity() {
       const self = this;
+
+      this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
       
       this
         .fillValues()
@@ -202,6 +206,7 @@ export default {
   },
   mounted() {
     this
+      .addEventListeners()
       .hideWelcome();
   }
 };
@@ -234,6 +239,10 @@ export default {
   #data-entry section input {
     text-align: right;
     width: 40%;
+  }
+
+  #symbol {
+    text-transform: uppercase;
   }
 
   .dropzone {
