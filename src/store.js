@@ -2,9 +2,9 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
+import securityTemplate from '@/assets/services/object-templates.service';
 
 const { initialData } = require('@/assets/services/initial-data.service');
-const templates = require('@/assets/services/object-templates.service');
 
 Vue.use(Vuex);
 
@@ -25,7 +25,7 @@ export default new Vuex.Store({
      * @description Update the portfolio. 
      * @param {object} data Expect two sorts of objects: one to clear the portfolio 
      *  ({ action: 'clear' }) and one to add data to the portfolio (looks like 
-     *  templates.security).
+     *  securityTemplate).
      * @returns {undefined}
     */
     portfolio: function portfolio(state, payload) {
@@ -43,7 +43,7 @@ export default new Vuex.Store({
       }
 
       Object
-        .keys(templates.security)
+        .keys(securityTemplate)
         .forEach((el) => {
           if (!Object.keys(payload).includes(el)) {
             throw new Error(`Missing expected property: ${el}`);

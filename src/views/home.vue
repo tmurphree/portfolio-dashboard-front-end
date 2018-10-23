@@ -101,7 +101,7 @@
 
 <script>
 
-const securityTemplate = require('@/assets/services/object-templates.service').security;
+import securityTemplate from '@/assets/services/object-templates.service';
 
 /**
  * @description Hide or show an element or elements based on whether or not they

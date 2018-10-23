@@ -40,6 +40,11 @@ export default new Router({
       component: Help,
     },
     {
+      path: '/',
+      name: 'home',
+      component: Home,
+    },
+    {
       path: '/monitored',
       name: 'monitored',
       component: Monitored,
@@ -48,11 +53,6 @@ export default new Router({
       path: '/trade-simulator',
       name: 'trade-simulator',
       component: TradeSimulator,
-    },
-    {
-      path: '/',
-      name: 'home',
-      component: Home,
     },
   ]
 });

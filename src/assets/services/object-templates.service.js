@@ -1,4 +1,4 @@
-const security = {
+const securityTemplate = {
   assetClasses: {
     bondDomestic: '',
     bondInternational: '',
@@ -18,6 +18,4 @@ const security = {
   symbol: '',
 };
 
-module.exports = {
-  security
-};
+export default securityTemplate;

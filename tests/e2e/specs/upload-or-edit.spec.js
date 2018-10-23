@@ -1,6 +1,6 @@
-describe('the upload-or-edit component', function() {
-  beforeEach(function() {
-    cy.visit('/upload-or-edit');
+describe('the home view', function() {
+  before(function() {
+    cy.visit('/');
   });
   
   it('has a file input', function() {
