@@ -76,7 +76,7 @@ describe('side bar', function() {
   
   it('goes to the appropriate partials on click', function() {
     const urlMapper = [
-      { expectedUrl: '/home', linkText: 'Home' },
+      { expectedUrl: '/', linkText: 'Home' },
       { expectedUrl: '/current-graph', linkText: 'Graph view' },
       { expectedUrl: '/current-table', linkText: 'Table view' },
       { expectedUrl: '/monitored', linkText: 'Monitored securities' },
