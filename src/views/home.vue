@@ -194,6 +194,12 @@ export default {
     resetEditedSecurity: function resetEditedSecurity() {
       console.log('hi from resetEditedSecurity');
       this.editedSecurity = { ...securityTemplate };
+
+      for (const key in this.editedSecurity.assetClasses) {
+        if (this.editedSecurity.assetClasses.hasOwnProperty(key)) {
+          this.editedSecurity.assetClasses[key] = '';
+        }
+      }
     },
     validateNewSecurity: function validateNewSecurityProps() {
       console.error('TODO: flesh out validateNewSecurity');
