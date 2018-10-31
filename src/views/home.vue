@@ -24,7 +24,7 @@
             <th scope="col">Actions</th>
           </thead>
           <tbody>
-            <tr v-for="item in this.$store.state.portfolio">
+            <tr v-for="(item, index) in this.$store.state.portfolio">
                 <td>{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }}</td>
                 <td>{{ item.numShares }}</td>
@@ -32,7 +32,7 @@
                 <td>{{ item.numShares }}</td>
                 <td>TODO: pretty print this</td>
                 <td>
-                  <template v-if="true"><button type="button" class="mr-1">Edit</button><button type="button" >Remove</button></template>
+                  <template v-if="true"><button type="button" class="mr-1">Edit</button><button type="button" @click="removeSecurity(index)">Remove</button></template>
                   <template v-else><button type="button" class="mr-1">Save</button><button type="button" >Cancel</button></template>
                 </td>
             </tr>
@@ -138,14 +138,14 @@ export default {
       this
         .fillValues()
         .validateNewSecurity()
-        .$store.commit('portfolio', this.editedSecurity);
+        .$store.commit('addToPortfolio', this.editedSecurity);
 
       setTimeout(() => {
         self.resetEditedSecurity();
       }, 100);
     },
     clearPortfolio: function clearPortfolio() {
-      this.$store.commit('portfolio', { action: 'clear' });
+      this.$store.commit('clearPortfolio');
     },
     /**
      * @description The decision was made to default assetClasses props to ''.  This makes it
@@ -191,8 +191,10 @@ export default {
 
       return this;
     },
+    removeSecurity: function removeSecurity(index) {
+      this.$store.commit('trimPortfolio', index);
+    },
     resetEditedSecurity: function resetEditedSecurity() {
-      console.log('hi from resetEditedSecurity');
       this.editedSecurity = { ...securityTemplate };
 
       for (const key in this.editedSecurity.assetClasses) {
