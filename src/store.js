@@ -14,24 +14,6 @@ export default new Vuex.Store({
     portfolio: [...initialData],
   },
   mutations: {
-    clearPortfolio: function clearPortfolio(state, payload) {
-      state.portfolio = [];
-    },
-    showHomeViewWelcome: function showHomeViewWelcome(state, payload) {
-      if (typeof payload !== 'boolean') {
-        throw new Error(`Non-boolean received in showHomeViewWelcome mutation.`);
-      }
-
-      state.showHomeViewWelcome = payload;
-    },
-    /**
-     * @description Update the portfolio. 
-     * @param {object} state state object
-     * @param {object} payload two sorts of objects: one with an 'action' param 
-     *  ({ action: 'clear' }) and one to add data to the portfolio (looks like 
-     *  securityTemplate).  The 'action' object can also have other props.     
-     * @returns {undefined}
-    */
     addToPortfolio: function addToPortfolio(state, payload) {
       if (typeof payload !== 'object') {
         throw new Error(`Non-object received in portfolio mutation.`);
@@ -44,9 +26,18 @@ export default new Vuex.Store({
             throw new Error(`Missing expected property: ${el}`);
           }
         });
-      
-    
+
       state.portfolio.push(payload);
+    },
+    clearPortfolio: function clearPortfolio(state, payload) {
+      state.portfolio = [];
+    },
+    showHomeViewWelcome: function showHomeViewWelcome(state, payload) {
+      if (typeof payload !== 'boolean') {
+        throw new Error(`Non-boolean received in showHomeViewWelcome mutation.`);
+      }
+
+      state.showHomeViewWelcome = payload;
     },
     trimPortfolio: function trimPortfolio(state, payload) {
       //This doesn't work: state.portfolio.splice(payload,0); -- the state doesn't update.
