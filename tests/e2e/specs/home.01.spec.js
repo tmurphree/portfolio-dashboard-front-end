@@ -1,29 +1,30 @@
-describe('the home view', function() {
-  before(function() {
+
+describe('the home view', () => {
+  before(() => {
     cy.visit('/');
   });
   
-  it('has a file input', function() {
+  it('has a file input', () => {
     cy.get('input[type=file]')
       .should('have.attr', 'accept','.csv')
       .should('not.have.attr','multiple')
       .should('not.have.attr','required');
   });
 
-  it('has an "upload" button', function() {
+  it('has an "upload" button', () => {
     cy.get('[data-cy-upload]');
   });
 
   //skip until you get the API ready
   //https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
   //for drag and drop
-  it.skip('lets you drag and drop for file upload', function() {
+  it.skip('lets you drag and drop for file upload', () => {
     cy.get('[data-cy-dropzone]');
 
   });
 
   //skip until you get the API ready
-  it.skip('gets an array of objects from the API after file upload', function() {
+  it.skip('gets an array of objects from the API after file upload', () => {
     
   });
 
@@ -39,22 +40,33 @@ describe('the home view', function() {
       .type('{enter}');
   }
   
-  it('lets you enter securities in one at a time', function() {
-    let currentPortfolioContentLength;
-
+  it('lets you enter securities in one at a time', () => {
     cy.get('[cy-portfolio-table] tr')
      .then($trArray => {
-       currentPortfolioContentLength = $trArray.length;
+       let currentPortfolioContentLength = $trArray.length;
 
        enterSecurityData();
        
        cy.get('[cy-portfolio-table] tr')
          .its('length')
-         .should('be.gt', currentPortfolioContentLength);
+         .should('eq', (currentPortfolioContentLength + 1));
      });
   });
 
-  it.skip('lets you edit the securities in your portfolio', function() {
+  it('lets you remove a security', () => {
+    cy.get('[cy-portfolio-table] tr')
+     .then($trArray => {
+       let currentPortfolioContentLength = $trArray.length;
+
+       cy.contains('Remove').click();
+       
+       cy.get('[cy-portfolio-table] tr')
+         .its('length')
+         .should('eq', (currentPortfolioContentLength - 1));
+     });
+  });
+
+  it.skip('lets you edit the securities in your portfolio', () => {
     
   });
 });
