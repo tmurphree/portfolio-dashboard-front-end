@@ -14,6 +14,9 @@ export default new Vuex.Store({
     portfolio: [...initialData],
   },
   mutations: {
+    clearPortfolio: function clearPortfolio(state, payload) {
+      state.portfolio = [];
+    },
     showHomeViewWelcome: function showHomeViewWelcome(state, payload) {
       if (typeof payload !== 'boolean') {
         throw new Error(`Non-boolean received in showHomeViewWelcome mutation.`);
@@ -23,23 +26,15 @@ export default new Vuex.Store({
     },
     /**
      * @description Update the portfolio. 
-     * @param {object} data Expect two sorts of objects: one to clear the portfolio 
+     * @param {object} state state object
+     * @param {object} payload two sorts of objects: one with an 'action' param 
      *  ({ action: 'clear' }) and one to add data to the portfolio (looks like 
-     *  securityTemplate).
+     *  securityTemplate).  The 'action' object can also have other props.     
      * @returns {undefined}
     */
-    portfolio: function portfolio(state, payload) {
+    addToPortfolio: function addToPortfolio(state, payload) {
       if (typeof payload !== 'object') {
         throw new Error(`Non-object received in portfolio mutation.`);
-      }
-
-      if (payload.action) {
-        if (payload.action === 'clear') {
-          state.portfolio = [];
-          return;
-        } else {
-          throw new Error(`Only one valid action in portfolio mutation: 'clear'.`);
-        }
       }
 
       Object
@@ -52,8 +47,23 @@ export default new Vuex.Store({
       
     
       state.portfolio.push(payload);
+    },
+    trimPortfolio: function trimPortfolio(state, payload) {
+      //This doesn't work: state.portfolio.splice(payload,0); -- the state doesn't update.
 
-      return this;
+      if (typeof payload !== 'number') {
+        throw new Error('Invalid payload value in trimPortfolio');
+      }
+
+      let newPort = [];
+
+      for (let index = 0; index < state.portfolio.length; index++) {
+        if (index !== payload) {
+          newPort.push(state.portfolio[index]);
+        }
+      }
+
+      state.portfolio = [ ...newPort ];
     }
   },
   actions: {
