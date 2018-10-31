@@ -145,7 +145,7 @@ export default {
       }, 100);
     },
     clearPortfolio: function clearPortfolio() {
-      alert('clearPortfolio does not work as intended at the moment -- please check back later.');
+      this.$store.commit('portfolio', { action: 'clear' });
     },
     /**
      * @description The decision was made to default assetClasses props to ''.  This makes it
