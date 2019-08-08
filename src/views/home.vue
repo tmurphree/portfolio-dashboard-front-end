@@ -45,13 +45,6 @@
         Clear current portfolio
       </button>
       <input type="file" name="file-input" id="file-input" accept=".csv" class="d-none">
-      <button type="button" 
-        class="btn btn-primary mr-2 mb-1 d-none d-lg-block" 
-        data-cy-upload 
-        @click="uploadCsvFile"
-      >
-        Upload a CSV file
-      </button>
     </section>
     <section id="data-entry" class="mt-4">
       <section data-cy-add-security-form>
@@ -90,11 +83,6 @@
           <p><sup>*</sup>optional</p>
         </form>
       </section>
-      <section class="d-none d-lg-block">
-          <div id="dropzone" class="dropzone" data-cy-dropzone>
-            <h2>Drag a CSV file here to upload it</h2>
-          </div>
-        </section>
     </section>
   </div>
 </template>
@@ -106,7 +94,6 @@ import securityTemplate from '@/assets/services/object-templates.service';
 export default {
   data: function data() {
     return {
-      dropzone: undefined,
       editedSecurity: { ...securityTemplate },
     };
   },
@@ -122,11 +109,6 @@ export default {
             }
           });
         });
-
-      // document.querySelector('#symbol')
-      //   .addEventListener('keyup', event => {
-      //     this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
-      //   });
 
       return this;
     },
@@ -208,9 +190,6 @@ export default {
 
       return this;
     },
-    uploadCsvFile: function uploadCsvFile() {
-      alert('uploadCsvFile does not work as intended at the moment -- please check back later.');
-    },
   },
   mounted() {
     this
@@ -251,13 +230,6 @@ export default {
 
   #symbol {
     text-transform: uppercase;
-  }
-
-  .dropzone {
-    border: 2px dashed rgba(0, 0, 0, 1);
-    height: 100%;
-    text-decoration: line-through; 
-    color: gray;
   }
 
   .table-striped tbody tr:nth-of-type(odd) {
