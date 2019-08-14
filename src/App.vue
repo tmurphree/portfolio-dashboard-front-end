@@ -1,6 +1,6 @@
 <template>
   <!-- layout partially borrowed from https://getbootstrap.com/docs/4.1/examples/dashboard/  -->
-  <div class="container-fluid"> 
+  <div class="container-fluid p-0"> 
     <nav class="bg-dark justify-content-start navbar navbar-dark shadow p-0" data-cy-top-bar>
       <div class="navbar-brand col-sm-3" @click="goHome">Portfolio Dashboard</div>
       <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
