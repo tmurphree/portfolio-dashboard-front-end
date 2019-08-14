@@ -1,18 +1,16 @@
 <template>
   <!-- layout partially borrowed from https://getbootstrap.com/docs/4.1/examples/dashboard/  -->
   <div class="container-fluid"> 
-    <div class="row">
-      <nav class="bg-dark justify-content-start navbar navbar-dark shadow p-0" data-cy-top-bar>
-        <div class="navbar-brand col-sm-3" @click="goHome">Portfolio Dashboard</div>
-        <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
-        <router-link to="/about" class="nav-link top-nav-link" data-cy-about>About</router-link>
-        <router-link to="/help" class="nav-link top-nav-link" data-cy-help>Help</router-link>
-        <div class="disclaimer" data-cy-disclaimer>
-          Do NOT base actual trades on the data from this site. This site is
-          UNFIT to be the basis for any real-world trading.
-        </div>
-      </nav>
-    </div>
+    <nav class="bg-dark justify-content-start navbar navbar-dark shadow p-0" data-cy-top-bar>
+      <div class="navbar-brand col-sm-3" @click="goHome">Portfolio Dashboard</div>
+      <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
+      <router-link to="/about" class="nav-link top-nav-link" data-cy-about>About</router-link>
+      <router-link to="/help" class="nav-link top-nav-link" data-cy-help>Help</router-link>
+      <div class="disclaimer" data-cy-disclaimer>
+        Do NOT base actual trades on the data from this site. This site is
+        UNFIT to be the basis for any real-world trading.
+      </div>
+    </nav>
     <div class="row">
       <!-- sidebar on md and higher -->
       <nav class="bg-light col-md-2 d-none d-md-block sidebar" data-cy-sidebar role="navigation">
