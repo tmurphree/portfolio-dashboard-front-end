@@ -12,10 +12,6 @@ describe('the home view', () => {
       .should('not.have.attr', 'required');
   });
 
-  it('has an "upload" button', () => {
-    cy.get('[data-cy-upload]');
-  });
-
   // skip until you get the API ready
   it.skip('gets an array of objects from the API after file upload', () => {
 
