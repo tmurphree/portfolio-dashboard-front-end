@@ -29,18 +29,18 @@ describe('top bar', () => {
   });
 
   it('shows up on all screen sizes', () => {
-    function checkVisibility(selector) {
+    function checkIsVisible(selector) {
       cy
         .get(selector)
         .should('be.visible');
     }
 
     cy.viewport('macbook-11');
-    checkVisibility('[data-cy-top-bar]');
+    checkIsVisible('[data-cy-top-bar]');
     cy.viewport('ipad-2');
-    checkVisibility('[data-cy-top-bar]');
+    checkIsVisible('[data-cy-top-bar]');
     cy.viewport('iphone-5');
-    checkVisibility('[data-cy-top-bar]');
+    checkIsVisible('[data-cy-top-bar]');
     cy.viewport('macbook-11');
   });
 });
@@ -91,17 +91,23 @@ describe('side bar', () => {
   });
 
   it('shows up on all screen sizes', () => {
-    function checkVisibility(selector) {
+    const checkIsVisible = function checkIsVisible(selector) {
       cy
         .get(selector)
         .should('be.visible');
-    }
+    };
+
+    const checkHidden = function checkHidden(selector) {
+      cy
+        .get(selector)
+        .should('not.be.visible');
+    };
 
     cy.viewport('macbook-11');
-    checkVisibility('[data-cy-sidebar]');
+    checkIsVisible('[data-cy-sidebar]');
     cy.viewport('ipad-2');
-    checkVisibility('[data-cy-sidebar]');
+    checkIsVisible('[data-cy-sidebar]');
     cy.viewport('iphone-5');
-    checkVisibility('[data-cy-sidebar]');
+    checkHidden('[data-cy-sidebar]');
   });
 });
