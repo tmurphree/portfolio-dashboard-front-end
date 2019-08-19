@@ -5,6 +5,8 @@
   "scripts": {
     "autotest": "nodemon --config nodemon.config.json",
     "build": "vue-cli-service build",
+    "lint": "eslint --ignore-path .eslintignore .",
+    "lint:fix": "eslint --ignore-path .eslintignore . --fix",
     "serve": "vue-cli-service serve",
     "test": "npm run test:unit; npm run test:e2e",
     "test:unit": "vue-cli-service test:unit",
