@@ -1,6 +1,4 @@
-const templates = require('./object-templates.service');
-
-let initialData = [];
+const initialData = [];
 
 initialData.push({
   assetClasses: {

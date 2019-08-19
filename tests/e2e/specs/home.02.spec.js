@@ -1,3 +1,5 @@
+/* eslint no-undef:'off' */
+
 describe('the home view', () => {
   before(() => {
     cy.visit('/');
