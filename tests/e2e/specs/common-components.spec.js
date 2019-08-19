@@ -24,7 +24,7 @@ describe('top bar', () => {
   it('has a disclaimer', () => {
     cy.get('[data-cy-disclaimer]')
       .should('be.visible')
-      .should('have.text', 'Do NOT base actual trades on the data from this site.  This site is UNFIT to be the basis for any real-world trading.')
+      .should('contain', 'Do NOT base actual trades on the data from this site.')
       .should('have.css', 'color', 'rgb(255, 0, 0)');
   });
 
