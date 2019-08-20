@@ -4,6 +4,7 @@
  * @description Tests for the top bar and side nav.
 */
 
+const { checkIsHidden, checkIsVisible } = require('../support/checkForVisibility');
 
 describe('top bar', () => {
   beforeEach(() => {
@@ -15,10 +16,19 @@ describe('top bar', () => {
   });
 
   it('has the appropriate menu items', () => {
-    ['About', 'Save', 'Help'].forEach((element) => {
+    cy.get('[data-cy-home]')
+      .should('have.attr', 'href', '#/');
+
+    ['Graph', 'About', 'Save', 'Help'].forEach((element) => {
       cy.get(`[data-cy-${element.toLocaleLowerCase()}]`)
         .should('have.attr', 'href', `#/${element.toLocaleLowerCase()}`);
     });
+
+    cy.viewport('macbook-11');
+    ['[data-cy-home]', '[data-cy-graph]'].forEach((el) => checkIsHidden(el));
+    cy.viewport('iphone-5');
+    ['[data-cy-home]', '[data-cy-graph]'].forEach((el) => checkIsVisible(el));
+    cy.viewport('macbook-11');
   });
 
   it('has a disclaimer', () => {
@@ -29,12 +39,6 @@ describe('top bar', () => {
   });
 
   it('shows up on all screen sizes', () => {
-    function checkIsVisible(selector) {
-      cy
-        .get(selector)
-        .should('be.visible');
-    }
-
     cy.viewport('macbook-11');
     checkIsVisible('[data-cy-top-bar]');
     cy.viewport('ipad-2');
@@ -51,7 +55,7 @@ describe('side bar', () => {
   });
 
   it('has appropriate styling', () => {
-    cy.get('[data-cy-sidebar]')
+    cy.get('[data-cy-sidebar-md]')
       .should('have.css', 'overflow', 'hidden')
       .should('have.css', 'max-width', '16.6667%')
       .its('height')
@@ -59,10 +63,10 @@ describe('side bar', () => {
   });
 
   it('has these menus', () => {
-    cy.get('[data-cy-sidebar] li.nav-item')
+    cy.get('[data-cy-sidebar-md] li.nav-item')
       .its('length').should('eq', 5);
 
-    cy.get('[data-cy-sidebar] li.nav-item a')
+    cy.get('[data-cy-sidebar-md] li.nav-item a')
       .should(($link) => {
         expect($link[0]).to.have.class('active');
         expect($link[0].innerText).to.contain('Home');
@@ -85,29 +89,17 @@ describe('side bar', () => {
     ];
 
     urlMapper.forEach((element) => {
-      cy.contains(element.linkText).click();
+      cy.get('[data-cy-sidebar-md]').contains(element.linkText).click();
       cy.url().should('contain', element.expectedUrl);
     });
   });
 
-  it('shows up on all screen sizes', () => {
-    const checkIsVisible = function checkIsVisible(selector) {
-      cy
-        .get(selector)
-        .should('be.visible');
-    };
-
-    const checkHidden = function checkHidden(selector) {
-      cy
-        .get(selector)
-        .should('not.be.visible');
-    };
-
+  it('shows up on all appropriate screen sizes', () => {
     cy.viewport('macbook-11');
-    checkIsVisible('[data-cy-sidebar]');
+    checkIsVisible('[data-cy-sidebar-md]');
     cy.viewport('ipad-2');
-    checkIsVisible('[data-cy-sidebar]');
+    checkIsVisible('[data-cy-sidebar-md]');
     cy.viewport('iphone-5');
-    checkHidden('[data-cy-sidebar]');
+    checkIsHidden('[data-cy-sidebar-md]');
   });
 });
