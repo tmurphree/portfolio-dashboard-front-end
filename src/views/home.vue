@@ -160,7 +160,12 @@ export default {
       if (this.$store.state.showHomeViewWelcome) {
         pause(15)
           .then(() => {
-            document.querySelector('#welcome').classList.add('collapsed');
+            const welcomeSection = document.querySelector('#welcome');
+
+            if (welcomeSection) {
+              welcomeSection.classList.add('collapsed');
+            }
+
             return pause(5);
           })
           .then(() => {
