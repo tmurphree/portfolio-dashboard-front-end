@@ -2,7 +2,7 @@
   <div> 
     <nav class="bg-dark justify-content-start navbar navbar-dark p-0" data-cy-top-bar>
       <span class="col-12 col-md-auto navbar-brand" @click="goHome">Portfolio Dashboard</span>
-      <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home>Home</router-link>
+      <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home exact>Home</router-link>
       <router-link to="/graph" class="nav-link top-nav-link d-md-none" data-cy-graph>Graph</router-link>
       <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
       <router-link to="/about" class="nav-link top-nav-link" data-cy-about>About</router-link>
@@ -117,12 +117,28 @@
     color: rgba(255, 0, 0, 1);
   }
 
-  .top-nav-link {
-    color: rgba(85, 178, 170, 1);
+  .navbar-brand {
+    cursor: pointer;
   }
 
   .sidebar {
     overflow: hidden;
+  }
+
+  .top-nav-link {
+    color: rgba(85, 178, 170, 1);
+  }
+
+  [data-cy-top-bar] {
+    a:hover, .router-link-exact-active {
+      color: rgba(255, 244, 58, 1);
+    }
+  }
+
+  [data-cy-sidebar-md] {
+    .router-link-exact-active {
+      border: 1px solid;
+    }
   }
 
   @media (min-width: 768px) {
