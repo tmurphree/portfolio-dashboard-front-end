@@ -121,10 +121,6 @@
     cursor: pointer;
   }
 
-  .sidebar {
-    overflow: hidden;
-  }
-
   .top-nav-link {
     color: rgba(85, 178, 170, 1);
   }
@@ -138,12 +134,6 @@
   [data-cy-sidebar-md] {
     .router-link-exact-active {
       border: 1px solid;
-    }
-  }
-
-  @media (min-width: 768px) {
-    .sidebar {
-      height: calc(100vh - 40px);
     }
   }
 </style>
