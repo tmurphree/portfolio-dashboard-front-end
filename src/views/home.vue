@@ -13,23 +13,24 @@
     </section>
     <section>
       <h2>Current portfolio:</h2>
-      <table class="table table-bordered table-hover table-striped" cy-portfolio-table>
+      <p class="d-sm-none">Scroll the table to the right or turn the phone on its side to see action buttons.</p>
+      <table class="table table-bordered table-hover table-responsive table-striped" cy-portfolio-table>
           <thead class="thead-dark">
-            <th scope="col">Symbol</th>
-            <th scope="col">Friendly name</th>
-            <th scope="col">Num shares</th>
-            <th scope="col">Value</th>
+            <th class="d-md-table-cell d-none" scope="col">Symbol</th>
+            <th scope="col">Friendly name <span class="d-md-none">(symbol)</span></th>
+            <th class="d-md-table-cell d-none" scope="col">Num shares</th>
+            <th class="d-md-table-cell d-none" scope="col">Value</th>
             <th scope="col">% of portfolio</th>
             <th scope="col">Asset class(es)</th>
             <th scope="col">Actions</th>
           </thead>
           <tbody>
             <tr v-for="(item, index) in this.$store.state.portfolio">
-                <td>{{ item.symbol }}</td>
-                <td>{{ item.friendlyName }}</td>
+                <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
+                <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
                 <td>{{ item.numShares }}</td>
-                <td>{{ item.numShares }}</td>
-                <td>{{ item.numShares }}</td>
+                <td class="d-md-table-cell d-none">{{ item.numShares }}</td>
+                <td class="d-md-table-cell d-none">{{ item.numShares }}</td>
                 <td>TODO: pretty print this</td>
                 <td>
                   <template v-if="true"><button type="button" class="mr-1">Edit</button><button type="button" @click="removeSecurity(index)">Remove</button></template>
