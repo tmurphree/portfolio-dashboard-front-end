@@ -1,18 +1,18 @@
 <template>
   <div> 
-    <nav class="bg-dark justify-content-start navbar navbar-dark shadow p-0" data-cy-top-bar>
+    <nav class="bg-dark justify-content-start navbar navbar-dark p-0" data-cy-top-bar>
       <span class="navbar-brand" @click="goHome">Portfolio Dashboard</span>
       <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home>Home</router-link>
       <router-link to="/graph" class="nav-link top-nav-link d-md-none" data-cy-graph>Graph</router-link>
       <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
       <router-link to="/about" class="nav-link top-nav-link" data-cy-about>About</router-link>
       <router-link to="/help" class="nav-link top-nav-link" data-cy-help>Help</router-link>
-      <div class="disclaimer" data-cy-disclaimer>
+    </nav>
+    <div class="container-fluid">
+      <div class="disclaimer row ml-0 mr-0 mt-1" data-cy-disclaimer>
         Do NOT base actual trades on the data from this site. This site is
         UNFIT to be the basis for any real-world trading.
       </div>
-    </nav>
-    <div class="container-fluid">
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar" data-cy-sidebar-md role="navigation">
           <div class="sidebar-sticky">
