@@ -1,7 +1,7 @@
 <template>
   <div> 
     <nav class="bg-dark justify-content-start navbar navbar-dark p-0" data-cy-top-bar>
-      <span class="navbar-brand" @click="goHome">Portfolio Dashboard</span>
+      <span class="col-12 col-md-auto navbar-brand" @click="goHome">Portfolio Dashboard</span>
       <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home>Home</router-link>
       <router-link to="/graph" class="nav-link top-nav-link d-md-none" data-cy-graph>Graph</router-link>
       <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
