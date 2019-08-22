@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <nav class="bg-dark justify-content-start navbar navbar-dark p-0" data-cy-top-bar>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" data-cy-top-bar>
       <span class="col-12 col-md-auto navbar-brand" @click="goHome">Portfolio Dashboard</span>
       <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home exact>Home</router-link>
       <router-link to="/graph" class="nav-link top-nav-link d-md-none" data-cy-graph>Graph</router-link>
@@ -14,7 +14,7 @@
         UNFIT to be the basis for any real-world trading.
       </div>
       <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar" data-cy-sidebar-md role="navigation">
+        <nav class="bg-dark col-md-2 d-md-block d-none sidebar" data-cy-sidebar-md role="navigation">
           <div class="sidebar-sticky">
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Current assets</span>
@@ -71,7 +71,6 @@
                 </router-link>
               </li>
             </ul>
-
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>What-if analysis</span>
             </h6>
@@ -91,7 +90,7 @@
             </ul>
           </div>
         </nav>
-        <main class="col-md-10">
+        <main class="col-md-9 ml-sm-auto col-lg-10 mt-4">
           <router-view />
         </main>
       </div>
@@ -120,6 +119,34 @@
   .navbar-brand {
     cursor: pointer;
   }
+
+  // make the sidebar go all the way down
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  }
+
+  .sidebar-sticky {
+    position: sticky;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  // add extra top margin on iPhone SE so content isn't cut off
+  @media screen and (max-width: 320px){
+    main.mt-4 {
+      margin-top: 3rem !important;
+    }
+  }
+
 
   .top-nav-link {
     color: rgba(85, 178, 170, 1);
