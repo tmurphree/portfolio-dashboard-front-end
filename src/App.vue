@@ -14,7 +14,7 @@
         UNFIT to be the basis for any real-world trading.
       </div>
       <div class="row">
-        <nav class="bg-dark col-md-2 d-md-block d-none sidebar" data-cy-sidebar-md role="navigation">
+        <nav class="bg-light col-md-2 d-md-block d-none sidebar" data-cy-sidebar-md role="navigation">
           <div class="sidebar-sticky">
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Current assets</span>
@@ -90,7 +90,7 @@
             </ul>
           </div>
         </nav>
-        <main class="col-md-9 ml-sm-auto col-lg-10 mt-4">
+        <main class="col-md-9 col-lg-10 ml-sm-auto mt-4 mt-md-1 mt-lg-3" id="main-element">
           <router-view />
         </main>
       </div>
@@ -141,12 +141,18 @@
   }
 
   // add extra top margin on iPhone SE so content isn't cut off
-  @media screen and (max-width: 320px){
-    main.mt-4 {
+  @media screen and (max-width: 320px) {
+    #main-element {
       margin-top: 3rem !important;
     }
   }
 
+  // fix ipad styling
+  @media screen and (min-width: 737px) {
+    #main-element {
+      margin-left: 17% !important;
+    }
+  }
 
   .top-nav-link {
     color: rgba(85, 178, 170, 1);
