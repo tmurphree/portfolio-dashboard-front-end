@@ -14,7 +14,7 @@
     <section>
       <h2>Current portfolio:</h2>
       <p class="d-sm-none">Scroll the table to the right or turn the phone on its side to see action buttons.</p>
-      <table class="table table-bordered table-hover table-responsive table-striped" cy-portfolio-table>
+      <table class="table table-bordered table-hover table-responsive-md table-striped" cy-portfolio-table>
           <thead class="thead-dark">
             <th class="d-md-table-cell d-none" scope="col">Symbol</th>
             <th scope="col">Friendly name <span class="d-md-none">(symbol)</span></th>
