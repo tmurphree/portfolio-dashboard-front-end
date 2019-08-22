@@ -15,7 +15,7 @@
       </div>
       <div class="row">
         <nav class="bg-light col-md-2 d-md-block d-none sidebar" data-cy-sidebar-md role="navigation">
-          <div class="sidebar-sticky">
+          <div class="px-xl-3 sidebar-sticky">
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Current assets</span>
             </h6>
