@@ -88,8 +88,10 @@
         </nav>
         <main class="col-md-9 col-lg-10 ml-sm-auto mt-4 mt-md-1 mt-lg-3" id="main-element">
           <div class="disclaimer" data-cy-disclaimer>
-            Do NOT base actual trades on the data from this site. This site is
-            UNFIT to be the basis for any real-world trading.
+            <p>
+              Do NOT base actual trades on the data from this site. This site is
+              UNFIT to be the basis for any real-world trading.
+            </p>
           </div>
           <router-view />
         </main>
@@ -146,10 +148,6 @@
     #main-element {
       margin-top: 3rem !important;
     }
-  }
-
-  @media screen and (max-width: 320px) {
-
   }
 
   // fix ipad styling
