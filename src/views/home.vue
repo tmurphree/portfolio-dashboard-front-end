@@ -97,12 +97,12 @@
             <input v-model.number="editedSecurity.assetClasses.bondDomestic" class="form-control" id="pct-bond-domestic" name="pct-bond-domestic" type="number"><span class="d-none d-md-inlines">%</span>
           </div>
           <div class="form-group form-row">
-            <label for="pct-bond-international">Intl bond:</label>
+            <label for="pct-bond-international">International bond:</label>
             <input v-model.number="editedSecurity.assetClasses.bondInternational" class="form-control" id="pct-bond-international" name="pct-bond-international" type="number"><span class="d-none d-md-inlines">%</span>
           </div>
       </div>
       <div class="col-12">
-        <button type="button" class="btn btn-success mr-2 mb-1" data-cy-add-security @click="addSecurity">
+        <button type="button" class="btn btn-success btn-lg mr-2 mb-1" data-cy-add-security @click="addSecurity">
           Add security
         </button>
       </div>
