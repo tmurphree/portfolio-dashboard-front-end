@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="home-div">
     <section v-if="this.$store.state.showHomeViewWelcome" id="welcome" class="collapsable row">
       <h2>Welcome to the portfolio dashboard</h2>
       <p>
@@ -241,6 +241,17 @@ export default {
 
   #symbol {
     text-transform: uppercase;
+  }
+
+  // enforce no x scrollbar and whitespace around table
+  @media (min-width: 1024px) {
+    body {
+      overflow-x: hidden;
+    }
+
+    #home-div {
+      max-width: calc(100% - 15px);
+    }
   }
 
   .table-striped tbody tr:nth-of-type(odd) {
