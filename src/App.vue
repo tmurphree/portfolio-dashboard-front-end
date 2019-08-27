@@ -1,6 +1,6 @@
 <template>
   <div> 
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow" data-cy-top-bar>
+    <nav class="navbar navbar-dark fixed-top bg-dark p-0 shadow" data-cy-top-bar>
       <span class="col-12 col-md-auto navbar-brand" @click="goHome">Portfolio Dashboard</span>
       <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home exact>Home</router-link>
       <router-link to="/graph" class="nav-link top-nav-link d-md-none" data-cy-graph>Graph</router-link>
@@ -9,10 +9,6 @@
       <router-link to="/help" class="nav-link top-nav-link" data-cy-help>Help</router-link>
     </nav>
     <div class="container-fluid">
-      <div class="disclaimer row ml-0 mr-0 mt-1" data-cy-disclaimer>
-        Do NOT base actual trades on the data from this site. This site is
-        UNFIT to be the basis for any real-world trading.
-      </div>
       <div class="row">
         <nav class="bg-light col-md-2 d-md-block d-none sidebar" data-cy-sidebar-md role="navigation">
           <div class="px-xl-3 sidebar-sticky">
@@ -91,6 +87,10 @@
           </div>
         </nav>
         <main class="col-md-9 col-lg-10 ml-sm-auto mt-4 mt-md-1 mt-lg-3" id="main-element">
+          <div class="disclaimer" data-cy-disclaimer>
+            Do NOT base actual trades on the data from this site. This site is
+            UNFIT to be the basis for any real-world trading.
+          </div>
           <router-view />
         </main>
       </div>
@@ -114,6 +114,7 @@
 <style lang="scss">
   .disclaimer {
     color: rgba(255, 0, 0, 1);
+    margin-top: 5rem;
   }
 
   .navbar-brand {
@@ -147,10 +148,18 @@
     }
   }
 
+  @media screen and (max-width: 320px) {
+
+  }
+
   // fix ipad styling
-  @media screen and (min-width: 737px) {
+  @media screen and (min-width: 768px) {
     #main-element {
       margin-left: 17% !important;
+    }
+
+    .disclaimer {
+      margin-top: 3rem;
     }
   }
 
