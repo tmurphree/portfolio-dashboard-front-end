@@ -109,6 +109,7 @@
         </button>
       </div>
     </section>
+    <link rel="prefetch" href="edit-remove-buttons.png">
   </div>
 </template>
 

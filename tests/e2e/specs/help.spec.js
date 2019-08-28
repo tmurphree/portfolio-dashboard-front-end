@@ -14,7 +14,7 @@ describe('the help view', () => {
       .get('#help .row p')
       .its('length')
       .should('be.gte', 1);
-    
+
     cy
       .get('#help .row p')
       .each(($paragraph) => {
