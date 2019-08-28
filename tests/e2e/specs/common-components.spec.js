@@ -56,7 +56,7 @@ describe('side bar', () => {
 
   it('has appropriate styling', () => {
     cy.get('[data-cy-sidebar-md]')
-      .should('have.css', 'overflow', 'hidden')
+      .should('have.css', 'overflow', 'visible')
       .should('have.css', 'max-width', '16.6667%')
       .its('height')
       .should('be.gte', '600px');

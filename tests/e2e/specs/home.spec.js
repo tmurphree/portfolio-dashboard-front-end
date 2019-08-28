@@ -5,7 +5,7 @@ describe('the home view', () => {
     cy.visit('/');
   });
 
-  it('has a file input', () => {
+  it.skip('has a file input', () => {
     cy.get('input[type=file]')
       .should('have.attr', 'accept', '.csv')
       .should('not.have.attr', 'multiple')
