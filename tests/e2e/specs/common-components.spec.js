@@ -64,7 +64,7 @@ describe('side bar', () => {
 
   it('has these menus', () => {
     cy.get('[data-cy-sidebar-md] li.nav-item')
-      .its('length').should('eq', 5);
+      .its('length').should('eq', 4);
 
     cy.get('[data-cy-sidebar-md] li.nav-item a')
       .should(($link) => {
@@ -72,10 +72,9 @@ describe('side bar', () => {
         expect($link[0].innerText).to.contain('Home');
 
         expect($link[1].innerText).to.contain('Graph view');
-        expect($link[2].innerText).to.contain('Table view');
-        expect($link[3].innerText).to.contain('Monitored securities');
+        expect($link[2].innerText).to.contain('Monitored securities');
 
-        expect($link[4].innerText).to.contain('Trade simulator');
+        expect($link[3].innerText).to.contain('Trade simulator');
       });
   });
 
@@ -83,7 +82,6 @@ describe('side bar', () => {
     const urlMapper = [
       { expectedUrl: '/', linkText: 'Home' },
       { expectedUrl: '/current-graph', linkText: 'Graph view' },
-      { expectedUrl: '/current-table', linkText: 'Table view' },
       { expectedUrl: '/monitored', linkText: 'Monitored securities' },
       { expectedUrl: '/trade-simulator', linkText: 'Trade simulator' },
     ];
