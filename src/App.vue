@@ -89,8 +89,7 @@
         <main class="col-md-9 col-lg-10 ml-sm-auto mt-4 mt-md-1 mt-lg-3" id="main-element">
           <div class="disclaimer" data-cy-disclaimer>
             <p>
-              Do NOT base actual trades on the data from this site. This site is
-              UNFIT to be the basis for any real-world trading.
+              Do NOT base actual trades on the data from this site.  <router-link to="/about">Find out why.</router-link>
             </p>
           </div>
           <router-view />

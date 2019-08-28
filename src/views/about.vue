@@ -1,6 +1,6 @@
 
 <template>
-  <div class="about">
+  <div id="about">
     <h1>About this project</h1>
     <p>
       I'm interested in personal finance and wanted a tool to help me show my web 
