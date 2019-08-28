@@ -33,8 +33,10 @@
                 <td class="d-md-table-cell d-none">{{ item.numShares }}</td>
                 <td>TODO: pretty print this</td>
                 <td>
-                  <template v-if="true"><button type="button" class="mr-1">Edit</button><button type="button" @click="removeSecurity(index)">Remove</button></template>
-                  <template v-else><button type="button" class="mr-1">Save</button><button type="button" >Cancel</button></template>
+                  <template>
+                    <button type="button" class="mr-1">Edit</button>
+                    <button type="button" @click="removeSecurity(index)">Remove</button>
+                  </template>
                 </td>
             </tr>
           </tbody>

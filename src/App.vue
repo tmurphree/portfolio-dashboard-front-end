@@ -1,10 +1,9 @@
 <template>
   <div> 
-    <nav class="navbar navbar-dark fixed-top bg-dark p-0 shadow" data-cy-top-bar>
+    <nav class="bg-dark fixed-top navbar navbar-dark p-0 shadow" data-cy-top-bar>
       <span class="col-12 col-md-auto navbar-brand" @click="goHome">Portfolio Dashboard</span>
       <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home exact>Home</router-link>
       <router-link to="/graph" class="nav-link top-nav-link d-md-none" data-cy-graph>Graph</router-link>
-      <router-link to="/save" class="nav-link top-nav-link" data-cy-save>Save</router-link>
       <router-link to="/about" class="nav-link top-nav-link" data-cy-about>About</router-link>
       <router-link to="/help" class="nav-link top-nav-link" data-cy-help>Help</router-link>
     </nav>
