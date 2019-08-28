@@ -254,7 +254,7 @@ export default {
       overflow-x: hidden;
     }
 
-    #home-div {
+    #home {
       max-width: calc(100% - 15px);
     }
   }
