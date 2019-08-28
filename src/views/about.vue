@@ -1,6 +1,6 @@
 
 <template>
-  <div class="about">
+  <div id="about">
     <h1>About this project</h1>
     <p>
       I'm interested in personal finance and wanted a tool to help me show my web 
@@ -10,9 +10,9 @@
       This site attempts to be accurate, but <strong>I cannot guarantee that it is accurate</strong>.
     </p>
     <p>
-      <h2>
-        DO NOT MAKE ACTUAL FINANCIAL DECISIONS BASED ON THIS SITE BECAUSE I CANNOT GUARANTEE ITS ACCURACY.
-      </h2>
+      <strong>
+        Do not make financial decisions based on this site.
+      </strong>
     </p>
   </div>
 </template>

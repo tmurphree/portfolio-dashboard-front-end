@@ -54,5 +54,5 @@ export default new Router({
       name: 'trade-simulator',
       component: TradeSimulator,
     },
-  ]
+  ],
 });

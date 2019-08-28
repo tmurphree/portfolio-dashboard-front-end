@@ -1,10 +1,12 @@
 {
   "name": "portfolio-dashboard-front-end",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "scripts": {
     "autotest": "nodemon --config nodemon.config.json",
     "build": "vue-cli-service build",
+    "lint": "eslint --ignore-path .eslintignore .",
+    "lint:fix": "eslint --ignore-path .eslintignore . --fix",
     "serve": "vue-cli-service serve",
     "test": "npm run test:unit; npm run test:e2e",
     "test:unit": "vue-cli-service test:unit",
@@ -16,14 +18,17 @@
     "vuex": "3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "3.0.1",
+    "@vue/cli-plugin-babel": "3.10.0",
     "@vue/cli-plugin-e2e-cypress": "3.0.1",
     "@vue/cli-plugin-unit-jest": "3.0.1",
-    "@vue/cli-service": "3.0.1",
+    "@vue/cli-service": "3.10.0",
     "@vue/test-utils": "1.0.0-beta.20",
     "babel-core": "7.0.0-bridge.0",
-    "babel-jest": "23.0.1",
-    "node-sass": "4.9.0",
+    "babel-jest": "24.1.0",
+    "eslint": "6.1.0",
+    "eslint-config-airbnb-base": "14.0.0",
+    "eslint-plugin-import": "2.18.2",
+    "node-sass": "4.12.0",
     "nodemon": "1.18.4",
     "sass-loader": "7.0.1",
     "vue-template-compiler": "2.5.17"
