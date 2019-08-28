@@ -45,7 +45,6 @@
       <button type="button" class="btn btn-danger mr-2 mb-1" data-cy-clear-port @click="clearPortfolio">
         Clear current portfolio
       </button>
-      <input type="file" name="file-input" id="file-input" accept=".csv" class="d-none">
     </section>
     <section id="data-entry" class="mt-4 row">
       <form class="col-lg-5">
