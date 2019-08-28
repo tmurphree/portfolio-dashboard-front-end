@@ -1,12 +1,15 @@
 <template>
-  <div id="home-div">
+  <div id="home">
     <section v-if="this.$store.state.showHomeViewWelcome" id="welcome" class="collapsable row">
-      <h2>Welcome to the portfolio dashboard</h2>
-      <p>
-        I'm assuming you want to dive right in with little to no preamble, but there are pages
-        with <router-link to="/help">instructions</router-link> and 
-        <router-link to="/about">overviews</router-link>.
-      </p>
+      <div>
+        <h2>Welcome to the portfolio dashboard</h2>
+      </div>
+      <div class="col-xl-12 p-0">
+        <p>
+          I'm assuming you want to dive right in.  Go ahead!  There's a 
+          <router-link to="/help">Help page</router-link> if you need it.
+        </p>
+      </div>
     </section>
     <section class="row">
       <h2>Current portfolio:</h2>
