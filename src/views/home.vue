@@ -7,7 +7,7 @@
       <div class="col-xl-12 p-0">
         <p>
           I'm assuming you want to dive right in.  Go ahead!  There's a 
-          <router-link to="/help">Help page</router-link> if you need it.
+          <router-link to="/help">help page</router-link> if you need it.
         </p>
       </div>
     </section>
