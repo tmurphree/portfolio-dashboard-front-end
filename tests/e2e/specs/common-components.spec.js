@@ -19,7 +19,7 @@ describe('top bar', () => {
     cy.get('[data-cy-home]')
       .should('have.attr', 'href', '#/');
 
-    ['Graph', 'About', 'Save', 'Help'].forEach((element) => {
+    ['Graph', 'About', 'Help'].forEach((element) => {
       cy.get(`[data-cy-${element.toLocaleLowerCase()}]`)
         .should('have.attr', 'href', `#/${element.toLocaleLowerCase()}`);
     });
