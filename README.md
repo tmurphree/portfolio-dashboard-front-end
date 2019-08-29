@@ -4,7 +4,11 @@
 
 ~~[Coming soon: Click here for portfolio dashboard in production]()~~
 
-# This is a programming exercise.  There are no guarantees about the accuracy of the data on the site.  DO NOT base real financial decisions on the site.  
+I'm interested in personal finance and wanted a tool to help me show my web development skills in a way that's interesting to me.  
+
+This site attempts to be accurate, but **I cannot guarantee that it is accurate**.  
+
+**Do not make financial decisions based on this site.**  
 
 ## Business Problem Solved  
 Save time and effort on checking important but time-consuming tasks.  It's important to maintain a portfolio composition / asset allocation that matches your risk profile, but it takes time to do it.  This site automates the process so you can spend more time thinking strategically.  
