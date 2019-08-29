@@ -54,11 +54,11 @@
           <h4>Basic info</h4>
         </div>
         <div class="form-group form-row">
-          <label for="symbol">Symbol:</label>
+          <label for="symbol">Symbol <span class="text-red">(required)</span>:</label>
           <input v-model="editedSecurity.symbol" class="form-control" id="symbol" name="symbol" type="text">
         </div>
         <div class="form-group form-row">
-          <label for="num-shares"># of shares:</label>
+          <label for="num-shares"># of shares <span class="text-red">(required)</span>:</label>
           <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
         </div>
         <div class="form-group form-row">
@@ -68,7 +68,8 @@
       </form>
       <div class="col-lg-5" id="asset-classes">
         <div class="row">
-          <h4>Asset classes (%)</h4>
+          <h4 class="w-100">Asset classes (%)</h4>
+          <p><small>These must add to 100 before you can save.</small></p>
         </div>
           <p>Stocks</p>
           <div class="form-group form-row">
@@ -177,7 +178,7 @@ export default {
       return this;
     },
     hideWelcome: function hideWelcome() {
-      function pause(seconds) {
+      const pause = function pause(seconds) {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve();
@@ -242,6 +243,10 @@ export default {
 
   .collapsable.collapsed {
     max-height: 0;
+  }
+
+  .text-red {
+    color: red;
   }
 
   #symbol {
