@@ -134,7 +134,13 @@ export default {
   },
   computed: {
     disableAddButton() {
-      return true;
+      const assetClassesSumTo100 = function assetClassesSumTo100() {
+        return true;
+      };
+
+      return this.editedSecurity.symbol &&
+        this.editedSecurity.numShares > 0 &&
+        assetClassesSumTo100();
     }
   },
   methods: {
