@@ -10,8 +10,7 @@ import axios from 'axios';
  * getPrices(Vue, 'jpm');
 */
 const getPrices = function getPrices(Vue, userInput) {
-  // eslint-disable-next-line
-  Vue.prototype.$getPrices = (symbol = userInput) => {
+  const doTheWork = (symbol = userInput) => {
     let url;
 
     console.log(`url ${url}\nsymbol ${symbol}`);
@@ -32,16 +31,16 @@ const getPrices = function getPrices(Vue, userInput) {
   };
 
   // add the method to the Vue instance as $getPrices
-  // Object.defineProperty(
-  //   // object to extend
-  //   Vue.prototype,
-  //   // key name
-  //   '$getPrices',
-  //   // options
-  //   // eslint-disable-next-line
-  //   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
-  //   { configurable: false, value: doTheWork, writable: false },
-  // );
+  Object.defineProperty(
+    // object to extend
+    Vue.prototype,
+    // key name
+    '$getPrices',
+    // options
+    // eslint-disable-next-line
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+    { configurable: false, value: doTheWork, writable: false },
+  );
 };
 
 export default {
