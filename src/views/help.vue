@@ -8,7 +8,7 @@
         <h5 class="card-title">Adding a security</h5>
       </div>
       <div class="card-body">
-        <p class="card-text">
+        <p class="card-text" data-cy="help-text">
           Fill out the required fields on the Home screen and click "Add Security" towards the bottom
           of the page.
         </p>
@@ -19,7 +19,7 @@
         <h5 class="card-title">Editing or removing a security</h5>
       </div>
       <div class="card-body">
-        <p class="card-text">
+        <p class="card-text" data-cy="help-text">
           Click "Edit" or "Delete", as appropriate, on the table on the home screen. 
         </p>
         <img src="edit-remove-buttons.png" alt="Edit and remove buttons">

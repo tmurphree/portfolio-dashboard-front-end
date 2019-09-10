@@ -11,12 +11,12 @@ describe('the help view', () => {
 
   it('has at least one row with content', () => {
     cy
-      .get('#help .row p')
+      .get('[data-cy="help-text"]')
       .its('length')
       .should('be.gte', 1);
 
     cy
-      .get('#help .row p')
+      .get('[data-cy="help-text"]')
       .each(($paragraph) => {
         expect($paragraph[0].innerText.length)
           .to.be.gt(0);
