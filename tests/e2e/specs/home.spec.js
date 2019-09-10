@@ -22,27 +22,32 @@ describe('the home view', () => {
       .should('be.disabled');
   });
 
+  it('calculates the value table columns', () => {
+    cy.get('[data-cy="value-cell"]')
+      .should('be.disabled');
+  });
+
   it('lets you enter securities in one at a time', () => {
-    cy.get('[cy-portfolio-table] tr')
+    cy.get('[data-cy="portfolio-table"] tr')
       .then(($trArray) => {
         const currentPortfolioContentLength = $trArray.length;
 
         enterSecurityData();
 
-        cy.get('[cy-portfolio-table] tr')
+        cy.get('[data-cy="portfolio-table"] tr')
           .its('length')
           .should('eq', (currentPortfolioContentLength + 1));
       });
   });
 
   it('lets you remove a security', () => {
-    cy.get('[cy-portfolio-table] tr')
+    cy.get('[data-cy="portfolio-table"] tr')
       .then(($trArray) => {
         const currentPortfolioContentLength = $trArray.length;
 
         cy.contains('Remove').click();
 
-        cy.get('[cy-portfolio-table] tr')
+        cy.get('[data-cy="portfolio-table"] tr')
           .its('length')
           .should('eq', (currentPortfolioContentLength - 1));
       });
@@ -51,7 +56,7 @@ describe('the home view', () => {
   it('lets you clear the portfolio', () => {
     cy.contains('Clear current portfolio').click();
 
-    cy.get('[cy-portfolio-table] tr')
+    cy.get('[data-cy="portfolio-table"] tr')
       .should('not.exist');
   });
 
