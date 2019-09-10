@@ -1,5 +1,6 @@
 <template>
   <div>
-    <h1>trade simulator</h1>
+    <h1>Trade simulator</h1>
+    <p>Coming soon.</p>
   </div>
 </template>

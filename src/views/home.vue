@@ -12,11 +12,9 @@
       </div>
     </section>
     <section class="row">
-      <h2>Current portfolio:</h2>
+      <h2>Current portfolio</h2>
       <p class="d-sm-none">Scroll the table to the right or turn the phone on its side if you can't see action buttons.</p>
-      <small class="col-12 pl-0">
-        A word on <router-link to="/about">rounding</router-link>.
-      </small>
+      <small class="col-12 pl-0">A word on <router-link to="/about">rounding</router-link>.</small>
       <table class="table table-bordered table-hover table-responsive-md table-striped" data-cy="portfolio-table">
           <thead class="thead-dark">
             <th class="d-md-table-cell d-none" scope="col">Symbol</th>

@@ -81,7 +81,7 @@ describe('side bar', () => {
   it('goes to the appropriate partials on click', () => {
     const urlMapper = [
       { expectedUrl: '/', linkText: 'Home' },
-      { expectedUrl: '/current-graph', linkText: 'Graph view' },
+      { expectedUrl: '/graph', linkText: 'Graph view' },
       { expectedUrl: '/monitored', linkText: 'Monitored securities' },
       { expectedUrl: '/trade-simulator', linkText: 'Trade simulator' },
     ];

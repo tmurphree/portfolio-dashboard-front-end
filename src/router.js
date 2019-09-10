@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import About from './views/about.vue';
 import AssetAllocation from './views/asset-allocation.vue';
-import CurrentGraph from './views/current-graph.vue';
+import CurrentGraph from './views/graph.vue';
 import Help from './views/help.vue';
 import Monitored from './views/monitored.vue';
 import TradeSimulator from './views/trade-simulator.vue';
@@ -24,8 +24,8 @@ export default new Router({
       component: AssetAllocation,
     },
     {
-      path: '/current-graph',
-      name: 'current-graph',
+      path: '/graph',
+      name: 'graph',
       component: CurrentGraph,
     },
     {
