@@ -22,11 +22,6 @@ describe('the home view', () => {
       .should('be.disabled');
   });
 
-  it('calculates the value table columns', () => {
-    cy.get('[data-cy="value-cell"]')
-      .should('be.disabled');
-  });
-
   it('lets you enter securities in one at a time', () => {
     cy.get('[data-cy="portfolio-table"] tr')
       .then(($trArray) => {
@@ -50,6 +45,26 @@ describe('the home view', () => {
         cy.get('[data-cy="portfolio-table"] tr')
           .its('length')
           .should('eq', (currentPortfolioContentLength - 1));
+      });
+  });
+
+  it('calculates the security values', () => {
+    cy.get('[data-cy="value-cell"]')
+      .should(($td) => {
+        const nodes = [...$td];
+        nodes.forEach((el) => {
+          expect(parseFloat(el.innerText)).to.be.greaterThan(0);
+        });
+      });
+  });
+
+  it('calculates the percent of portfolio values', () => {
+    cy.get('[data-cy="pct-of-portfolio-cell"]')
+      .should(($td) => {
+        const nodes = [...$td];
+        nodes.forEach((el) => {
+          expect(parseFloat(el.innerText)).to.be.greaterThan(0);
+        });
       });
   });
 
