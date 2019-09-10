@@ -5,13 +5,6 @@ describe('the home view', () => {
     cy.visit('/');
   });
 
-  it.skip('has a file input', () => {
-    cy.get('input[type=file]')
-      .should('have.attr', 'accept', '.csv')
-      .should('not.have.attr', 'multiple')
-      .should('not.have.attr', 'required');
-  });
-
   const enterSecurityData = function enterSecurityData() {
     cy.get('#symbol')
       .type('vtibx')
@@ -23,6 +16,11 @@ describe('the home view', () => {
       .type(100)
       .type('{enter}');
   };
+
+  it('starts out with a disabled "Add Security" button', () => {
+    cy.get('[data-cy-add-security]')
+      .should('be.disabled');
+  });
 
   it('lets you enter securities in one at a time', () => {
     cy.get('[cy-portfolio-table] tr')
@@ -59,6 +57,13 @@ describe('the home view', () => {
 
   it.skip('lets you edit the securities in your portfolio', () => {
 
+  });
+
+  it.skip('has a file input', () => {
+    cy.get('input[type=file]')
+      .should('have.attr', 'accept', '.csv')
+      .should('not.have.attr', 'multiple')
+      .should('not.have.attr', 'required');
   });
 
   // skip until you get the API ready
