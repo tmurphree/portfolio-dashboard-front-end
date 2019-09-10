@@ -2,7 +2,7 @@
 
 > Front end for the portfolio dashboard project.
 
-~~[Coming soon: Click here for portfolio dashboard in production]()~~
+[Click here for portfolio dashboard in production](https://tm-portfolio-dashboard.herokuapp.com/)  
 
 I'm interested in personal finance and wanted a tool to help me show my web development skills in a way that's interesting to me.  
 
@@ -48,9 +48,10 @@ npm run test:e2e
 * Twitter Bootstrap  
 
 ## APIs
-* none: the back end part of the project ~~uses~~ will use the AlphaVantage stock price API
+* none: the back end part of the project uses the AlphaVantage stock price API  
 
 ## Future Implementations  
+* Use Chart.js to show the data in a chart.  
 * Tag a security as needing monitoring and set thresholds for it.  Show the security against the specified thresholds in the "Monitored securities" page.  
 * Allow users to log in with Google or a local username / password.  
 * Allow logged-in users to save portfolios.  
