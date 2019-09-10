@@ -140,12 +140,6 @@ export default {
 
       const numSharesToFloat = this.editedSecurity.numShares === '' ? 0 : this.editedSecurity.numShares;
 
-      console.log(
-        this.editedSecurity.symbol.length,
-        numSharesToFloat,
-        assetClassesSum
-      );
-
       return this.editedSecurity.symbol.length <= 0 ||
         numSharesToFloat <= 0 ||
         assetClassesSum !== 100;
