@@ -49,6 +49,7 @@ describe('the home view', () => {
   });
 
   it('calculates the security values', () => {
+    cy.wait(10000);
     cy.get('[data-cy="value-cell"]')
       .should(($td) => {
         const nodes = [...$td];
@@ -73,6 +74,8 @@ describe('the home view', () => {
 
     cy.get('[data-cy="portfolio-table"] tr')
       .should('not.exist');
+    // reset back to default
+    cy.reload();
   });
 
   it.skip('lets you edit the securities in your portfolio', () => {

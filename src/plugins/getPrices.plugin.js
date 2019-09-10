@@ -11,17 +11,10 @@ import axios from 'axios';
 */
 const getPrices = function getPrices(Vue, userInput) {
   const doTheWork = (symbol = userInput) => {
-    let url;
+    const baseUrl = process.env.VUE_APP_API_BASE_URL ||
+      'https://dashboard.heroku.com/apps/tm-portfolio-dashboard';
 
-    if (process.env.NODE_ENV === 'development') {
-      url = Array.isArray(symbol) ?
-        'http://127.0.0.1:3000/prices/many' :
-        'http://127.0.0.1:3000/prices/one';
-    } else {
-      url = Array.isArray(symbol) ?
-        'https://dashboard.heroku.com/apps/tm-portfolio-dashboard/prices/many' :
-        'https://dashboard.heroku.com/apps/tm-portfolio-dashboard/prices/one';
-    }
+    const url = `${baseUrl}/prices/${Array.isArray(symbol) ? 'many' : 'one'}`;
 
     return axios.post(url, { symbol });
   };
