@@ -108,7 +108,7 @@
       updatePortfolioValues() {
         this.$getPrices(this.allSymbols)
           .then((res) => {
-            this.$store.commit('updatePriceAndValue', res.data.payload);
+            this.$store.commit('updatePriceValuePercentage', res.data.payload);
           })
           .catch((err) => {
             console.error(err);
