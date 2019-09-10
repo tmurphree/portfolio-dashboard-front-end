@@ -95,13 +95,34 @@
     data() {
       return {};
     },
+    computed: {
+      allSymbols() {
+        return this.$store.state.portfolio
+          .map(el => el.symbol);
+      }
+    },
     methods: {
       goHome() {
         this.$router.push('/');
       },
+      updatePortfolioValues() {
+        console.log(this.allSymbols);
+        this.$getPrices('bac')
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      }
     },
     mounted() {
-      this.$getPrices();
+      const self = this;
+      self.updatePortfolioValues();
+
+      setInterval(() => {
+        self.updatePortfolioValues();
+      }, 10000);
     }
   };
 </script>
