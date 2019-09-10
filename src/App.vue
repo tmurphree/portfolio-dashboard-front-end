@@ -106,7 +106,6 @@
         this.$router.push('/');
       },
       updatePortfolioValues() {
-        console.log(this.allSymbols);
         this.$getPrices(this.allSymbols)
           .then((res) => {
             console.log(res);
@@ -117,11 +116,10 @@
       }
     },
     mounted() {
-      const self = this;
-      self.updatePortfolioValues();
+      this.updatePortfolioValues();
 
       setInterval(() => {
-        self.updatePortfolioValues();
+        this.updatePortfolioValues();
       }, 60000);
     }
   };
