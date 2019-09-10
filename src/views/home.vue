@@ -59,11 +59,11 @@
         </div>
         <div class="form-group form-row">
           <label for="num-shares"># of shares <span class="text-red">(required)</span>:</label>
-          <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
+          <input v-model.number="editedSecurity.numShares" class="form-control" id="num-shares" name="num-shares" type="number">
         </div>
         <div class="form-group form-row">
           <label for="friendly-name">Friendly name (optional):</label>
-          <input v-model.number="editedSecurity.numShares" class="form-control" id="num-shares" name="num-shares" type="number">
+          <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
         </div>
       </form>
       <div class="col-lg-5" id="asset-classes">
@@ -107,7 +107,13 @@
           </div>
       </div>
       <div class="col-12">
-        <button type="button" class="btn btn-success btn-lg mr-2 mb-1" data-cy-add-security @click="addSecurity">
+        <button
+          class="btn btn-success btn-lg mr-2 mb-1"
+          @click="addSecurity"
+          data-cy-add-security
+          :disabled="disableAddButton"
+          type="button"
+        >
           Add security
         </button>
       </div>
@@ -127,6 +133,23 @@ export default {
     };
   },
   computed: {
+    disableAddButton() {
+      const assetClassesSum = Object.values(this.editedSecurity.assetClasses)
+        .map(el => isNaN(parseFloat(el)) ? 0 : parseFloat(el))
+        .reduce((sum, current) => sum + current, 0);
+
+      const numSharesToFloat = this.editedSecurity.numShares === '' ? 0 : this.editedSecurity.numShares;
+
+      console.log(
+        this.editedSecurity.symbol.length,
+        numSharesToFloat,
+        assetClassesSum
+      );
+
+      return this.editedSecurity.symbol.length <= 0 ||
+        numSharesToFloat <= 0 ||
+        assetClassesSum !== 100;
+    }
   },
   methods: {
     addEventListeners: function addEventListeners() {

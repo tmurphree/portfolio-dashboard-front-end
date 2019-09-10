@@ -3,29 +3,39 @@
     <div class="row">
       <h1>Help</h1>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <strong>Adding  a security</strong>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Adding a security</h5>
       </div>
-      <p>
-        Use the form on the home screen to add a security.
-      </p>
+      <div class="card-body">
+        <p class="card-text">
+          Fill out the required fields on the Home screen and click "Add Security" towards the bottom
+          of the page.
+        </p>
+      </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <strong>Editing your portfolio</strong>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Editing or removing a security</h5>
       </div>
-      <p>
-        Use the Edit and Remove buttons on the table on the home screen to edit or remove it:
-        <br>
+      <div class="card-body">
+        <p class="card-text">
+          Click "Edit" or "Delete", as appropriate, on the table on the home screen. 
+        </p>
         <img src="edit-remove-buttons.png" alt="Edit and remove buttons">
-      </p>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="scss">
-  #help div.col-12 {
-    padding: 0;
+  // top margin for all cards except first
+  .card + .card {
+    margin-top: 1rem;
+  }
+  
+  // bottom margin for last card
+  .card:last-of-type {
+    margin-bottom: 1rem;
   }
 </style>
