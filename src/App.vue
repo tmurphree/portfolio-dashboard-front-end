@@ -108,7 +108,7 @@
       updatePortfolioValues() {
         this.$getPrices(this.allSymbols)
           .then((res) => {
-            console.log(res);
+            this.$store.commit('updatePriceAndValue', res.data.payload);
           })
           .catch((err) => {
             console.error(err);
@@ -118,7 +118,7 @@
     mounted() {
       this.updatePortfolioValues();
 
-      setInterval(() => {
+      const updateInterval = setInterval(() => {
         this.updatePortfolioValues();
       }, 60000);
     }

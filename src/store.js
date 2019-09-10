@@ -63,6 +63,19 @@ export default new Vuex.Store({
 
       state.portfolio = [...newPort];
     },
+    updatePriceAndValue: function updatePriceAndValue(state, payload) {
+      const standardInput = Array.isArray(payload) ? [...payload] : [payload];
+
+      standardInput
+        .filter((el) => el.error === false)
+        .forEach((el) => {
+          const relevantSecurity = state.portfolio.find((innerEl) => el.symbol === innerEl.symbol);
+
+          relevantSecurity.lastRefreshed = el.lastRefreshed;
+          relevantSecurity.price = el.price;
+          relevantSecurity.value = relevantSecurity.price * relevantSecurity.numShares;
+        });
+    },
   },
   actions: {
 

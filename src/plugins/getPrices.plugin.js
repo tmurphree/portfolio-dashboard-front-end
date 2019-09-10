@@ -13,8 +13,6 @@ const getPrices = function getPrices(Vue, userInput) {
   const doTheWork = (symbol = userInput) => {
     let url;
 
-    console.log(`url ${url}\nsymbol ${symbol}`);
-
     if (process.env.NODE_ENV === 'development') {
       url = Array.isArray(symbol) ?
         'http://127.0.0.1:3000/prices/many' :
@@ -24,8 +22,6 @@ const getPrices = function getPrices(Vue, userInput) {
         'https://dashboard.heroku.com/apps/tm-portfolio-dashboard/prices/many' :
         'https://dashboard.heroku.com/apps/tm-portfolio-dashboard/prices/one';
     }
-
-    console.log(`url ${url}\nsymbol ${symbol}`);
 
     return axios.post(url, { symbol });
   };
