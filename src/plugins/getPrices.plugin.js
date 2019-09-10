@@ -11,8 +11,9 @@ import axios from 'axios';
 */
 const getPrices = function getPrices(Vue, userInput) {
   const doTheWork = (symbol = userInput) => {
-    const baseUrl = process.env.VUE_APP_API_BASE_URL ||
-      'https://dashboard.heroku.com/apps/tm-portfolio-dashboard';
+    const baseUrl = process.env.NODE_ENV === 'production' ?
+      'https://tm-portfolio-dashboard.herokuapp.com' :
+      'http://127.0.0.1:3000';
 
     const url = `${baseUrl}/prices/${Array.isArray(symbol) ? 'many' : 'one'}`;
 
