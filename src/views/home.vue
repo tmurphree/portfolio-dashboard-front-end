@@ -32,7 +32,13 @@
                 <td class="d-md-table-cell d-none">{{ item.numShares }}</td>
                 <td class="d-md-table-cell d-none" data-cy="value-cell">{{ item.value }}</td>
                 <td data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
-                <td>TODO: pretty print this</td>
+                <td>
+                  <ul class="m-0 p-0">
+                    <li v-for="(asset) in displayAssetClasses(item.assetClasses)" class="asset-li">
+                      {{ asset }}
+                    </li>
+                  </ul>
+                </td>
                 <td>
                   <template>
                     <button type="button" class="mr-1">Edit</button>
@@ -175,6 +181,17 @@ export default {
     clearPortfolio: function clearPortfolio() {
       this.$store.commit('clearPortfolio');
     },
+    displayAssetClasses: function displayAssetClasses(classesObject) {
+      // const nonzeroKeys = Object.keys(classesObject)
+      //   .filter(el => classesObject[el] !== 0);
+      
+      // console.log(nonzeroKeys);
+      // return nonzeroKeys
+      //   .map(el => `${classesObject[el]} ${el}`);
+      return Object.keys(classesObject)
+        .filter(el => classesObject[el] !== 0)
+        .map(el => `${classesObject[el]} ${el}`);
+    },
     /**
      * @description The decision was made to default assetClasses props to ''.  This makes it
      *    easier for the user to enter data (he doesn't have to keep deleting zeroes before
@@ -282,5 +299,9 @@ export default {
 
   .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: rgba(255, 255, 4, 1);
+  }
+
+  .asset-li {
+    list-style-type: none;
   }
 </style>
