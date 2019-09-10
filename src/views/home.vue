@@ -29,9 +29,9 @@
             <tr v-for="(item, index) in this.$store.state.portfolio">
                 <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
-                <td>{{ item.numShares }}</td>
+                <td class="d-md-table-cell d-none">{{ item.numShares }}</td>
                 <td class="d-md-table-cell d-none" data-cy="value-cell">{{ item.value }}</td>
-                <td class="d-md-table-cell d-none" data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
+                <td data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
                 <td>TODO: pretty print this</td>
                 <td>
                   <template>
