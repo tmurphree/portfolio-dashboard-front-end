@@ -73,7 +73,7 @@ export default new Vuex.Store({
 
           relevantSecurity.lastRefreshed = el.lastRefreshed;
           relevantSecurity.price = el.price;
-          relevantSecurity.value = relevantSecurity.price * relevantSecurity.numShares;
+          relevantSecurity.value = Math.round(relevantSecurity.price * relevantSecurity.numShares);
         });
     },
   },
