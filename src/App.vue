@@ -107,13 +107,13 @@
       },
       updatePortfolioValues() {
         console.log(this.allSymbols);
-        this.$getPrices('bac')
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+        this.$getPrices(this.allSymbols)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
     },
     mounted() {
@@ -122,7 +122,7 @@
 
       setInterval(() => {
         self.updatePortfolioValues();
-      }, 10000);
+      }, 60000);
     }
   };
 </script>
