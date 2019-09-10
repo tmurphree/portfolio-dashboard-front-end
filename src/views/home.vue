@@ -134,13 +134,21 @@ export default {
   },
   computed: {
     disableAddButton() {
-      const assetClassesSumTo100 = function assetClassesSumTo100() {
-        return true;
-      };
+      const assetClassesSum = Object.values(this.editedSecurity.assetClasses)
+        .map(el => isNaN(parseFloat(el)) ? 0 : parseFloat(el))
+        .reduce((sum, current) => sum + current, 0);
 
-      return this.editedSecurity.symbol &&
-        this.editedSecurity.numShares > 0 &&
-        assetClassesSumTo100();
+      const numSharesToFloat = this.editedSecurity.numShares === '' ? 0 : this.editedSecurity.numShares;
+
+      console.log(
+        this.editedSecurity.symbol.length,
+        numSharesToFloat,
+        assetClassesSum
+      );
+
+      return this.editedSecurity.symbol.length <= 0 ||
+        numSharesToFloat <= 0 ||
+        assetClassesSum !== 100;
     }
   },
   methods: {
