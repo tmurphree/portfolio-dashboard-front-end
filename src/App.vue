@@ -98,7 +98,10 @@
     methods: {
       goHome() {
         this.$router.push('/');
-      }
+      },
+    },
+    mounted() {
+      this.$getPrices();
     }
   };
 </script>
