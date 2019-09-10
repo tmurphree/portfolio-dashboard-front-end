@@ -165,7 +165,6 @@ export default {
       
       this
         .fillValues()
-        .validateNewSecurity()
         .$store.commit('addToPortfolio', this.editedSecurity);
 
       setTimeout(() => {
@@ -235,11 +234,6 @@ export default {
           this.editedSecurity.assetClasses[key] = '';
         }
       }
-    },
-    validateNewSecurity: function validateNewSecurityProps() {
-      console.error('TODO: flesh out validateNewSecurity');
-
-      return this;
     },
   },
   mounted() {
