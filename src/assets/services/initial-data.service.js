@@ -6,7 +6,7 @@ initialData.push({
     bondInternational: 0,
     stockDomesticLarge: 77,
     stockDomesticMid: 18,
-    stockDomesticSmall: 6,
+    stockDomesticSmall: 5,
     stockInternationalLarge: 0,
     stockInternationalMid: 0,
     stockInternationalSmall: 0,
