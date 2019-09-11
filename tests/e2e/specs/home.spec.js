@@ -49,11 +49,14 @@ describe('the home view', () => {
       .click()
       .get('#num-shares')
       .clear()
+      .get('#num-shares')
       .type('200')
       .get('[data-cy-add-security]')
       .click()
       .get('[data-cy-num-shares-cell="ITOT"]')
-      .should('be.equal', 200);
+      .should(($td) => {
+        expect($td[0].innerText).to.equal('200');
+      });
   });
 
   it('lets you enter securities in one at a time', () => {
