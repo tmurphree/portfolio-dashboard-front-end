@@ -260,7 +260,8 @@ export default {
 
       this.editedSecurity = Object.assign({}, this.$store.state.portfolio.find((el) => el.symbol === symbol));
       // remove the existing security from the store to avoid mutation warnings
-      this.removeSecurity(this.$store.state.portfolio.indexOf((el) => el.symbol === symbol));
+      // "Don't mutate things outside of commits"
+      this.removeSecurity(symbol);
     },
     removeSecurity: function removeSecurity(symbol) {
       this.$store.commit('trimPortfolio', symbol);
