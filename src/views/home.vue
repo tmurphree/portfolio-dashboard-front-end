@@ -41,7 +41,14 @@
                 </td>
                 <td>
                   <template>
-                    <button type="button" class="mr-1" :data-cy-edit="item.symbol">Edit</button>
+                    <button 
+                      type="button"
+                      class="mr-1"
+                      @click="populateEditedSecurity"
+                      :data-cy-edit="item.symbol"
+                    >
+                      Edit
+                    </button>
                     <button type="button" @click="removeSecurity(index)">Remove</button>
                   </template>
                 </td>
@@ -249,6 +256,11 @@ export default {
       }
 
       return this;
+    },
+    populateEditedSecurity: function populateEditedSecurity(event) {
+      const symbol = event.target.dataset.cyEdit;
+
+      this.editedSecurity = { ...this.$store.state.portfolio.find(el => el.symbol === symbol) };
     },
     removeSecurity: function removeSecurity(index) {
       this.$store.commit('trimPortfolio', index);
