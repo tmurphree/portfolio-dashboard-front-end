@@ -47,21 +47,10 @@ export default new Vuex.Store({
       state.showHomeViewWelcome = payload;
     },
     trimPortfolio: function trimPortfolio(state, payload) {
-      // This doesn't work: state.portfolio.splice(payload,0); -- the state doesn't update.
-
-      if (typeof payload !== 'number') {
-        throw new Error('Invalid payload value in trimPortfolio');
-      }
-
-      const newPort = [];
-
-      for (let index = 0; index < state.portfolio.length; index++) {
-        if (index !== payload) {
-          newPort.push(state.portfolio[index]);
-        }
-      }
-
-      state.portfolio = [...newPort];
+      state.portfolio.splice(
+        state.portfolio.findIndex((el) => el.symbol === payload),
+        1,
+      );
     },
     updatePriceValuePercentage: function updatePriceValuePercentage(state, payload) {
       const roundToPrecision = function roundToPrecision(x, precision) {

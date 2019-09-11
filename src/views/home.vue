@@ -26,7 +26,7 @@
             <th scope="col">Actions</th>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in this.$store.state.portfolio" :key="item.symbol">
+            <tr v-for="item in this.$store.state.portfolio">
                 <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
                 <td class="d-md-table-cell d-none" :data-cy-num-shares-cell="item.symbol">{{ item.numShares }}</td>
@@ -34,7 +34,7 @@
                 <td data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
                 <td>
                   <ul class="m-0 p-0">
-                    <li v-for="asset in displayAssetClasses(item.assetClasses)" class="asset-li" :key="asset">
+                    <li v-for="asset in displayAssetClasses(item.assetClasses)" class="asset-li">
                       {{ asset }}
                     </li>
                   </ul>
@@ -49,7 +49,7 @@
                     >
                       Edit
                     </button>
-                    <button type="button" @click="removeSecurity(index)">Remove</button>
+                    <button type="button" @click="removeSecurity(item.symbol)">Remove</button>
                   </template>
                 </td>
             </tr>
@@ -137,7 +137,6 @@
 </template>
 
 <script>
-
 import securityTemplate from '@/assets/services/object-templates.service';
 
 export default {
@@ -157,7 +156,7 @@ export default {
       return this.editedSecurity.symbol.length <= 0 ||
         numSharesToFloat <= 0 ||
         assetClassesSum !== 100;
-    }
+    },
   },
   methods: {
     addEventListeners: function addEventListeners() {
@@ -173,7 +172,6 @@ export default {
       return this;
     },
     addSecurity: function addSecurity() {
-      const self = this;
 
       this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
       
@@ -182,7 +180,7 @@ export default {
         .$store.commit('addToPortfolio', this.editedSecurity);
 
       setTimeout(() => {
-        self.resetEditedSecurity();
+        this.resetEditedSecurity();
       }, 100);
     },
     clearPortfolio: function clearPortfolio() {
@@ -260,10 +258,12 @@ export default {
     populateEditedSecurity: function populateEditedSecurity(event) {
       const symbol = event.target.dataset.cyEdit;
 
-      this.editedSecurity = { ...this.$store.state.portfolio.find(el => el.symbol === symbol) };
+      this.editedSecurity = Object.assign({}, this.$store.state.portfolio.find((el) => el.symbol === symbol));
+      // remove the existing security from the store to avoid mutation warnings
+      this.removeSecurity(this.$store.state.portfolio.indexOf((el) => el.symbol === symbol));
     },
-    removeSecurity: function removeSecurity(index) {
-      this.$store.commit('trimPortfolio', index);
+    removeSecurity: function removeSecurity(symbol) {
+      this.$store.commit('trimPortfolio', symbol);
     },
     resetEditedSecurity: function resetEditedSecurity() {
       this.editedSecurity = { ...securityTemplate };
@@ -279,7 +279,8 @@ export default {
     this
       .addEventListeners()
       .hideWelcome();
-  }
+  },
+  name: 'home'
 };
 </script>
 
