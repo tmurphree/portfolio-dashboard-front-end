@@ -17,9 +17,43 @@ describe('the home view', () => {
       .type('{enter}');
   };
 
+  it('calculates the security values', () => {
+    cy.wait(6000);
+    cy.get('[data-cy="value-cell"]')
+      .should(($td) => {
+        const nodes = [...$td];
+        nodes.forEach((el) => {
+          expect(parseFloat(el.innerText)).to.be.greaterThan(0);
+        });
+      });
+  });
+
+  it('calculates the percent of portfolio values', () => {
+    cy.get('[data-cy="pct-of-portfolio-cell"]')
+      .should(($td) => {
+        const nodes = [...$td];
+        nodes.forEach((el) => {
+          expect(parseFloat(el.innerText)).to.be.greaterThan(0);
+        });
+      });
+  });
+
   it('starts out with a disabled "Add Security" button', () => {
     cy.get('[data-cy-add-security]')
       .should('be.disabled');
+  });
+
+  it('lets you edit the securities in your portfolio', () => {
+    cy
+      .get('[data-cy-edit="ITOT"]')
+      .click()
+      .get('#num-shares')
+      .clear()
+      .type('200')
+      .get('[data-cy-add-security]')
+      .click()
+      .get('[data-cy-num-shares-cell="ITOT"]')
+      .should('be.equal', 200);
   });
 
   it('lets you enter securities in one at a time', () => {
@@ -48,27 +82,6 @@ describe('the home view', () => {
       });
   });
 
-  it('calculates the security values', () => {
-    cy.wait(10000);
-    cy.get('[data-cy="value-cell"]')
-      .should(($td) => {
-        const nodes = [...$td];
-        nodes.forEach((el) => {
-          expect(parseFloat(el.innerText)).to.be.greaterThan(0);
-        });
-      });
-  });
-
-  it('calculates the percent of portfolio values', () => {
-    cy.get('[data-cy="pct-of-portfolio-cell"]')
-      .should(($td) => {
-        const nodes = [...$td];
-        nodes.forEach((el) => {
-          expect(parseFloat(el.innerText)).to.be.greaterThan(0);
-        });
-      });
-  });
-
   it('lets you clear the portfolio', () => {
     cy.contains('Clear current portfolio').click();
 
@@ -76,10 +89,6 @@ describe('the home view', () => {
       .should('not.exist');
     // reset back to default
     cy.reload();
-  });
-
-  it.skip('lets you edit the securities in your portfolio', () => {
-
   });
 
   it.skip('has a file input', () => {

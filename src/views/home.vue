@@ -29,7 +29,7 @@
             <tr v-for="(item, index) in this.$store.state.portfolio" :key="item.symbol">
                 <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
-                <td class="d-md-table-cell d-none">{{ item.numShares }}</td>
+                <td class="d-md-table-cell d-none" :data-cy-num-shares-cell="item.symbol">{{ item.numShares }}</td>
                 <td class="d-md-table-cell d-none" data-cy="value-cell">{{ item.value }}</td>
                 <td data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
                 <td>
@@ -41,7 +41,7 @@
                 </td>
                 <td>
                   <template>
-                    <button type="button" class="mr-1">Edit</button>
+                    <button type="button" class="mr-1" :data-cy-edit="item.symbol">Edit</button>
                     <button type="button" @click="removeSecurity(index)">Remove</button>
                   </template>
                 </td>
