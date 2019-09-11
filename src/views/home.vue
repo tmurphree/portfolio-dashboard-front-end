@@ -26,7 +26,7 @@
             <th scope="col">Actions</th>
           </thead>
           <tbody>
-            <tr v-for="(item, index) in this.$store.state.portfolio">
+            <tr v-for="(item, index) in this.$store.state.portfolio" :key="item.symbol">
                 <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
                 <td class="d-md-table-cell d-none">{{ item.numShares }}</td>
@@ -34,7 +34,7 @@
                 <td data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
                 <td>
                   <ul class="m-0 p-0">
-                    <li v-for="(asset) in displayAssetClasses(item.assetClasses)" class="asset-li">
+                    <li v-for="asset in displayAssetClasses(item.assetClasses)" class="asset-li" :key="asset">
                       {{ asset }}
                     </li>
                   </ul>
@@ -182,15 +182,24 @@ export default {
       this.$store.commit('clearPortfolio');
     },
     displayAssetClasses: function displayAssetClasses(classesObject) {
-      // const nonzeroKeys = Object.keys(classesObject)
-      //   .filter(el => classesObject[el] !== 0);
-      
-      // console.log(nonzeroKeys);
-      // return nonzeroKeys
-      //   .map(el => `${classesObject[el]} ${el}`);
+      const expandAssetClassShorthand = function expandAssetClassShorthand(shorthand) {
+        const translations = {
+          bondDomestic: 'domestic bonds',
+          bondInternational: 'international bonds',
+          stockDomesticLarge: 'domestic large-cap stocks',
+          stockDomesticMid: 'domestic mid-cap stocks',
+          stockDomesticSmall: 'domestic small-cap stocks',
+          stockInternationalLarge: 'international large-cap stocks',
+          stockInternationalMid: 'international mid-cap stocks',
+          stockInternationalSmall: 'international small-cap stocks',
+      };
+
+      return translations[shorthand];
+    };
+
       return Object.keys(classesObject)
         .filter(el => classesObject[el] !== 0)
-        .map(el => `${classesObject[el]} ${el}`);
+        .map(el => `${classesObject[el]}% ${expandAssetClassShorthand(el)}`);
     },
     /**
      * @description The decision was made to default assetClasses props to ''.  This makes it
@@ -303,5 +312,6 @@ export default {
 
   .asset-li {
     list-style-type: none;
+    margin-bottom: 0.5rem;
   }
 </style>
