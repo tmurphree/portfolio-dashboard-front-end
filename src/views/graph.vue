@@ -34,9 +34,9 @@ export default {
   computed: {
     bySecurityChartData() {
       return this.portfolio
-        .map((el => {
+        .map(((el, index) => {
           return {
-            backgroundColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: this.alternateBackgroundColors(index),
             data: el.pctOfPortfolio,
             label: el.symbol,
           }
@@ -45,6 +45,23 @@ export default {
     ...mapState(['portfolio']),
   },
   methods: {
+    alternateBackgroundColors(index) {
+      const backgroundColor = [
+          // red
+          'rgba(255, 99, 132, 1)',
+          // blue
+          'rgba(54, 162, 235, 1)',
+          // yellow
+          'rgba(255, 206, 86, 1)',
+          // green
+          'rgba(75, 192, 192, 1)',
+          // purple
+          'rgba(153, 102, 255, 1)',
+          // orange
+          'rgba(255, 159, 64, 1)',
+        ];
+      return backgroundColor[index];
+    },
     /**
      * @description Draw a chart.
      * @param {string} selector Query selector specific to the <canvas> you want to draw
@@ -106,20 +123,7 @@ export default {
     },
   },
   mounted() {
-              // backgroundColor: [
-          //   // red
-          //   'rgba(255, 99, 132, 1)',
-          //   // blue
-          //   'rgba(54, 162, 235, 1)',
-          //   // yellow
-          //   'rgba(255, 206, 86, 1)',
-          //   // green
-          //   'rgba(75, 192, 192, 1)',
-          //   // purple
-          //   'rgba(153, 102, 255, 1)',
-          //   // orange
-          //   'rgba(255, 159, 64, 1)'
-          // ],
+              
     const chartData = [
       {
         backgroundColor: 'rgba(255, 99, 132, 1)',
