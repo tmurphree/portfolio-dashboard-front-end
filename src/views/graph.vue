@@ -24,83 +24,53 @@
 <script>
 import { mapState } from 'vuex';
 
-/**
- * @description Draw a chart.
- * @param {string} selector Query selector specific to the <canvas> you want to draw
- *    the chart on.
- * @param {ChartInfo[]} chartInfo Data to chart.
- * @returns {undefined}
- * 
- * @typedef ChartInfo
- * @prop {string} backgroundColor 'rgba(255, 99, 132, 1)'
- * @prop {number} data The data you want to show in the chart.
- * @prop {string} label The label for the data point.
-*/
-const drawChart = function drawChart(selector, chartInfo) {
-  const context = document.querySelector(selector).getContext('2d');
-  const data = {
-        labels: chartInfo.map((el) => el.label),
-        datasets: [{
-          data: chartInfo.map((el) => el.data),
-          backgroundColor: chartInfo.map((el) => el.backgroundColor),
-          borderWidth: 1
-        }]
-    };
-
-  const pieChart = new Chart(
-    context,
-    {
-      type: 'pie',
-      data,
-      options: {
-        legend: {
-          position: 'bottom'
-        },
-      },
-    }
-  );
-};
-
 export default {
   data: function data() {
-    return {};
+    return {
+      bySecurityChart: {},
+      byAssetClassChart: {},
+    };
   },
   computed: {
-    bySecurityChartData() {
-      return [
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 12,
-        label: 'Red',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 19,
-        label: 'Blue',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 0.1)',
-        data: 3,
-        label: 'Yellow',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 5,
-        label: 'Red',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 2,
-        label: 'Red',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 3,
-        label: 'Red',
-      },
-    ];
-    },
     ...mapState(['portfolio']),
+  },
+  methods: {
+    /**
+     * @description Draw a chart.
+     * @param {string} selector Query selector specific to the <canvas> you want to draw
+     *    the chart on.
+     * @param {ChartInfo[]} chartInfo Data to chart.
+     * @returns {undefined}
+     * 
+     * @typedef ChartInfo
+     * @prop {string} backgroundColor 'rgba(255, 99, 132, 1)'
+     * @prop {number} data The data you want to show in the chart.
+     * @prop {string} label The label for the data point.
+    */
+    drawChart(selector, chartInfo) {
+      const context = document.querySelector(selector).getContext('2d');
+      const data = {
+            labels: chartInfo.map((el) => el.label),
+            datasets: [{
+              data: chartInfo.map((el) => el.data),
+              backgroundColor: chartInfo.map((el) => el.backgroundColor),
+              borderWidth: 1
+            }]
+        };
+
+      return new Chart(
+        context,
+        {
+          type: 'pie',
+          data,
+          options: {
+            legend: {
+              position: 'bottom'
+            },
+          },
+        }
+      );
+    },
   },
   mounted() {
               // backgroundColor: [
@@ -149,8 +119,19 @@ export default {
         label: 'Red',
       },
     ];
-    drawChart('#by-security', this.bySecurityChartData);
-    drawChart('#by-asset-class', chartData);
+    this.bySecurityChart = this.drawChart('#by-security', chartData);
+    this.byAssetClassChart = this.drawChart('#by-asset-class', chartData);
+
+    setTimeout(() => {
+      this.bySecurityChart.data.labels.pop();
+      this.bySecurityChart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+      });
+      this.bySecurityChart.update();
+    }, 5000);
+  },
+  updated() {
+    console.log('update triggered');
   },
   name: 'graph'
 }
