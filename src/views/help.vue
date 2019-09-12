@@ -60,6 +60,15 @@
   </div>
 </template>
 
+<script>
+export default {
+  data: function data() {
+    return {};
+  },
+  name: 'help'
+}
+</script>
+
 <style lang="scss">
   // top margin for all cards except first
   .card + .card {

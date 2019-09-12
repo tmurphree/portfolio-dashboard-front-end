@@ -8,3 +8,16 @@
     </p>
   </div>
 </template>
+
+<script>
+export default {
+  data: function data() {
+    return {};
+  },
+  name: 'monitored'
+}
+</script>
+
+<style lang="scss">
+
+</style>
