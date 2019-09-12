@@ -5,6 +5,38 @@
     </div>
     <div class="card">
       <div class="card-header">
+        <h5 class="card-title">
+          Prices and values don't update.
+        </h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text" data-cy="help-text">
+          Probably, someone else is looking at the site.  This is causing the app to exceed the rate limit
+          on the pricing API.  Adding UX for this is already in the backlog.
+        </p>
+        <p class="card-text" data-cy="help-text">
+          This is a demo application, and as such I have a limited budget for it.  I'm using the free tier
+          of the API that provides prices, and that limits me to 5 prices / minute.  Everything will 
+          update after a while.
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">
+          After editing a security, my values didn't automatically update.  I had to wait for that to happen.
+        </h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text" data-cy="help-text">
+          Ideally the value of a holding would update on edit.  But this is a demo application, and as
+          such I have a limited budget for it.  I'm using the free tier of the API that provides prices, and
+          that limits me to 5 prices / minute.  Everything will update after a while.
+        </p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
         <h5 class="card-title">Adding a security</h5>
       </div>
       <div class="card-body">
