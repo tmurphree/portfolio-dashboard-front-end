@@ -29,6 +29,7 @@ export default {
     return {
       bySecurityChart: {},
       byAssetClassChart: {},
+      someFoo: '12',
     };
   },
   computed: {
@@ -70,6 +71,21 @@ export default {
           },
         }
       );
+    },
+    updateCharts() {
+      this.bySecurityChart.data.labels.pop();
+      this.bySecurityChart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+      });
+      this.bySecurityChart.update();
+    },
+  },
+  watch: {
+    portfolio: {
+      deep: true,
+      handler() {
+        this.updateCharts();
+      },
     },
   },
   mounted() {
@@ -121,17 +137,6 @@ export default {
     ];
     this.bySecurityChart = this.drawChart('#by-security', chartData);
     this.byAssetClassChart = this.drawChart('#by-asset-class', chartData);
-
-    setTimeout(() => {
-      this.bySecurityChart.data.labels.pop();
-      this.bySecurityChart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-      });
-      this.bySecurityChart.update();
-    }, 5000);
-  },
-  updated() {
-    console.log('update triggered');
   },
   name: 'graph'
 }
