@@ -2,20 +2,20 @@
   <div>
     <div class="row"> 
       <div class="col-12">
-       <h1>By security</h1>
-        <small class="col-12 pl-0">
-          Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
-        </small>
-        <canvas id="by-security"></canvas>
-      </div>
-    </div>
-    <div class="row"> 
-      <div class="col-12">
        <h1>By asset class</h1>
         <small class="col-12 pl-0">
           Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
         <canvas id="by-asset-class"></canvas>
+      </div>
+    </div>
+    <div class="row"> 
+      <div class="col-12">
+       <h1>By security</h1>
+        <small class="col-12 pl-0">
+          Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
+        </small>
+        <canvas id="by-security"></canvas>
       </div>
     </div>
   </div>
@@ -47,20 +47,34 @@ export default {
   methods: {
     alternateBackgroundColors(index) {
       const backgroundColor = [
-          // red
-          'rgba(255, 21, 21, 1)',
-          // orange
-          'rgba(255, 131, 0, 1)',
-          // yellow
-          'rgba(255, 255, 11, 1)',
-          // blue
-          'rgba(54, 162, 235, 1)',
-          // green
-          'rgba(75, 192, 192, 1)',
-          // purple
-          'rgba(153, 102, 255, 1)',
-        ];
+        // red
+        'rgba(255, 21, 21, 1)',
+        // orange
+        'rgba(255, 131, 0, 1)',
+        // yellow
+        'rgba(255, 255, 11, 1)',
+        // blue
+        'rgba(54, 162, 235, 1)',
+        // green
+        'rgba(75, 192, 192, 1)',
+        // purple
+        'rgba(153, 102, 255, 1)',
+      ];
+
       return backgroundColor[index];
+    },
+    applyAssetClassColor(shorthand) {
+      const translations = {
+        bondDomestic: 'rgba(75, 192, 192, 1)',
+        bondInternational: 'rgba(75, 192, 192, 0.5)',
+        stockDomesticLarge: 'rgba(255, 21, 21, 1)',
+        stockDomesticMid: 'rgba(255, 21, 21, 0.6)',
+        stockDomesticSmall: 'rgba(255, 21, 21, 0.2)',
+        stockInternationalLarge: 'rgba(54, 162, 235, 1)',
+        stockInternationalMid: 'rgba(54, 162, 235, 0.6)',
+        stockInternationalSmall: 'rgba(54, 162, 235, 0.2)',
+      };
+      return translations[shorthand];
     },
     /**
      * @description Draw a chart.
