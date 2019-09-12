@@ -29,10 +29,19 @@ export default {
     return {
       bySecurityChart: {},
       byAssetClassChart: {},
-      someFoo: '12',
     };
   },
   computed: {
+    bySecurityChartData() {
+      return this.portfolio
+        .map((el => {
+          return {
+            backgroundColor: 'rgba(255, 99, 132, 1)',
+            data: el.pctOfPortfolio,
+            label: el.symbol,
+          }
+        }));
+    },
     ...mapState(['portfolio']),
   },
   methods: {
@@ -53,8 +62,8 @@ export default {
       const data = {
             labels: chartInfo.map((el) => el.label),
             datasets: [{
-              data: chartInfo.map((el) => el.data),
               backgroundColor: chartInfo.map((el) => el.backgroundColor),
+              data: chartInfo.map((el) => el.data),
               borderWidth: 1
             }]
         };
@@ -73,9 +82,17 @@ export default {
       );
     },
     updateCharts() {
-      this.bySecurityChart.data.labels.pop();
+      this.bySecurityChart.data.labels = [];
+      this.bySecurityChart.data.labels = this.bySecurityChartData.map((el) => el.label);
+
       this.bySecurityChart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
+        dataset.backgroundColor = [];
+        dataset.backgroundColor = this.bySecurityChartData.map((el) => el.backgroundColor);
+
+        dataset.data = [];
+        dataset.data = this.bySecurityChartData.map((el) => el.data);
+
+        dataset.borderWidth = 1;
       });
       this.bySecurityChart.update();
     },
@@ -135,7 +152,7 @@ export default {
         label: 'Red',
       },
     ];
-    this.bySecurityChart = this.drawChart('#by-security', chartData);
+    this.bySecurityChart = this.drawChart('#by-security', this.bySecurityChartData);
     this.byAssetClassChart = this.drawChart('#by-asset-class', chartData);
   },
   name: 'graph'
