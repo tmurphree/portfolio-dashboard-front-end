@@ -6,7 +6,7 @@
     <div class="card">
       <div class="card-header">
         <h5 class="card-title">
-          Prices and values don't update.
+          Values and percentages don't update.
         </h5>
       </div>
       <div class="card-body">
@@ -24,7 +24,7 @@
     <div class="card">
       <div class="card-header">
         <h5 class="card-title">
-          After editing a security, my values didn't automatically update.  I had to wait for that to happen.
+          After editing a security, my values and percentages didn't automatically update.  I had to wait for that to happen.
         </h5>
       </div>
       <div class="card-body">
