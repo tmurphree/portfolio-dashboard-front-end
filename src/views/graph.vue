@@ -1,55 +1,62 @@
 <template>
   <div>
-    <div class="row">
+    <div class="row"> 
       <div class="col-12">
-        <h1>Graph</h1>
+       <h1>By security</h1>
         <small class="col-12 pl-0">
           Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
+        <canvas id="by-security"></canvas>
       </div>
     </div>
     <div class="row"> 
       <div class="col-12">
-        <canvas id="current-portfolio"></canvas>
+       <h1>By asset class</h1>
+        <small class="col-12 pl-0">
+          Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
+        </small>
+        <canvas id="by-asset-class"></canvas>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-const drawChart = function drawChart() {
-  const context = document.querySelector('#current-portfolio').getContext('2d');
+import { mapState } from 'vuex';
+
+/**
+ * @description Draw a chart.
+ * @param {string} selector Query selector specific to the <canvas> you want to draw
+ *    the chart on.
+ * @param {ChartInfo[]} chartInfo Data to chart.
+ * @returns {undefined}
+ * 
+ * @typedef ChartInfo
+ * @prop {string} backgroundColor 'rgba(255, 99, 132, 1)'
+ * @prop {number} data The data you want to show in the chart.
+ * @prop {string} label The label for the data point.
+*/
+const drawChart = function drawChart(selector, chartInfo) {
+  const context = document.querySelector(selector).getContext('2d');
   const data = {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: chartInfo.map((el) => el.label),
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
+          data: chartInfo.map((el) => el.data),
+          backgroundColor: chartInfo.map((el) => el.backgroundColor),
+          borderWidth: 1
         }]
     };
 
   const pieChart = new Chart(
     context,
     {
-      type: 'bar',
+      type: 'pie',
       data,
-      options: {},
+      options: {
+        legend: {
+          position: 'bottom'
+        },
+      },
     }
   );
 };
@@ -58,8 +65,92 @@ export default {
   data: function data() {
     return {};
   },
+  computed: {
+    bySecurityChartData() {
+      return [
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 12,
+        label: 'Red',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 19,
+        label: 'Blue',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+        data: 3,
+        label: 'Yellow',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 5,
+        label: 'Red',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 2,
+        label: 'Red',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 3,
+        label: 'Red',
+      },
+    ];
+    },
+    ...mapState(['portfolio']),
+  },
   mounted() {
-    drawChart();
+              // backgroundColor: [
+          //   // red
+          //   'rgba(255, 99, 132, 1)',
+          //   // blue
+          //   'rgba(54, 162, 235, 1)',
+          //   // yellow
+          //   'rgba(255, 206, 86, 1)',
+          //   // green
+          //   'rgba(75, 192, 192, 1)',
+          //   // purple
+          //   'rgba(153, 102, 255, 1)',
+          //   // orange
+          //   'rgba(255, 159, 64, 1)'
+          // ],
+    const chartData = [
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 12,
+        label: 'Red',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 19,
+        label: 'Blue',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 0.1)',
+        data: 3,
+        label: 'Yellow',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 5,
+        label: 'Red',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 2,
+        label: 'Red',
+      },
+      {
+        backgroundColor: 'rgba(255, 99, 132, 1)',
+        data: 3,
+        label: 'Red',
+      },
+    ];
+    drawChart('#by-security', this.bySecurityChartData);
+    drawChart('#by-asset-class', chartData);
   },
   name: 'graph'
 }
