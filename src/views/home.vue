@@ -15,7 +15,7 @@
       <h2>Current portfolio</h2>
       <p class="d-sm-none">Scroll the table to the right or turn the phone on its side if you can't see action buttons.</p>
       <small class="col-12 pl-0">
-        Prices are update once a minute.  A word on <router-link to="/about">rounding</router-link>.
+        Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
       </small>
       <table class="table table-bordered table-hover table-responsive-md table-striped" data-cy="portfolio-table">
           <thead class="thead-dark">

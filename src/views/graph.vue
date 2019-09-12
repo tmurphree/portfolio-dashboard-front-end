@@ -4,7 +4,7 @@
       <div class="col-12">
         <h1>Graph</h1>
         <small class="col-12 pl-0">
-          Prices are update once a minute.  A word on <router-link to="/about">rounding</router-link>.
+          Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
       </div>
     </div>
