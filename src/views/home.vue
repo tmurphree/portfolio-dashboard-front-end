@@ -140,8 +140,10 @@
 
 <script>
 import securityTemplate from '@/assets/services/object-templates.service';
+import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
 
 export default {
+  mixins: [expandAssetClassShorthand],
   data: function data() {
     return {
       editedSecurity: { ...securityTemplate },
@@ -189,24 +191,9 @@ export default {
       this.$store.commit('clearPortfolio');
     },
     displayAssetClasses: function displayAssetClasses(classesObject) {
-      const expandAssetClassShorthand = function expandAssetClassShorthand(shorthand) {
-        const translations = {
-          bondDomestic: 'domestic bonds',
-          bondInternational: 'international bonds',
-          stockDomesticLarge: 'domestic large-cap stocks',
-          stockDomesticMid: 'domestic mid-cap stocks',
-          stockDomesticSmall: 'domestic small-cap stocks',
-          stockInternationalLarge: 'international large-cap stocks',
-          stockInternationalMid: 'international mid-cap stocks',
-          stockInternationalSmall: 'international small-cap stocks',
-      };
-
-      return translations[shorthand];
-    };
-
       return Object.keys(classesObject)
         .filter(el => classesObject[el] !== 0)
-        .map(el => `${classesObject[el]}% ${expandAssetClassShorthand(el)}`);
+        .map(el => `${classesObject[el]}% ${this.expandAssetClassShorthand(el)}`);
     },
     /**
      * @description The decision was made to default assetClasses props to ''.  This makes it
