@@ -213,64 +213,33 @@ export default {
         }
       );
     },
-    updateCharts() {
-      this.bySecurityChart.data.labels = [];
-      this.bySecurityChart.data.labels = this.bySecurityChartData.map((el) => el.label);
+    updateChart(chart, newChartInfo) {
+      chart.data.labels = [];
+      chart.data.labels = newChartInfo.map((el) => el.label);
 
-      this.bySecurityChart.data.datasets.forEach((dataset) => {
+      chart.data.datasets.forEach((dataset) => {
         dataset.backgroundColor = [];
-        dataset.backgroundColor = this.bySecurityChartData.map((el) => el.backgroundColor);
+        dataset.backgroundColor = newChartInfo.map((el) => el.backgroundColor);
 
         dataset.data = [];
-        dataset.data = this.bySecurityChartData.map((el) => el.data);
+        dataset.data = newChartInfo.map((el) => el.data);
 
         dataset.borderWidth = 1;
       });
-      this.bySecurityChart.update();
+
+      chart.update();
     },
   },
   watch: {
     portfolio: {
       deep: true,
       handler() {
-        this.updateCharts();
+        this.updateChart(this.byAssetClassChart, this.byAssetClassChartData);
+        this.updateChart(this.bySecurityChart, this.bySecurityChartData);
       },
     },
   },
   mounted() {
-              
-    const chartData = [
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 12,
-        label: 'Red',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 19,
-        label: 'Blue',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 0.1)',
-        data: 3,
-        label: 'Yellow',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 5,
-        label: 'Red',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 2,
-        label: 'Red',
-      },
-      {
-        backgroundColor: 'rgba(255, 99, 132, 1)',
-        data: 3,
-        label: 'Red',
-      },
-    ];
     this.bySecurityChart = this.drawChart('#by-security', this.bySecurityChartData);
     this.byAssetClassChart = this.drawChart('#by-asset-class', this.byAssetClassChartData);
   },
