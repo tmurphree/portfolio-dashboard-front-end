@@ -24,9 +24,11 @@
 <script>
 import { mapState } from 'vuex';
 
+import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
 import securityTemplate from '@/assets/services/object-templates.service';
 
 export default {
+  mixins: [expandAssetClassShorthand],
   data: function data() {
     return {
       bySecurityChart: {},
@@ -36,7 +38,7 @@ export default {
   computed: {
     /**
      * @description Calculates data for the 'by-asset-class' chart.
-     * @returns {array}
+     * @returns {object[]}
      * [
      *  { 
      *    backgroundColor: 'rgba(something)',
@@ -65,15 +67,11 @@ export default {
         return 42;
       };
 
-      const calculateLabel = function calculateLabel(shorthand) {
-        return 'foofoo';
-      };
-
-      const chartInfoFactory = function chartInfoFactory(shorthand) {
+      const chartInfoFactory = (shorthand) => {
         return {
           backgroundColor: calculateBackgroundColor(shorthand),
           data: calculateData(shorthand),
-          label: calculateLabel(shorthand),
+          label: this.expandAssetClassShorthand(shorthand),
         };
       };
       
@@ -82,7 +80,7 @@ export default {
     },
     /**
      * @description Calculates data for the 'by-security' chart.
-     * @returns {array}
+     * @returns {object[]}
      * [
      *  { 
      *    backgroundColor: 'rgba(something)',
