@@ -49,28 +49,83 @@ export default {
      * ]
     */
     byAssetClassChartData() {
+      /**
+       * @returns {object}
+       * { 
+       *  bondDomestic: 54.98,
+       *  bondInternational: 0,
+       *  stockDomesticLarge: 34.66,
+       *  stockDomesticMid: 8.10,
+       *  stockDomesticSmall: 2.25,
+       *  stockInternationalLarge: 0,
+       *  stockInternationalMid: 0,
+       *  stockInternationalSmall: 0
+       * }
+      */
+      const aggregateWeightedAssetClassPercentages = (function(portfolio) {
+        const assetClassKeys = Object.keys(securityTemplate.assetClasses);
+        
+        // make object with appriate keys set to 0
+        const makeInitialObject = function makeInitialObject() {
+          const result = {};
+
+          assetClassKeys.forEach((key) => {
+            result[key] = 0;
+          });
+
+          return result;
+        };
+
+        const grabRelevantProps = function grabRelevantProps(el) {
+          return { 
+            pctOfPortfolio: parseFloat(el.pctOfPortfolio),
+            ...el.assetClasses,
+          };
+        };
+
+        const calculatePerSecurityContribution = function calculatePerSecurityContribution(el) {
+          const result = {};  
+          
+          assetClassKeys.forEach((key) => {
+            result[key] = el[key] * el.pctOfPortfolio / 100;
+          });
+
+          return result;
+        };
+
+        const addThePercentages = function addThePercentages(result, current) {
+          assetClassKeys.forEach((key) => {
+            result[key] = result[key] + current[key];
+          });
+
+          return result;
+        };
+
+        return portfolio
+          .map(grabRelevantProps)
+          .map(calculatePerSecurityContribution)
+          .reduce(addThePercentages, makeInitialObject());
+      })(this.portfolio);
+
+      // const aggregateWeightedAssetClassPercentages = { foo: 42 };
       const calculateBackgroundColor = function calculateBackgroundColor(shorthand) {
         const translations = {
           bondDomestic: 'rgba(75, 192, 192, 1)',
           bondInternational: 'rgba(75, 192, 192, 0.5)',
-          stockDomesticLarge: 'rgba(255, 21, 21, 1)',
-          stockDomesticMid: 'rgba(255, 21, 21, 0.6)',
-          stockDomesticSmall: 'rgba(255, 21, 21, 0.2)',
-          stockInternationalLarge: 'rgba(54, 162, 235, 1)',
-          stockInternationalMid: 'rgba(54, 162, 235, 0.6)',
-          stockInternationalSmall: 'rgba(54, 162, 235, 0.2)',
+          stockDomesticLarge: 'rgba(29, 39, 255, 1)',
+          stockDomesticMid: 'rgba(29, 39, 255, 0.6)',
+          stockDomesticSmall: 'rgba(29, 39, 255, 0.2)',
+          stockInternationalLarge: 'rgba(255, 255, 11, 1)',
+          stockInternationalMid: 'rgba(255, 255, 11, 0.6)',
+          stockInternationalSmall: 'rgba(255, 255, 11, 0.2)',
         };
         return translations[shorthand];
-      };
-
-      const calculateData = function calculateData(shorthand) {
-        return 42;
       };
 
       const chartInfoFactory = (shorthand) => {
         return {
           backgroundColor: calculateBackgroundColor(shorthand),
-          data: calculateData(shorthand),
+          data: aggregateWeightedAssetClassPercentages[shorthand],
           label: this.expandAssetClassShorthand(shorthand),
         };
       };
@@ -217,7 +272,7 @@ export default {
       },
     ];
     this.bySecurityChart = this.drawChart('#by-security', this.bySecurityChartData);
-    this.byAssetClassChart = this.drawChart('#by-asset-class', chartData);
+    this.byAssetClassChart = this.drawChart('#by-asset-class', this.byAssetClassChartData);
   },
   name: 'graph'
 }
