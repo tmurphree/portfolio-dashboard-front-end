@@ -24,6 +24,8 @@
 <script>
 import { mapState } from 'vuex';
 
+import securityTemplate from '@/assets/services/object-templates.service';
+
 export default {
   data: function data() {
     return {
@@ -32,11 +34,88 @@ export default {
     };
   },
   computed: {
+    /**
+     * @description Calculates data for the 'by-asset-class' chart.
+     * @returns {array}
+     * [
+     *  { 
+     *    backgroundColor: 'rgba(something)',
+     *    data: 42,
+     *    label: 'Large cap domestic stock'
+     *  },
+     *  etc.
+     * ]
+    */
+    byAssetClassChartData() {
+      const calculateBackgroundColor = function calculateBackgroundColor(shorthand) {
+        const translations = {
+          bondDomestic: 'rgba(75, 192, 192, 1)',
+          bondInternational: 'rgba(75, 192, 192, 0.5)',
+          stockDomesticLarge: 'rgba(255, 21, 21, 1)',
+          stockDomesticMid: 'rgba(255, 21, 21, 0.6)',
+          stockDomesticSmall: 'rgba(255, 21, 21, 0.2)',
+          stockInternationalLarge: 'rgba(54, 162, 235, 1)',
+          stockInternationalMid: 'rgba(54, 162, 235, 0.6)',
+          stockInternationalSmall: 'rgba(54, 162, 235, 0.2)',
+        };
+        return translations[shorthand];
+      };
+
+      const calculateData = function calculateData(shorthand) {
+        return 42;
+      };
+
+      const calculateLabel = function calculateLabel(shorthand) {
+        return 'foofoo';
+      };
+
+      const chartInfoFactory = function chartInfoFactory(shorthand) {
+        return {
+          backgroundColor: calculateBackgroundColor(shorthand),
+          data: calculateData(shorthand),
+          label: calculateLabel(shorthand),
+        };
+      };
+      
+      return Object.keys(securityTemplate.assetClasses)
+        .map((el) => chartInfoFactory(el));
+    },
+    /**
+     * @description Calculates data for the 'by-security' chart.
+     * @returns {array}
+     * [
+     *  { 
+     *    backgroundColor: 'rgba(something)',
+     *    data: 42,
+     *    label: 'JPM'
+     *  },
+     *  etc.
+     * ]
+    */
     bySecurityChartData() {
+      const alternateBackgroundColors = function alternateBackgroundColors(index) {
+        const backgroundColor = [
+          // red
+          'rgba(255, 21, 21, 1)',
+          // orange
+          'rgba(255, 131, 0, 1)',
+          // yellow
+          'rgba(255, 255, 11, 1)',
+          // blue
+          'rgba(54, 162, 235, 1)',
+          // green
+          'rgba(75, 192, 192, 1)',
+          // purple
+          'rgba(153, 102, 255, 1)',
+        ];
+
+        return backgroundColor[index];
+      };
+
       return this.portfolio
         .map(((el, index) => {
           return {
-            backgroundColor: this.alternateBackgroundColors(index),
+            backgroundColor: alternateBackgroundColors(index),
             data: el.pctOfPortfolio,
             label: el.symbol,
           }
@@ -45,37 +124,6 @@ export default {
     ...mapState(['portfolio']),
   },
   methods: {
-    alternateBackgroundColors(index) {
-      const backgroundColor = [
-        // red
-        'rgba(255, 21, 21, 1)',
-        // orange
-        'rgba(255, 131, 0, 1)',
-        // yellow
-        'rgba(255, 255, 11, 1)',
-        // blue
-        'rgba(54, 162, 235, 1)',
-        // green
-        'rgba(75, 192, 192, 1)',
-        // purple
-        'rgba(153, 102, 255, 1)',
-      ];
-
-      return backgroundColor[index];
-    },
-    applyAssetClassColor(shorthand) {
-      const translations = {
-        bondDomestic: 'rgba(75, 192, 192, 1)',
-        bondInternational: 'rgba(75, 192, 192, 0.5)',
-        stockDomesticLarge: 'rgba(255, 21, 21, 1)',
-        stockDomesticMid: 'rgba(255, 21, 21, 0.6)',
-        stockDomesticSmall: 'rgba(255, 21, 21, 0.2)',
-        stockInternationalLarge: 'rgba(54, 162, 235, 1)',
-        stockInternationalMid: 'rgba(54, 162, 235, 0.6)',
-        stockInternationalSmall: 'rgba(54, 162, 235, 0.2)',
-      };
-      return translations[shorthand];
-    },
     /**
      * @description Draw a chart.
      * @param {string} selector Query selector specific to the <canvas> you want to draw
