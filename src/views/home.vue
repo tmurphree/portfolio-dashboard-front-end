@@ -37,7 +37,7 @@
                 <td>
                   <ul class="m-0 p-0">
                     <li v-for="asset in displayAssetClasses(item.assetClasses)" class="asset-li">
-                      {{ asset }}
+                      {{ asset.toLowerCase() }}
                     </li>
                   </ul>
                 </td>
