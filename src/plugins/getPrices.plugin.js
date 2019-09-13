@@ -1,3 +1,13 @@
+/**
+ * I put this function in a plugin and made it available globally because in an ideal
+ * world I would need it from many components.  It would do things like get prices on
+ * security edit, get prices for what-if scenarios, etc.
+ *
+ * Sadly, the limited budget for the project curtails my API usage, so this dream isn't
+ * realized.  :(
+*/
+
+
 import axios from 'axios';
 
 /**
