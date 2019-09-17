@@ -36,9 +36,9 @@
 <script>
 import { mapState } from 'vuex';
 
-import GraphLegend from '../components/graph-legend';
+import GraphLegend from '@/components/graph-legend';
 
-import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
+import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 import securityFactory from '@/lib/securityFactory';
 
 export default {
