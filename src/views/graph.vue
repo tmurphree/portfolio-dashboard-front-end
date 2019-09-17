@@ -1,5 +1,8 @@
 <template>
   <div>
+    <!-- <div id="md-and-smaller">
+
+    </div> -->
     <div class="row"> 
       <div class="col-12">
        <h1>By asset class</h1>
@@ -32,7 +35,7 @@
       </div>
     </div>
     <graph-legend :chart-data="bySecurityChartData" data-legend-for="by-security"></graph-legend>
-  </div>
+  </div> <!-- immediate child of template element -->
 </template>
 
 <script>
@@ -50,6 +53,7 @@ export default {
     return {
       bySecurityChart: {},
       byAssetClassChart: {},
+      windowWidth: window.innerWidth,
     };
   },
   computed: {
@@ -193,6 +197,10 @@ export default {
     ...mapState(['portfolio']),
   },
   methods: {
+    f() {
+      console.log(`hi from f ${window.innerWidth}`);
+      this.windowWidth = window.innerWidth;
+    },
     /**
      * @description Draw a chart.
      * @param {string} selector Query selector specific to the <canvas> you want to draw
@@ -256,6 +264,8 @@ export default {
     },
   },
   mounted() {
+    window.addEventListener('resize', () => this.windowWidth = window.innerWidth);
+
     this.bySecurityChart = this.drawChart('#by-security', this.bySecurityChartData);
     this.byAssetClassChart = this.drawChart('#by-asset-class', this.byAssetClassChartData);
   },
@@ -264,10 +274,10 @@ export default {
 </script>
 
 <style lang="scss">
-  @media (min-width: 992px) {
-    canvas {
-      height: auto;
-      max-width: 50%;
-    } 
-  }
+@media (min-width: 992px) {
+  canvas {
+    height: auto;
+    max-width: 50%;
+  } 
+}
 </style>
