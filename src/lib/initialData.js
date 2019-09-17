@@ -69,4 +69,4 @@ initialData.push({
   value: 0,
 });
 
-module.exports = { initialData };
+export default initialData;

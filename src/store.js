@@ -7,11 +7,10 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-// eslint-disable-next-line
-import securityFactory from '@/lib/securityFactory';
 
-// eslint-disable-next-line
-const { initialData } = require('@/lib/initialData');
+import initialData from './lib/initialData';
+import roundToPrecision from './lib/roundToPrecision';
+import securityFactory from './lib/securityFactory';
 
 Vue.use(Vuex);
 
@@ -53,11 +52,6 @@ export default new Vuex.Store({
       );
     },
     updatePriceValuePercentage: function updatePriceValuePercentage(state, payload) {
-      const roundToPrecision = function roundToPrecision(x, precision) {
-        const y = +x + (precision === undefined ? 0.5 : precision / 2);
-        return y - (y % (precision === undefined ? 1 : +precision));
-      };
-
       const standardInput = Array.isArray(payload) ? [...payload] : [payload];
       let totalValue = 0;
 
