@@ -52,7 +52,7 @@
       </div>
       <div class="card-body">
         <p class="card-text" data-cy="help-text">
-          Click "Edit" or "Delete", as appropriate, on the table on the home screen. 
+          Click "Edit" or "Remove", as appropriate, on the table on the home screen. 
         </p>
         <img src="edit-remove-buttons.png" alt="Edit and remove buttons">
       </div>
