@@ -1,27 +1,22 @@
 <template>
-  <div>
-    <!-- <div id="md-and-smaller">
-
-    </div> -->
-    <div class="row"> 
+  <div class="row">
+    <section class="col-12 col-lg-6">
+      <h1>By asset class</h1>
+      <small class="col-12 pl-0">
+        Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
+      </small>
+      <canvas
+        aria-label="Chart by asset class"
+        class="chart-canvas"
+        id="by-asset-class"
+        role="img"
+      >
+      </canvas>
+      <graph-legend :chart-data="byAssetClassChartData" data-legend-for="by-asset-class"></graph-legend>
+    </section>
+    <section class="align-items-center col-12 col-lg-6"> 
       <div class="col-12">
-       <h1>By asset class</h1>
-        <small class="col-12 pl-0">
-          Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
-        </small>
-        <canvas
-          aria-label="Chart by asset class"
-          class="chart-canvas"
-          id="by-asset-class"
-          role="img"
-        >
-        </canvas>
-      </div>
-    </div>
-    <graph-legend :chart-data="byAssetClassChartData" data-legend-for="by-asset-class"></graph-legend>
-    <div class="row"> 
-      <div class="col-12">
-       <h1>By security</h1>
+      <h1>By security</h1>
         <small class="col-12 pl-0">
           Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
@@ -33,9 +28,9 @@
         >
         </canvas>
       </div>
-    </div>
-    <graph-legend :chart-data="bySecurityChartData" data-legend-for="by-security"></graph-legend>
-  </div> <!-- immediate child of template element -->
+      <graph-legend :chart-data="bySecurityChartData" data-legend-for="by-security"></graph-legend>
+    </section>
+  </div><!-- immediate child of template element -->
 </template>
 
 <script>
@@ -53,7 +48,6 @@ export default {
     return {
       bySecurityChart: {},
       byAssetClassChart: {},
-      windowWidth: window.innerWidth,
     };
   },
   computed: {
@@ -237,6 +231,10 @@ export default {
         }
       );
     },
+    updateAllCharts() {
+        this.updateChart(this.byAssetClassChart, this.byAssetClassChartData);
+        this.updateChart(this.bySecurityChart, this.bySecurityChartData);
+    },
     updateChart(chart, newChartInfo) {
       chart.data.labels = [];
       chart.data.labels = newChartInfo.map((el) => el.label);
@@ -264,8 +262,6 @@ export default {
     },
   },
   mounted() {
-    window.addEventListener('resize', () => this.windowWidth = window.innerWidth);
-
     this.bySecurityChart = this.drawChart('#by-security', this.bySecurityChartData);
     this.byAssetClassChart = this.drawChart('#by-asset-class', this.byAssetClassChartData);
   },
@@ -276,8 +272,7 @@ export default {
 <style lang="scss">
 @media (min-width: 992px) {
   canvas {
-    height: auto;
-    max-width: 50%;
+    margin-bottom: 1rem;
   } 
 }
 </style>

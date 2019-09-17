@@ -15,11 +15,6 @@ export default {
   data() {
     return {};
   },
-  // computed: {
-  //   marginLeft() {
-  //     return '30%';
-  //   },
-  // },
   name: 'graph-legend'
 };
 </script>
@@ -41,15 +36,4 @@ export default {
       margin-left: 26%;
     } 
   }
-
-    @media (min-width: 992px) {
-    [data-legend-for="by-asset-class"] {
-      margin-left: 15%;
-    }
-
-    [data-legend-for="by-security"] {
-      margin-left: 26%;
-    } 
-  }
-
 </style>
