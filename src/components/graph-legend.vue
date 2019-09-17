@@ -9,12 +9,17 @@
 
 <script>
 export default {
-  data() {
-    return {};
-  },
   props: {
     chartData: Array,
   },
+  data() {
+    return {};
+  },
+  // computed: {
+  //   marginLeft() {
+  //     return '30%';
+  //   },
+  // },
   name: 'graph-legend'
 };
 </script>
@@ -25,4 +30,26 @@ export default {
     height: 10px;
     width: 20px;
   }
+
+  // style data-legend-for down here so I can use scss nesting
+  @media (min-width: 768px) {
+    [data-legend-for="by-asset-class"] {
+      margin-left: 10%;
+    }
+
+    [data-legend-for="by-security"] {
+      margin-left: 26%;
+    } 
+  }
+
+    @media (min-width: 992px) {
+    [data-legend-for="by-asset-class"] {
+      margin-left: 15%;
+    }
+
+    [data-legend-for="by-security"] {
+      margin-left: 26%;
+    } 
+  }
+
 </style>

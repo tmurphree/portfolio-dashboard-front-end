@@ -15,7 +15,7 @@
         </canvas>
       </div>
     </div>
-    <graph-legend :chart-data="byAssetClassChartData"></graph-legend>
+    <graph-legend :chart-data="byAssetClassChartData" data-legend-for="by-asset-class"></graph-legend>
     <div class="row"> 
       <div class="col-12">
        <h1>By security</h1>
@@ -31,7 +31,7 @@
         </canvas>
       </div>
     </div>
-    <graph-legend :chart-data="bySecurityChartData"></graph-legend>
+    <graph-legend :chart-data="bySecurityChartData" data-legend-for="by-security"></graph-legend>
   </div>
 </template>
 
@@ -264,5 +264,10 @@ export default {
 </script>
 
 <style lang="scss">
-
+  @media (min-width: 992px) {
+    canvas {
+      height: auto;
+      max-width: 50%;
+    } 
+  }
 </style>
