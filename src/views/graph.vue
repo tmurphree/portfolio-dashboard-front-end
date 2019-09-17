@@ -14,7 +14,7 @@
       </canvas>
       <graph-legend :chart-data="byAssetClassChartData" data-legend-for="by-asset-class"></graph-legend>
     </section>
-    <section class="align-items-center col-12 col-lg-6"> 
+    <section class="align-items-center col-12 col-lg-6">
       <div class="col-12">
       <h1>By security</h1>
         <small class="col-12 pl-0">
@@ -38,6 +38,7 @@ import { mapState } from 'vuex';
 
 import GraphLegend from '@/components/graph-legend';
 
+import roundToPrecision from '@/lib/roundToPrecision';
 import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 import securityFactory from '@/lib/securityFactory';
 
@@ -139,7 +140,7 @@ export default {
       const chartInfoFactory = (shorthand) => {
         return {
           backgroundColor: calculateBackgroundColor(shorthand),
-          data: aggregateWeightedAssetClassPercentages[shorthand],
+          data: roundToPrecision(aggregateWeightedAssetClassPercentages[shorthand], 0.01),
           label: this.expandAssetClassShorthand(shorthand),
         };
       };
