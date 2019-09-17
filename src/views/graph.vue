@@ -6,7 +6,13 @@
         <small class="col-12 pl-0">
           Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
-        <canvas id="by-asset-class" aria-label="Chart by asset class" role="img"></canvas>
+        <canvas
+          aria-label="Chart by asset class"
+          class="chart-canvas"
+          id="by-asset-class"
+          role="img"
+        >
+        </canvas>
       </div>
     </div>
     <graph-legend :chart-data="byAssetClassChartData"></graph-legend>
@@ -16,9 +22,16 @@
         <small class="col-12 pl-0">
           Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
-        <canvas id="by-security" aria-label="Chart by asset class" role="img"></canvas>
+        <canvas
+          aria-label="Chart by security"
+          class="chart-canvas"
+          id="by-security"
+          role="img"
+        >
+        </canvas>
       </div>
     </div>
+    <graph-legend :chart-data="bySecurityChartData"></graph-legend>
   </div>
 </template>
 
@@ -118,9 +131,9 @@ export default {
           stockDomesticLarge: 'rgba(29, 39, 255, 1)',
           stockDomesticMid: 'rgba(29, 39, 255, 0.6)',
           stockDomesticSmall: 'rgba(29, 39, 255, 0.2)',
-          stockInternationalLarge: 'rgba(255, 255, 11, 1)',
-          stockInternationalMid: 'rgba(255, 255, 11, 0.6)',
-          stockInternationalSmall: 'rgba(255, 255, 11, 0.2)',
+          stockInternationalLarge: 'rgba(255, 182, 0, 1)',
+          stockInternationalMid: 'rgba(255, 182, 0, 0.6)',
+          stockInternationalSmall: 'rgba(255, 182, 0, 0.2)',
         };
         return translations[shorthand];
       };
@@ -210,7 +223,7 @@ export default {
           data,
           options: {
             legend: {
-              position: 'bottom'
+              display: false
             },
           },
         }
