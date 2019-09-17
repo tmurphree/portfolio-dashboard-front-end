@@ -25,7 +25,7 @@
 import { mapState } from 'vuex';
 
 import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
-import securityTemplate from '@/assets/services/object-templates.service';
+import securityFactory from '@/assets/services/object-templates.service';
 
 export default {
   mixins: [expandAssetClassShorthand],
@@ -63,7 +63,7 @@ export default {
        * }
       */
       const aggregateWeightedAssetClassPercentages = (function(portfolio) {
-        const assetClassKeys = Object.keys(securityTemplate.assetClasses);
+        const assetClassKeys = Object.keys(securityFactory().assetClasses);
         
         // make object with appriate keys set to 0
         const makeInitialObject = function makeInitialObject() {
@@ -107,7 +107,6 @@ export default {
           .reduce(addThePercentages, makeInitialObject());
       })(this.portfolio);
 
-      // const aggregateWeightedAssetClassPercentages = { foo: 42 };
       const calculateBackgroundColor = function calculateBackgroundColor(shorthand) {
         const translations = {
           bondDomestic: 'rgba(75, 192, 192, 1)',
@@ -130,7 +129,7 @@ export default {
         };
       };
       
-      return Object.keys(securityTemplate.assetClasses)
+      return Object.keys(securityFactory().assetClasses)
         .map((el) => chartInfoFactory(el));
     },
     /**
