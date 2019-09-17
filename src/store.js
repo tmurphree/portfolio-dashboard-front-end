@@ -8,10 +8,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 // eslint-disable-next-line
-import securityFactory from '@/assets/services/object-templates.service';
+import securityFactory from '@/lib/securityFactory';
 
 // eslint-disable-next-line
-const { initialData } = require('@/assets/services/initial-data.service');
+const { initialData } = require('@/lib/initialData');
 
 Vue.use(Vuex);
 

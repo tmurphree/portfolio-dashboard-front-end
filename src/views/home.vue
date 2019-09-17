@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import securityFactory from '@/assets/services/object-templates.service';
+import securityFactory from '@/lib/securityFactory';
 import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
 
 export default {
