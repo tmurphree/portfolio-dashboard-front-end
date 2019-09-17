@@ -6,16 +6,17 @@
         <small class="col-12 pl-0">
           Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
-        <canvas id="by-asset-class"></canvas>
+        <canvas id="by-asset-class" aria-label="Chart by asset class" role="img"></canvas>
       </div>
     </div>
+    <graph-legend :chart-data="byAssetClassChartData"></graph-legend>
     <div class="row"> 
       <div class="col-12">
        <h1>By security</h1>
         <small class="col-12 pl-0">
           Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
         </small>
-        <canvas id="by-security"></canvas>
+        <canvas id="by-security" aria-label="Chart by asset class" role="img"></canvas>
       </div>
     </div>
   </div>
@@ -24,10 +25,13 @@
 <script>
 import { mapState } from 'vuex';
 
+import GraphLegend from '../components/graph-legend';
+
 import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
 import securityFactory from '@/assets/services/object-templates.service';
 
 export default {
+  components: { GraphLegend },
   mixins: [expandAssetClassShorthand],
   data: function data() {
     return {
@@ -243,7 +247,7 @@ export default {
     this.byAssetClassChart = this.drawChart('#by-asset-class', this.byAssetClassChartData);
   },
   name: 'graph'
-}
+};
 </script>
 
 <style lang="scss">
