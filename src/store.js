@@ -8,7 +8,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 // eslint-disable-next-line
-import securityTemplate from '@/assets/services/object-templates.service';
+import securityFactory from '@/assets/services/object-templates.service';
 
 // eslint-disable-next-line
 const { initialData } = require('@/assets/services/initial-data.service');
@@ -27,7 +27,7 @@ export default new Vuex.Store({
       }
 
       Object
-        .keys(securityTemplate)
+        .keys(securityFactory())
         .forEach((el) => {
           if (!Object.keys(payload).includes(el)) {
             throw new Error(`Missing expected property: ${el}`);
@@ -85,9 +85,6 @@ export default new Vuex.Store({
           });
       }
     },
-  },
-  actions: {
-
   },
   strict: process.env.NODE_ENV !== 'production',
 });

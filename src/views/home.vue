@@ -139,14 +139,14 @@
 </template>
 
 <script>
-import securityTemplate from '@/assets/services/object-templates.service';
+import securityFactory from '@/assets/services/object-templates.service';
 import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
 
 export default {
   mixins: [expandAssetClassShorthand],
   data: function data() {
     return {
-      editedSecurity: { ...securityTemplate },
+      editedSecurity: { ...securityFactory() },
     };
   },
   computed: {
@@ -171,6 +171,11 @@ export default {
               this.addSecurity();
             }
           });
+
+          el.addEventListener('click', event => {
+            // select the text in the input
+            event.target.select();
+          });
         });
 
       return this;
@@ -180,7 +185,6 @@ export default {
       this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
       
       this
-        .fillValues()
         .$store.commit('addToPortfolio', this.editedSecurity);
 
       setTimeout(() => {
@@ -194,25 +198,6 @@ export default {
       return Object.keys(classesObject)
         .filter(el => classesObject[el] !== 0)
         .map(el => `${classesObject[el]}% ${this.expandAssetClassShorthand(el)}`);
-    },
-    /**
-     * @description The decision was made to default assetClasses props to ''.  This makes it
-     *    easier for the user to enter data (he doesn't have to keep deleting zeroes before
-     *    entering the relevant data).  But that introduces string math to the mix: 
-     *    5 + '' + 12 === '512' because the first operation coerces the 5 to '5'.  The workaround
-     *    is to convert all '' to 0 before doing anything serious with it.
-     * @returns {object} this
-    */
-    fillValues: function ensureAllAssetClassesHaveNonStingValues() {
-      for (const key in this.editedSecurity.assetClasses) {
-        if (this.editedSecurity.assetClasses.hasOwnProperty(key) && 
-          this.editedSecurity.assetClasses[key] === ''
-        ) {
-          this.editedSecurity.assetClasses[key] = 0;
-        }
-      }
-
-      return this;
     },
     hideWelcome: function hideWelcome() {
       const pause = function pause(seconds) {
@@ -248,21 +233,14 @@ export default {
       const symbol = event.target.dataset.cyEdit;
 
       this.editedSecurity = Object.assign({}, this.$store.state.portfolio.find((el) => el.symbol === symbol));
-      // remove the existing security from the store to avoid mutation warnings
-      // "Don't mutate things outside of commits"
+      // remove the existing security from the store to avoid mutation outside of vuex
       this.removeSecurity(symbol);
     },
     removeSecurity: function removeSecurity(symbol) {
       this.$store.commit('trimPortfolio', symbol);
     },
     resetEditedSecurity: function resetEditedSecurity() {
-      this.editedSecurity = { ...securityTemplate };
-
-      for (const key in this.editedSecurity.assetClasses) {
-        if (this.editedSecurity.assetClasses.hasOwnProperty(key)) {
-          this.editedSecurity.assetClasses[key] = '';
-        }
-      }
+      this.editedSecurity = { ...securityFactory() };
     },
   },
   mounted() {
