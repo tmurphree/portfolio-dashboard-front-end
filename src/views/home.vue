@@ -71,28 +71,27 @@
       </button>
     </section>
     <section id="data-entry" class="mt-4 row">
-      <form class="col-lg-5">
-        <div class="row">
+      <form @submit="handleSubmit">
+        <div class="col-lg-5" id="name-qty">
           <h4>Basic info</h4>
+          <div class="form-group form-row">
+            <label for="symbol">Symbol <span class="text-red">(required)</span>:</label>
+            <input v-model="editedSecurity.symbol" class="form-control" id="symbol" name="symbol" type="text">
+          </div>
+          <div class="form-group form-row">
+            <label for="num-shares"># of shares <span class="text-red">(required)</span>:</label>
+            <input v-model.number="editedSecurity.numShares" class="form-control" id="num-shares" name="num-shares" type="number">
+          </div>
+          <div class="form-group form-row">
+            <label for="friendly-name">Friendly name (optional):</label>
+            <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
+          </div>
         </div>
-        <div class="form-group form-row">
-          <label for="symbol">Symbol <span class="text-red">(required)</span>:</label>
-          <input v-model="editedSecurity.symbol" class="form-control" id="symbol" name="symbol" type="text">
-        </div>
-        <div class="form-group form-row">
-          <label for="num-shares"># of shares <span class="text-red">(required)</span>:</label>
-          <input v-model.number="editedSecurity.numShares" class="form-control" id="num-shares" name="num-shares" type="number">
-        </div>
-        <div class="form-group form-row">
-          <label for="friendly-name">Friendly name (optional):</label>
-          <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
-        </div>
-      </form>
-      <div class="col-lg-5" id="asset-classes">
-        <div class="row">
-          <h4 class="w-100">Asset classes (%)</h4>
-          <p><small>These must add to 100 before you can save.</small></p>
-        </div>
+        <div class="col-lg-5" id="asset-classes">
+          <div class="row">
+            <h4 class="w-100">Asset classes (%)</h4>
+            <p><small>These must add to 100 before you can save.</small></p>
+          </div>
           <p>Stocks</p>
           <div class="form-group form-row">
             <label for="pct-stock-domestic-large">Large-cap domestic:</label>
@@ -127,18 +126,19 @@
             <label for="pct-bond-international">International bond:</label>
             <input v-model.number="editedSecurity.assetClasses.bondInternational" class="form-control" id="pct-bond-international" name="pct-bond-international" type="number"><span class="d-none d-md-inlines">%</span>
           </div>
-      </div>
-      <div class="col-12">
-        <button
-          class="btn btn-success btn-lg mr-2 mb-1"
-          @click="addSecurity"
-          data-cy-add-security
-          :disabled="disableAddButton"
-          type="button"
-        >
-          Add security
-        </button>
-      </div>
+        </div>
+        <div class="col-12">
+          <button
+            class="btn btn-success btn-lg mr-2 mb-1"
+            @click="addSecurity"
+            data-cy-add-security
+            :disabled="disableAddButton"
+            type="submit"
+          >
+            Add security
+          </button>
+        </div>
+      </form>
     </section>
     <link rel="prefetch" href="edit-remove-buttons.png">
   </div>
@@ -183,14 +183,8 @@ export default {
   },
   methods: {
     addEventListeners: function addEventListeners() {
-      document.querySelectorAll('#asset-classes input')
+      document.querySelectorAll('form input')
         .forEach(el => {
-          el.addEventListener('keyup', event => {
-            if (event.keyCode === 13) {
-              this.addSecurity();
-            }
-          });
-
           el.addEventListener('click', event => {
             // select the text in the input
             event.target.select();
@@ -216,6 +210,11 @@ export default {
       return Object.keys(classesObject)
         .filter(el => classesObject[el] !== 0)
         .map(el => `${classesObject[el]}% ${this.expandAssetClassShorthand(el)}`);
+    },
+    handleSubmit(event) {
+      // Do nothing -- the submit button ("Add Security") fires before this.
+      // Also, this does not run if the submit button is disabled.
+      event.preventDefault();
     },
     hideWelcome: function hideWelcome() {
       const pause = function pause(seconds) {
