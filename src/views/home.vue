@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div class="alert alert-warning" :class="alertClasses" role="alert">
-      Prices didn't update because of API throttling.  Retrying in 1 minute.  Please be patient.
+      Some prices didn't update because of API throttling.  Retrying in 1 minute.  Please be patient.
     </div>
     <section v-if="this.$store.state.showHomeViewWelcome" id="welcome" class="collapsable row">
       <div>
@@ -296,9 +296,16 @@ export default {
 
   [role="alert"] {
     left: 40px;
+    max-width: 70%;
     position: absolute;
     top: 40px;
     z-index: 1050;
+  }
+
+  @media (min-width: 768px) {
+    [role="alert"] {
+      max-width: inherit;
+    }
   }
 
   .text-red {
