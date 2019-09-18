@@ -1,9 +1,10 @@
 <template>
   <div id="home">
     <div class="alert alert-warning" :class="alertClasses" role="alert">
-      Some prices didn't update because of API throttling.  Retrying in 1 minute.  Please be patient.
+      Some prices didn't update because of API throttling.  Retrying in 1 minute.
+      <router-link to="/help">See details.</router-link>
     </div>
-    <section v-if="this.$store.state.showHomeViewWelcome" id="welcome" class="collapsable row">
+    <section v-if="this.showHomeViewWelcome" id="welcome" class="collapsable row">
       <div>
         <h2>Welcome to the portfolio dashboard</h2>
       </div>
@@ -16,7 +17,9 @@
     </section>
     <section class="row">
       <h2>Current portfolio</h2>
-      <p class="d-sm-none">Scroll the table to the right or turn the phone on its side if you can't see action buttons.</p>
+      <p class="d-sm-none">
+        Scroll the table to the right or turn the phone on its side if you can't see action buttons.
+      </p>
       <small class="col-12 pl-0">
         Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
       </small>
@@ -31,7 +34,7 @@
             <th scope="col">Actions</th>
           </thead>
           <tbody>
-            <tr v-for="item in this.$store.state.portfolio">
+            <tr v-for="item in this.portfolio">
                 <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
                 <td class="d-md-table-cell d-none" :data-cy-num-shares-cell="item.symbol">{{ item.numShares }}</td>
@@ -142,23 +145,23 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import securityFactory from '@/lib/securityFactory';
-import expandAssetClassShorthand from '../mixins/expandAssetClassShorthand.mixin';
+import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 
 export default {
   mixins: [expandAssetClassShorthand],
   data: function data() {
     return {
+      alertClasses: {
+        'd-none': true,
+        fadeInDown: false,
+      },
       editedSecurity: { ...securityFactory() },
     };
   },
   computed: {
-    alertClasses() {
-      return {
-        'd-none': false,
-        fadeInDown: true,
-      };
-    },
     disableAddButton() {
       const assetClassesSum = Object.values(this.editedSecurity.assetClasses)
         .map(el => isNaN(parseFloat(el)) ? 0 : parseFloat(el))
@@ -170,6 +173,7 @@ export default {
         numSharesToFloat <= 0 ||
         assetClassesSum !== 100;
     },
+    ...mapState(['portfolio', 'showHomeViewWelcome']),
   },
   methods: {
     addEventListeners: function addEventListeners() {
@@ -217,7 +221,7 @@ export default {
         });
       }
 
-      if (this.$store.state.showHomeViewWelcome) {
+      if (this.showHomeViewWelcome) {
         pause(15)
           .then(() => {
             const welcomeSection = document.querySelector('#welcome');
@@ -241,7 +245,7 @@ export default {
     populateEditedSecurity: function populateEditedSecurity(event) {
       const symbol = event.target.dataset.cyEdit;
 
-      this.editedSecurity = Object.assign({}, this.$store.state.portfolio.find((el) => el.symbol === symbol));
+      this.editedSecurity = Object.assign({}, this.portfolio.find((el) => el.symbol === symbol));
       // remove the existing security from the store to avoid mutation outside of vuex
       this.removeSecurity(symbol);
     },
