@@ -1,5 +1,8 @@
 <template>
   <div id="home">
+    <div class="alert alert-warning" :class="alertClasses" role="alert">
+      Prices didn't update because of API throttling.  Retrying in 1 minute.  Please be patient.
+    </div>
     <section v-if="this.$store.state.showHomeViewWelcome" id="welcome" class="collapsable row">
       <div>
         <h2>Welcome to the portfolio dashboard</h2>
@@ -150,6 +153,12 @@ export default {
     };
   },
   computed: {
+    alertClasses() {
+      return {
+        'd-none': false,
+        fadeInDown: true,
+      };
+    },
     disableAddButton() {
       const assetClassesSum = Object.values(this.editedSecurity.assetClasses)
         .map(el => isNaN(parseFloat(el)) ? 0 : parseFloat(el))
@@ -253,6 +262,7 @@ export default {
 </script>
 
 <style lang="scss">
+  // welcome
   .collapsable {
     overflow: hidden;
     transition: max-height 4s ease-out;
@@ -262,6 +272,33 @@ export default {
 
   .collapsable.collapsed {
     max-height: 0;
+  }
+
+  // alert
+  // fadeInDown from https://github.com/daneden/animate.css
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .fadeInDown {
+    animation-name: fadeInDown;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+
+  [role="alert"] {
+    left: 40px;
+    position: absolute;
+    top: 40px;
+    z-index: 1050;
   }
 
   .text-red {
