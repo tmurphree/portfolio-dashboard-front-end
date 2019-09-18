@@ -72,62 +72,64 @@
     </section>
     <section id="data-entry" class="mt-4 row">
       <form @submit="handleSubmit">
-        <div class="col-lg-5" id="name-qty">
-          <h4>Basic info</h4>
-          <div class="form-group form-row">
-            <label for="symbol">Symbol <span class="text-red">(required)</span>:</label>
-            <input v-model="editedSecurity.symbol" class="form-control" id="symbol" name="symbol" type="text">
+        <div class="d-flex mx-1 row">
+          <div class="col-md-5" id="name-qty">
+            <h4>Basic info</h4>
+            <div class="form-group form-row">
+              <label for="symbol">Symbol <span class="text-red">(required)</span>:</label>
+              <input v-model="editedSecurity.symbol" class="form-control" id="symbol" name="symbol" type="text">
+            </div>
+            <div class="form-group form-row">
+              <label for="num-shares"># of shares <span class="text-red">(required)</span>:</label>
+              <input v-model.number="editedSecurity.numShares" class="form-control" id="num-shares" name="num-shares" type="number">
+            </div>
+            <div class="form-group form-row">
+              <label for="friendly-name">Friendly name (optional):</label>
+              <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
+            </div>
           </div>
-          <div class="form-group form-row">
-            <label for="num-shares"># of shares <span class="text-red">(required)</span>:</label>
-            <input v-model.number="editedSecurity.numShares" class="form-control" id="num-shares" name="num-shares" type="number">
+          <div class="col-md-5" id="asset-classes">
+            <div class="row">
+              <h4 class="w-100">Asset classes (%)</h4>
+              <p><small>These must add to 100 before you can save.</small></p>
+            </div>
+            <p>Stocks</p>
+            <div class="form-group form-row">
+              <label for="pct-stock-domestic-large">Large-cap domestic:</label>
+              <input v-model.number="editedSecurity.assetClasses.stockDomesticLarge" class="form-control" id="pct-stock-domestic-large" name="pct-stock-domestic-large" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
+            <div class="form-group form-row">
+              <label for="pct-stock-domestic-mid">Mid-cap domestic:</label>
+              <input v-model.number="editedSecurity.assetClasses.stockDomesticMid" class="form-control" id="pct-stock-domestic-mid" name="pct-stock-domestic-mid" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
+            <div class="form-group form-row">
+              <label for="pct-stock-domestic-small">Small-cap domestic:</label>
+              <input v-model.number="editedSecurity.assetClasses.stockDomesticSmall" class="form-control" id="pct-stock-domestic-small" name="pct-stock-domestic-small" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
+            <div class="form-group form-row">
+              <label for="pct-stock-international-large">Large-cap international:</label>
+              <input v-model.number="editedSecurity.assetClasses.stockInternationalLarge" class="form-control" id="pct-stock-international-large" name="pct-stock-international-large" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
+            <div class="form-group form-row">
+              <label for="pct-stock-international-mid">Mid-cap international:</label>
+              <input v-model.number="editedSecurity.assetClasses.stockInternationalMid" class="form-control" id="pct-stock-international-mid" name="pct-stock-international-mid" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
+            <div class="form-group form-row">
+              <label for="pct-stock-international-small">Small-cap international:</label>
+              <input v-model.number="editedSecurity.assetClasses.stockInternationalSmall" class="form-control" id="pct-stock-international-small" name="pct-stock-international-small" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
+            <p>Bonds</p>
+            <div class="form-group form-row">
+              <label for="pct-bond-domestic">Domestic bond:</label>
+              <input v-model.number="editedSecurity.assetClasses.bondDomestic" class="form-control" id="pct-bond-domestic" name="pct-bond-domestic" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
+            <div class="form-group form-row">
+              <label for="pct-bond-international">International bond:</label>
+              <input v-model.number="editedSecurity.assetClasses.bondInternational" class="form-control" id="pct-bond-international" name="pct-bond-international" type="number"><span class="d-none d-md-inlines">%</span>
+            </div>
           </div>
-          <div class="form-group form-row">
-            <label for="friendly-name">Friendly name (optional):</label>
-            <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
-          </div>
-        </div>
-        <div class="col-lg-5" id="asset-classes">
-          <div class="row">
-            <h4 class="w-100">Asset classes (%)</h4>
-            <p><small>These must add to 100 before you can save.</small></p>
-          </div>
-          <p>Stocks</p>
-          <div class="form-group form-row">
-            <label for="pct-stock-domestic-large">Large-cap domestic:</label>
-            <input v-model.number="editedSecurity.assetClasses.stockDomesticLarge" class="form-control" id="pct-stock-domestic-large" name="pct-stock-domestic-large" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-          <div class="form-group form-row">
-            <label for="pct-stock-domestic-mid">Mid-cap domestic:</label>
-            <input v-model.number="editedSecurity.assetClasses.stockDomesticMid" class="form-control" id="pct-stock-domestic-mid" name="pct-stock-domestic-mid" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-          <div class="form-group form-row">
-            <label for="pct-stock-domestic-small">Small-cap domestic:</label>
-            <input v-model.number="editedSecurity.assetClasses.stockDomesticSmall" class="form-control" id="pct-stock-domestic-small" name="pct-stock-domestic-small" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-          <div class="form-group form-row">
-            <label for="pct-stock-international-large">Large-cap international:</label>
-            <input v-model.number="editedSecurity.assetClasses.stockInternationalLarge" class="form-control" id="pct-stock-international-large" name="pct-stock-international-large" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-          <div class="form-group form-row">
-            <label for="pct-stock-international-mid">Mid-cap international:</label>
-            <input v-model.number="editedSecurity.assetClasses.stockInternationalMid" class="form-control" id="pct-stock-international-mid" name="pct-stock-international-mid" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-          <div class="form-group form-row">
-            <label for="pct-stock-international-small">Small-cap international:</label>
-            <input v-model.number="editedSecurity.assetClasses.stockInternationalSmall" class="form-control" id="pct-stock-international-small" name="pct-stock-international-small" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-          <p>Bonds</p>
-          <div class="form-group form-row">
-            <label for="pct-bond-domestic">Domestic bond:</label>
-            <input v-model.number="editedSecurity.assetClasses.bondDomestic" class="form-control" id="pct-bond-domestic" name="pct-bond-domestic" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-          <div class="form-group form-row">
-            <label for="pct-bond-international">International bond:</label>
-            <input v-model.number="editedSecurity.assetClasses.bondInternational" class="form-control" id="pct-bond-international" name="pct-bond-international" type="number"><span class="d-none d-md-inlines">%</span>
-          </div>
-        </div>
-        <div class="col-12">
+        </div> <!-- end div that lets the form move to the side on md -->
+        <div class="mx-1 row">
           <button
             class="btn btn-success btn-lg mr-2 mb-1"
             @click="addSecurity"
