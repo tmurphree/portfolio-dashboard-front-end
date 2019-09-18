@@ -83,7 +83,7 @@
               Do NOT base actual trades on the data from this site.  <router-link to="/about">Find out why.</router-link>
             </p>
           </div>
-          <router-view />
+          <router-view :callFrequencyDetected="callFrequencyDetected" />
         </main>
       </div>
     </div>
@@ -93,7 +93,9 @@
 <script>
   export default {
     data() {
-      return {};
+      return {
+        callFrequencyDetected: false,
+      };
     },
     computed: {
       allSymbols() {
@@ -109,6 +111,12 @@
         this.$getPrices(this.allSymbols)
           .then((res) => {
             this.$store.commit('updatePriceValuePercentage', res.data.payload);
+            this.callFrequencyDetected = res.data.payload
+              .some((el) => /call frequency/i.test(el.errorMessage));
+
+            setTimeout(() => {
+              this.callFrequencyDetected = false;
+            }, 3000);
           })
           .catch((err) => {
             console.error(err);

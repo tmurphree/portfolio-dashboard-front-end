@@ -150,13 +150,19 @@ import { mapState } from 'vuex';
 import securityFactory from '@/lib/securityFactory';
 import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 
+const toggle = function toggle(value) {
+  return !value;
+};
+
 export default {
   mixins: [expandAssetClassShorthand],
+  props: { callFrequencyDetected: Boolean },
   data: function data() {
     return {
       alertClasses: {
         'd-none': true,
         fadeInDown: false,
+        fadeOutUp: false,
       },
       editedSecurity: { ...securityFactory() },
     };
@@ -194,7 +200,6 @@ export default {
       return this;
     },
     addSecurity: function addSecurity() {
-
       this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
       
       this
@@ -256,6 +261,31 @@ export default {
       this.editedSecurity = { ...securityFactory() };
     },
   },
+  watch: {
+    callFrequencyDetected: {
+      handler() {
+        if (this.callFrequencyDetected) {
+          // fade in alert div
+          this.alertClasses['d-none'] = false;
+          this.alertClasses.fadeInDown = true;
+  
+          setTimeout(() => {
+            // fade out alert div
+            this.alertClasses.fadeOutUp = true;
+            this.alertClasses.fadeInDown = false;
+            
+
+            setTimeout(() => {
+              // clean up
+              this.alertClasses['d-none'] = true;
+              this.alertClasses.fadeInDown = false;
+              this.alertClasses.fadeOutUp = false;
+            }, 6000);
+          }, 7000);
+        }
+      },
+    },
+  },
   mounted() {
     this
       .addEventListeners()
@@ -293,9 +323,26 @@ export default {
   }
 
   .fadeInDown {
-    animation-name: fadeInDown;
     animation-duration: 1s;
     animation-fill-mode: both;
+    animation-name: fadeInDown;
+  }
+
+  @keyframes fadeOutUp {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
+  }
+
+  .fadeOutUp {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: fadeOutUp;
   }
 
   [role="alert"] {
