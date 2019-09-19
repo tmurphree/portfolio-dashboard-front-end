@@ -36,7 +36,7 @@ npm run test:e2e
 ```  
 
 ## Technologies Used
-* Vue.js
+* Vue.js  
 * JavaScript / HTML / SCSS  
 
 ## Libraries & Plugins
