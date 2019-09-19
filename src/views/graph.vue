@@ -140,7 +140,8 @@ export default {
       const chartInfoFactory = (shorthand) => {
         return {
           backgroundColor: calculateBackgroundColor(shorthand),
-          data: roundToPrecision(aggregateWeightedAssetClassPercentages[shorthand], 0.01),
+          data: roundToPrecision(aggregateWeightedAssetClassPercentages[shorthand], 0.01)
+            .toFixed(2),
           label: this.expandAssetClassShorthand(shorthand),
         };
       };
