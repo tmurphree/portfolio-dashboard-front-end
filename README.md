@@ -30,32 +30,22 @@ npm run serve
 npm run build
 ```
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
 ### Run your end-to-end tests
 ```
 npm run test:e2e
 ```  
 
 ## Technologies Used
-* Vue.js
+* Vue.js  
 * JavaScript / HTML / SCSS  
 
 ## Libraries & Plugins
+* Chart.js to show the data in a chart  
 * Twitter Bootstrap  
 
-## APIs
-* none: the back end part of the project uses the AlphaVantage stock price API  
-
-## Future Implementations  
-* Use Chart.js to show the data in a chart.  
+## Future Implementations    
 * Tag a security as needing monitoring and set thresholds for it.  Show the security against the specified thresholds in the "Monitored securities" page.  
-* Allow users to log in with Google or a local username / password.  
-* Allow logged-in users to save portfolios.  
-* Automatically update asset allocations and friendly names based on a symbol.  
+* Add a page where the user can do what-if analysis so that they can quicky compare the impact of different trades.  
 
 ## Known issues  
 * The file name for 'App.vue' is capitalized and the other .vue files are all lowercase.  I encountered a bug where the project wouldn't load consistently if I followed the all-lowercase naming convention on that file.  I'll submit an issue on this when I have the time.  
