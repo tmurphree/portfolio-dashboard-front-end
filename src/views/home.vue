@@ -70,7 +70,7 @@
         Clear current portfolio
       </button>
     </section>
-    <section id="data-entry" class="mt-4 row">
+    <section id="data-entry" class="mt-4 row" v-if="this.portfolio.length < 5">
       <form @submit="handleSubmit">
         <div class="d-flex mx-1 row">
           <div class="col-md-5" id="name-qty">
@@ -141,6 +141,19 @@
           </button>
         </div>
       </form>
+    </section>
+    <section class="mt-2" id="api-key-limit-warning" v-else>
+      <p>
+        API key limitations make five the maximum number of items in the portfolio.  Any more and we'll get API key
+        throttling errors on the back end.
+      </p>
+      <p>
+        The easiest solution is for me to pay for a higher tier of API access to the prices API, but since this is a demo site
+        the budget is limited and we're left with this hack.
+      </p>
+      <p>
+        Please remove one or more securities if you want to add different securities to the portfolio.
+      </p>
     </section>
     <link rel="prefetch" href="edit-remove-buttons.png">
   </div>
