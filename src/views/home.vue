@@ -15,7 +15,7 @@
         </p>
       </div>
     </section>
-    <section class="row">
+    <section class="row" id="current-portfolio">
       <h2>Current portfolio</h2>
       <p class="d-sm-none">
         Scroll the table to the right or turn the phone on its side if you can't see action buttons.
@@ -64,13 +64,12 @@
           </tbody>
         </table>
     </section>
-    <section>
-      <h2 class="sr-only">Edit</h2>
+    <section class="row" id="clear-portfolio">
       <button type="button" class="btn btn-danger mr-2 mb-1" data-cy-clear-port @click="clearPortfolio">
         Clear current portfolio
       </button>
     </section>
-    <section id="data-entry" class="mt-4 row" v-if="this.portfolio.length < 5">
+    <section class="mt-4 row" id="data-entry" v-if="this.portfolio.length < 5">
       <form @submit="handleSubmit">
         <div class="d-flex mx-1 row">
           <div class="col-md-5" id="name-qty">
@@ -142,14 +141,14 @@
         </div>
       </form>
     </section>
-    <section class="mt-2" id="api-key-limit-warning" v-else>
+    <section class="mt-2 row" id="api-key-limit-warning" v-else>
       <p>
-        API key limitations make five the maximum number of items in the portfolio.  Any more and we'll get API key
-        throttling errors on the back end.
+        API key limitations make five the maximum number of items in the portfolio.  Any more and we'll get 
+        API key throttling errors on the back end.
       </p>
       <p>
-        The easiest solution is for me to pay for a higher tier of API access to the prices API, but since this is a demo site
-        the budget is limited and we're left with this hack.
+        The easiest solution is for me to pay for a higher tier of API access to the prices API, but since this
+        is a demo site the budget is limited.
       </p>
       <p>
         Please remove one or more securities if you want to add different securities to the portfolio.
@@ -263,10 +262,10 @@ export default {
     },
     populateEditedSecurity: function populateEditedSecurity(event) {
       const symbol = event.target.dataset.cyEdit;
-
+      
       this.editedSecurity = Object.assign({}, this.portfolio.find((el) => el.symbol === symbol));
       // remove the existing security from the store to avoid mutation outside of vuex
-      this.removeSecurity(symbol);
+      // this.removeSecurity(symbol);
     },
     removeSecurity: function removeSecurity(symbol) {
       this.$store.commit('trimPortfolio', symbol);
