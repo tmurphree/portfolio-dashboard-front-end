@@ -93,16 +93,4 @@ describe('the home view', () => {
     // reset back to default
     cy.reload();
   });
-
-  it.skip('has a file input', () => {
-    cy.get('input[type=file]')
-      .should('have.attr', 'accept', '.csv')
-      .should('not.have.attr', 'multiple')
-      .should('not.have.attr', 'required');
-  });
-
-  // skip until you get the API ready
-  it.skip('gets an array of objects from the API after file upload', () => {
-
-  });
 });
