@@ -33,7 +33,23 @@ export default new Vuex.Store({
           }
         });
 
-      state.portfolio.push(payload);
+      const existingRow = state.portfolio
+        .find((el) => el.symbol === payload.symbol);
+
+      if (existingRow !== undefined) {
+        ['friendlyName', 'numShares', 'monitored', 'monitoredLowerBound', 'monitoredUpperBound']
+          // here we want to reassign the value
+          // eslint-disable-next-line no-return-assign
+          .forEach((el) => existingRow[el] = payload[el]);
+
+
+        Object.keys(payload.assetClasses)
+          // here we want to reassign the value
+          // eslint-disable-next-line no-return-assign
+          .forEach((el) => existingRow.assetClasses[el] = payload.assetClasses[el]);
+      } else {
+        state.portfolio.push(payload);
+      }
     },
     clearPortfolio: function clearPortfolio(state) {
       state.portfolio = [];

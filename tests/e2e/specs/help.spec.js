@@ -1,7 +1,7 @@
 /* eslint no-undef:'off' */
 
 describe('the help view', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('http://localhost:8080/#/help');
   });
 
