@@ -7,7 +7,7 @@
 const { checkIsHidden, checkIsVisible } = require('../support/checkForVisibility');
 
 describe('top bar', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
   });
 
@@ -50,7 +50,7 @@ describe('top bar', () => {
 });
 
 describe('side bar', () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit('/');
   });
 
