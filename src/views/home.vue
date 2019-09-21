@@ -4,7 +4,7 @@
       Some prices didn't update because of API throttling.  Retrying in 1 minute.
       <router-link to="/help">See details.</router-link>
     </div>
-    <section v-if="this.showHomeViewWelcome" id="welcome" class="collapsable row">
+    <section class="collapsable row" id="welcome" v-if="this.showHomeViewWelcome">
       <div>
         <h2>Welcome to the portfolio dashboard</h2>
       </div>
