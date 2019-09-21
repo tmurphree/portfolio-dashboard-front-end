@@ -209,6 +209,15 @@ export default {
     },
     addSecurity: function addSecurity() {
       this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
+
+      // convert '' to 0 in assetClasses (which can happen if a user just erases
+      // the zero)
+      Object.keys(this.editedSecurity.assetClasses)
+        .forEach((element) => {
+          if (this.editedSecurity.assetClasses[element] === '') {
+            this.editedSecurity.assetClasses[element] = 0;
+          }
+        });
       
       this
         .$store.commit('addToPortfolio', this.editedSecurity);
@@ -279,6 +288,8 @@ export default {
         .forEach((element) => {
           this.editedSecurity.assetClasses[element] = security.assetClasses[element];
         });
+
+      this.scrollToForm();
     },
     removeSecurity: function removeSecurity(symbol) {
       this.$store.commit('trimPortfolio', symbol);
@@ -286,6 +297,15 @@ export default {
     resetEditedSecurity: function resetEditedSecurity() {
       this.editedSecurity = { ...securityFactory() };
     },
+    scrollToForm() {
+      const form = document.querySelector('#name-qty');
+      const yCoordinate = form.getBoundingClientRect().top + window.pageYOffset - 50;
+
+      window.scrollTo({
+        top: yCoordinate,
+        behavior: 'smooth'
+      });
+    }
   },
   watch: {
     callFrequencyDetected: {
