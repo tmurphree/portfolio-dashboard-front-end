@@ -262,10 +262,23 @@ export default {
     },
     populateEditedSecurity: function populateEditedSecurity(event) {
       const symbol = event.target.dataset.cyEdit;
-      
-      this.editedSecurity = Object.assign({}, this.portfolio.find((el) => el.symbol === symbol));
-      // remove the existing security from the store to avoid mutation outside of vuex
-      // this.removeSecurity(symbol);
+      const security = this.portfolio.find((el) => el.symbol === symbol);
+
+      // Can't just this.editedSecurity = { ...security } because that leaves this.editedSecurity.assetClasses
+      // pointing to the store, and if we change any prop of this.editedSecurity.assetClasses we change the
+      // store immediately.  So we have to go the long way.
+
+      Object.keys(security)
+        .forEach((element) => {
+          if  (element !== 'assetClasses') {
+            this.editedSecurity[element] = security[element];
+          }
+        });
+
+      Object.keys(security.assetClasses)
+        .forEach((element) => {
+          this.editedSecurity.assetClasses[element] = security.assetClasses[element];
+        });
     },
     removeSecurity: function removeSecurity(symbol) {
       this.$store.commit('trimPortfolio', symbol);
