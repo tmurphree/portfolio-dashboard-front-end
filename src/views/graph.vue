@@ -7,7 +7,6 @@
       </small>
       <canvas
         aria-label="Chart by asset class"
-        class="chart-canvas"
         id="by-asset-class"
         role="img"
       >
@@ -22,7 +21,6 @@
         </small>
         <canvas
           aria-label="Chart by security"
-          class="chart-canvas"
           id="by-security"
           role="img"
         >
