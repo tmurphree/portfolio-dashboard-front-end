@@ -22,6 +22,7 @@
       </p>
       <small class="col-12 pl-0">
         Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
+        This is a demo site, to at most 5 securities are supported.
       </small>
       <table class="table table-bordered table-hover table-responsive-md table-striped" data-cy="portfolio-table">
           <thead class="thead-dark">
@@ -69,7 +70,7 @@
         Clear current portfolio
       </button>
     </section>
-    <section class="mt-4 row" id="data-entry" v-if="this.portfolio.length < 5">
+    <section class="mt-4 row" id="data-entry" v-if="this.showForm">
       <form @submit="handleSubmit">
         <div class="d-flex mx-1 row">
           <div class="col-md-5" id="name-qty">
@@ -179,6 +180,7 @@ export default {
         fadeOutUp: false,
       },
       editedSecurity: { ...securityFactory() },
+      showForm: true,
     };
   },
   computed: {
@@ -208,6 +210,12 @@ export default {
       return this;
     },
     addSecurity: function addSecurity() {
+      const isNewSecurity = (function isNewSecurity(portfolio, currentSymbol) {
+        return (!(portfolio
+          .map((el) => el.symbol)
+          .includes(currentSymbol)));
+      })(this.portfolio, this.editedSecurity.symbol);
+
       this.editedSecurity.symbol = this.editedSecurity.symbol.toUpperCase();
 
       // convert '' to 0 in assetClasses (which can happen if a user just erases
@@ -218,13 +226,23 @@ export default {
             this.editedSecurity.assetClasses[element] = 0;
           }
         });
-      
-      this
-        .$store.commit('addToPortfolio', this.editedSecurity);
 
-      setTimeout(() => {
-        this.resetEditedSecurity();
-      }, 100);
+      if (this.portfolio.length === 5 && isNewSecurity) {
+        this.showForm = false;
+
+        setTimeout(() => {
+          this.resetEditedSecurity();
+          this.showForm = true;
+        }, 15000);
+      } else {
+        this
+          .$store.commit('addToPortfolio', this.editedSecurity);
+
+        setTimeout(() => {
+          this.resetEditedSecurity();
+          document.querySelector('#symbol').focus();
+        }, 100);
+      }
     },
     clearPortfolio: function clearPortfolio() {
       this.$store.commit('clearPortfolio');
