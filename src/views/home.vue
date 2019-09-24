@@ -29,7 +29,7 @@
             <th class="d-md-table-cell d-none" scope="col">Symbol</th>
             <th scope="col">Friendly name <span class="d-md-none">(symbol)</span></th>
             <th class="d-md-table-cell d-none" scope="col">Num shares</th>
-            <th class="d-md-table-cell d-none" scope="col">Value</th>
+            <th class="d-md-table-cell d-none" scope="col">Value ($)</th>
             <th scope="col">% of portfolio</th>
             <th scope="col">Asset class(es)</th>
             <th scope="col">Actions</th>
@@ -39,7 +39,9 @@
                 <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
                 <td class="d-md-table-cell d-none" :data-cy-num-shares-cell="item.symbol">{{ item.numShares }}</td>
-                <td class="d-md-table-cell d-none" data-cy="value-cell">{{ item.value }}</td>
+                <td class="d-md-table-cell d-none" data-cy="value-cell">
+                  {{ item.value.toLocaleString('en-US', { style: 'decimal' }) }}
+                </td>
                 <td data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
                 <td>
                   <ul class="m-0 p-0">
