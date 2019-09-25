@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-dark col-md-6 col-xl-5">
+  <div class="border col-md-6"  :class="borderClass">
     <canvas
         aria-label="Monitored security chart"
         :id="chartId"
@@ -47,6 +47,9 @@ export default {
     return {};
   },
   computed: {
+    borderClass() {
+      return { 'border-danger': this.comparisonWord !== 'within' };
+    },
     chartId() {
       return `${this.chartData.symbol.toLowerCase()}-chart`
     },
@@ -63,8 +66,7 @@ export default {
     },
     comparisonWordClass() {
       return {
-        'text-danger': this.comparisonWord === 'above' || this.comparisonWord === 'below',
-        'text-dark': this.comparisonWord === 'within',
+        'text-danger': this.comparisonWord !== 'within',
       }
     },
   },
@@ -91,12 +93,16 @@ export default {
         throw new Error(`Invalid chartInfo in drawBarChart: ${JSON.stringify(chartInfo, null, 2)}`);
       }
 
+      const computedBackgroundColor = this.comparisonWord !== 'within' ?
+        'rgba(255, 99, 132, 1)' :
+        'rgba(20, 255, 91, 1)';
+
       const context = document.querySelector(selector).getContext('2d');
 
       const data = {
         labels: [chartInfo.symbol],
         datasets: [{
-          backgroundColor: 'rgba(255, 99, 132, 1)',
+          backgroundColor: computedBackgroundColor,
           data: [chartInfo.pctOfPortfolio],
           borderWidth: 1
         }]
