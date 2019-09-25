@@ -5,9 +5,9 @@ describe('the monitored securities view', () => {
     cy.visit('http://localhost:8080/#/monitored');
   });
 
-  it('has a graph canvas', () => {
+  it('has at least one canvas (graph)', () => {
     cy
-      .get('canvas#monitored-securities');
+      .get('canvas');
   });
 
   it('has an explanation section', () => {
