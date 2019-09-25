@@ -1,15 +1,43 @@
 <template>
-  <div class="col-md-6 col-xl-5">
+  <div class="border border-dark col-md-6 col-xl-5">
     <canvas
         aria-label="Monitored security chart"
         :id="chartId"
         role="img"
       >
       </canvas>
+      <p>
+        {{ chartData.symbol }} is {{ chartData.pctOfPortfolio }}% of the portfolio.  This is {{ comparisonWord }} the target range of 
+        {{ chartData.lowerBound }}% to {{ chartData.upperBound }}%
+      </p>
   </div> <!-- class="col-md-6" -->
 </template>
 
 <script>
+const selectorIsValid = function selectorIsValid(selector) {
+  return typeof selector === 'string' &&
+    selector.length > 0;
+};
+
+const chartInfoIsValid = function chartInfoIsValid(chartInfo) {
+  const hasExpectedProps = function hasExpectedProps() {
+    const expectedProps = [
+      'lowerBound',
+      'pctOfPortfolio',
+      'symbol',
+      'upperBound',
+    ];
+
+    const keys = Object.keys(chartInfo);
+    
+    return expectedProps.every((el) => keys.includes(el));
+  };
+
+  return typeof chartInfo === 'object' &&
+    hasExpectedProps() &&
+    chartInfo.symbol !== '';
+};
+
 export default {
   props: {
     chartData: Object,
@@ -21,6 +49,17 @@ export default {
     chartId() {
       return `${this.chartData.symbol.toLowerCase()}-chart`
     },
+    comparisonWord() {
+      if (this.chartData.pctOfPortfolio < this.chartData.lowerBound) {
+        return 'below';
+      }
+
+      if (this.chartData.pctOfPortfolio > this.chartData.upperBound) {
+        return 'above';
+      }
+
+      return 'within';
+    }, 
   },
   methods: {
     /**
@@ -31,18 +70,27 @@ export default {
      * @returns {undefined}
      * 
      * @typedef ChartInfo
-     * @prop {string} backgroundColor 'rgba(255, 99, 132, 1)'
-     * @prop {number} data The data you want to show in the chart.
-     * @prop {string} label The label for the data point.
+     * @prop {number} lowerBound
+     * @prop {number} pctOfPortfolio
+     * @prop {string} symbol
+     * @prop {number} upperBound
     */
     drawBarChart(selector, chartInfo) {
+      if (!selectorIsValid(selector)) {
+        throw new Error(`Invalid selector in drawBarChart: ${selector}`);
+      }
+
+      if (!chartInfoIsValid(chartInfo)) {
+        throw new Error(`Invalid chartInfo in drawBarChart: ${JSON.stringify(chartInfo, null, 2)}`);
+      }
+
       const context = document.querySelector(selector).getContext('2d');
-      console.log(context);
+
       const data = {
-        labels: ['test bar chart'],
+        labels: [chartInfo.symbol],
         datasets: [{
           backgroundColor: 'rgba(255, 99, 132, 1)',
-          data: [12],
+          data: [chartInfo.pctOfPortfolio],
           borderWidth: 1
         }]
       };
@@ -56,10 +104,8 @@ export default {
             scales: {
               yAxes: [{
                 ticks: {
-                  stepSize: 1,
                   min: 0,
-                  // TODO: set suggestedMax to monitoredUpperBound
-                  suggestedMax: 9,
+                  suggestedMax: chartInfo.upperBound,
                 }
               }],
             },
@@ -72,8 +118,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.chartId);
-    this.drawBarChart(`#${this.chartId}`, 'foo');
+    this.drawBarChart(`#${this.chartId}`, this.chartData);
   },
   name: 'monitored-security-graph'
 };
