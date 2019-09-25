@@ -1,5 +1,5 @@
 <template>
-  <div class="border col-md-6"  :class="borderClass">
+  <div class="border col-md-6 mb-3 mx-1"  :class="borderClass">
     <canvas
         aria-label="Monitored security chart"
         :id="chartId"

@@ -1,15 +1,14 @@
 <template>
   <div class="row">
     <section class="col-12" id="welcome-text">
-
-      <h1>Monitored securities</h1>
-      <p>
-        Some securities are riskier than others.   You can tag a security as needing monitoring and set
-        thresholds for it on the Home screen (it's an option when you Edit or add a security).This page
-        shows you where the value of the security is compared to those thresholds.
-      </p>
+        <h1>Monitored securities</h1>
+        <p>
+          Some securities are riskier than others.   You can tag a security as needing monitoring and set
+          thresholds for it on the Home screen (it's an option when you Edit or add a security).This page
+          shows you where the value of the security is compared to those thresholds.
+        </p>
     </section>
-    <section class="col-12" id="graph-section">
+    <section class="d-flex justify-content-center justify-content-lg-start row" id="graph-section">
       <monitored-security-graph
         v-for="element in monitoredSecurities"
         :chartData="element"
@@ -42,7 +41,8 @@ export default {
             symbol: el.symbol,
             upperBound: el.monitoredUpperBound,
           }
-        });
+        })
+        .sort((el) => el.symbol);
     },
     ...mapState(['portfolio']),
   },
@@ -51,5 +51,7 @@ export default {
 </script>
 
 <style lang="scss">
-
+ #graph-section>div {
+   max-width: 90%;
+ }
 </style>
