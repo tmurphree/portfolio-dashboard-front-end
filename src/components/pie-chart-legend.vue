@@ -15,7 +15,7 @@ export default {
   data() {
     return {};
   },
-  name: 'graph-legend'
+  name: 'pie-chart-legend'
 };
 </script>
 
