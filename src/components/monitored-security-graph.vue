@@ -7,7 +7,8 @@
       >
       </canvas>
       <p>
-        {{ chartData.symbol }} is {{ chartData.pctOfPortfolio }}% of the portfolio.  This is {{ comparisonWord }} the target range of 
+        {{ chartData.symbol }} is {{ chartData.pctOfPortfolio }}% of the portfolio.  This is 
+        <span :class="comparisonWordClass">{{ comparisonWord }}</span> the target range of 
         {{ chartData.lowerBound }}% to {{ chartData.upperBound }}%
       </p>
   </div> <!-- class="col-md-6" -->
@@ -59,7 +60,13 @@ export default {
       }
 
       return 'within';
-    }, 
+    },
+    comparisonWordClass() {
+      return {
+        'text-danger': this.comparisonWord === 'above' || this.comparisonWord === 'below',
+        'text-dark': this.comparisonWord === 'within',
+      }
+    },
   },
   methods: {
     /**
@@ -125,20 +132,5 @@ export default {
 </script>
 
 <style lang="scss">
-  .color-box {
-    display: inline-block;
-    height: 10px;
-    width: 20px;
-  }
 
-  // style data-legend-for down here so I can use scss nesting
-  @media (min-width: 768px) {
-    [data-legend-for="by-asset-class"] {
-      margin-left: 10%;
-    }
-
-    [data-legend-for="by-security"] {
-      margin-left: 26%;
-    } 
-  }
 </style>
