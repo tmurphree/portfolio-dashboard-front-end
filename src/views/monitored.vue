@@ -10,12 +10,11 @@
       </p>
     </section>
     <section class="col-12" id="graph-section">
-      <canvas
-        aria-label="Monitored security chart"
-        id="monitored-securities"
-        role="img"
-      >
-      </canvas>
+      <monitored-security-graph
+        v-for="element in monitoredSecurities"
+        :chartData="element"
+        :key="element.symbol"
+      ></monitored-security-graph>
     </section>
   </div>
 </template>
@@ -23,7 +22,12 @@
 <script>
 import { mapState } from 'vuex';
 
+import MonitoredSecurityGraph from '@/components/monitored-security-graph';
+
 export default {
+  components: {
+    MonitoredSecurityGraph,
+  },
   data: function data() {
     return {};
   },
@@ -34,64 +38,13 @@ export default {
         .map((el) => { 
           return {
             lowerBound: el.monitoredLowerBound,
-            upperBound: el.monitoredUpperBound,
+            pctOfPortfolio: el.pctOfPortfolio,
             symbol: el.symbol,
+            upperBound: el.monitoredUpperBound,
           }
         });
     },
     ...mapState(['portfolio']),
-  },
-  methods: {
-    /**
-     * @description Draw a chart.
-     * @param {string} selector Query selector specific to the <canvas> you want to draw
-     *    the chart on.
-     * @param {ChartInfo[]} chartInfo Data to chart.
-     * @returns {undefined}
-     * 
-     * @typedef ChartInfo
-     * @prop {string} backgroundColor 'rgba(255, 99, 132, 1)'
-     * @prop {number} data The data you want to show in the chart.
-     * @prop {string} label The label for the data point.
-    */
-    drawBarChart(selector='canvas', chartInfo) {
-      const context = document.querySelector(selector).getContext('2d');
-      console.log(context);
-      const data = {
-        labels: ['test bar chart'],
-        datasets: [{
-          backgroundColor: 'rgba(255, 99, 132, 1)',
-          data: [12],
-          borderWidth: 1
-        }]
-      };
-
-      return new Chart(
-        context,
-        {
-          type: 'bar',
-          data,
-          options: {
-            scales: {
-              yAxes: [{
-                ticks: {
-                  stepSize: 1,
-                  min: 0,
-                  // TODO: set suggestedMax to monitoredUpperBound
-                  suggestedMax: 9,
-                }
-              }],
-            },
-            legend: {
-              display: false
-            },
-          },
-        }
-      );
-    }
-  },
-  mounted() {
-    this.drawBarChart();
   },
   name: 'monitored'
 }
