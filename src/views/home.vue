@@ -4,7 +4,7 @@
       Some prices didn't update because of API throttling.  Retrying in 1 minute.
       <router-link to="/help">See details.</router-link>
     </div>
-    <section v-if="this.showHomeViewWelcome" id="welcome" class="collapsable row">
+    <section class="collapsable row" id="welcome" v-if="this.showHomeViewWelcome">
       <div>
         <h2>Welcome to the portfolio dashboard</h2>
       </div>
@@ -22,14 +22,14 @@
       </p>
       <small class="col-12 pl-0">
         Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
-        This is a demo site, to at most 5 securities are supported.
+        This is a demo site, so at most 5 securities are supported.
       </small>
       <table class="table table-bordered table-hover table-responsive-md table-striped" data-cy="portfolio-table">
           <thead class="thead-dark">
             <th class="d-md-table-cell d-none" scope="col">Symbol</th>
             <th scope="col">Friendly name <span class="d-md-none">(symbol)</span></th>
             <th class="d-md-table-cell d-none" scope="col">Num shares</th>
-            <th class="d-md-table-cell d-none" scope="col">Value</th>
+            <th class="d-md-table-cell d-none" scope="col">Value ($)</th>
             <th scope="col">% of portfolio</th>
             <th scope="col">Asset class(es)</th>
             <th scope="col">Actions</th>
@@ -39,7 +39,9 @@
                 <td class="d-md-table-cell d-none">{{ item.symbol }}</td>
                 <td>{{ item.friendlyName }} <span class="d-md-none">({{ item.symbol }})</span></td>
                 <td class="d-md-table-cell d-none" :data-cy-num-shares-cell="item.symbol">{{ item.numShares }}</td>
-                <td class="d-md-table-cell d-none" data-cy="value-cell">{{ item.value }}</td>
+                <td class="d-md-table-cell d-none" data-cy="value-cell">
+                  {{ item.value.toLocaleString('en-US', { style: 'decimal' }) }}
+                </td>
                 <td data-cy="pct-of-portfolio-cell">{{ item.pctOfPortfolio }}</td>
                 <td>
                   <ul class="m-0 p-0">
@@ -86,6 +88,31 @@
             <div class="form-group form-row">
               <label for="friendly-name">Friendly name (optional):</label>
               <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
+            </div>
+            <div class="form-group form-row">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkbox" v-model="editedSecurity.monitored">
+                <label for="checkbox" class="form-check-label">This security needs extra monitoring</label>
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <small>
+                Neither minimum threshold nor maximum threshold can be blank.  Minimum threshold must 
+                be &gt;= 0.  Minimum threshold must be &lt;= maximum threshold.  Maximum threshold must
+                be &lt;= 100.  You can't save if any of these are false.
+              </small>
+            </div>
+            <div class="form-group form-row">
+              <label for="monitored-minimum-pct">Minimum % of portfolio</label>
+              <input v-model.number="editedSecurity.monitoredLowerBound" class="form-control" id="monitored-minimum-pct" name="monitored-minimum-pct" type="number"
+                :disabled="!(editedSecurity.monitored)"
+              >
+            </div>
+            <div class="form-group form-row">
+              <label for="monitored-maximum-pct">Maximum % of portfolio</label>
+              <input v-model.number="editedSecurity.monitoredUpperBound" class="form-control" id="monitored-maximum-pct" name="monitored-maximum-pct" type="number"
+                :disabled="!(editedSecurity.monitored)"
+              >
             </div>
           </div>
           <div class="col-md-5" id="asset-classes">
@@ -185,6 +212,19 @@ export default {
   },
   computed: {
     disableAddButton() {
+      const monitoringThresholdsAreValid = (function monitoringThresholdsAreValid(editedSecurity) {
+        const lower = editedSecurity.monitoredLowerBound;
+        const upper = editedSecurity.monitoredUpperBound;
+        
+        if (!editedSecurity.monitored) { return true; }
+
+        return lower !== '' &&
+          upper !== '' &&
+          lower >= 0 &&
+          lower <= upper &&
+          upper <= 100;
+      })(this.editedSecurity);
+
       const assetClassesSum = Object.values(this.editedSecurity.assetClasses)
         .map(el => isNaN(parseFloat(el)) ? 0 : parseFloat(el))
         .reduce((sum, current) => sum + current, 0);
@@ -193,7 +233,8 @@ export default {
 
       return this.editedSecurity.symbol.length <= 0 ||
         numSharesToFloat <= 0 ||
-        assetClassesSum !== 100;
+        assetClassesSum !== 100 ||
+        !(monitoringThresholdsAreValid);
     },
     ...mapState(['portfolio', 'showHomeViewWelcome']),
   },

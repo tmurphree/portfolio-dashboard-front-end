@@ -1,16 +1,26 @@
 <template>
   <div> 
     <nav class="bg-dark fixed-top navbar navbar-dark p-0 shadow" data-cy-top-bar>
-      <span class="col-12 col-md-auto navbar-brand" @click="goHome">Portfolio Dashboard</span>
-      <div class="d-flex d-md-none justify-content-around w-100">
-        <router-link to="/" class="nav-link top-nav-link d-md-none" data-cy-home exact>Home</router-link>
-        <router-link to="/graph" class="nav-link top-nav-link d-md-none" data-cy-graph>Graph</router-link>
-        <router-link to="/about" class="nav-link top-nav-link" data-cy-about>About</router-link>
-        <router-link to="/help" class="nav-link top-nav-link" data-cy-help>Help</router-link>
+      <span class="ml-1 navbar-brand" @click="goHome">Portfolio Dashboard</span>
+      <button class="d-md-none navbar-toggler" type="button" data-toggle="collapse" 
+        data-target="#expandable-nav-menu" aria-controls="expandable-nav-menu" 
+        aria-expanded="false" aria-label="Toggle navigation"
+        data-cy="top-nav-toggle"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse d-md-none" id="expandable-nav-menu">
+        <div class="navbar-nav">
+          <router-link to="/" class="ml-1 nav-link top-nav-link" data-cy="home-sm-nav" exact>Home</router-link>
+          <router-link to="/graph" class="ml-1 nav-link top-nav-link" data-cy="graph-sm-nav">Graph view</router-link>
+          <router-link to="/monitored" class="ml-1 nav-link top-nav-link" data-cy="monitored-sm-nav">Monitored securities</router-link>
+          <router-link to="/about" class="ml-1 nav-link top-nav-link" data-cy="about-sm-nav">About</router-link>
+          <router-link to="/help" class="ml-1 nav-link top-nav-link" data-cy="help-sm-nav">Help</router-link>
+        </div>
       </div>
       <div class="d-none d-md-flex justify-content-end">
-        <router-link to="/about" class="nav-link top-nav-link" data-cy-about>About</router-link>
-        <router-link to="/help" class="nav-link top-nav-link" data-cy-help>Help</router-link>
+        <router-link to="/about" class="nav-link top-nav-link" data-cy="about-md-nav">About</router-link>
+        <router-link to="/help" class="nav-link top-nav-link" data-cy="help-md-nav">Help</router-link>
       </div>
     </nav>
     <div class="container-fluid">
@@ -77,7 +87,7 @@
             </ul>
           </div>
         </nav>
-        <main class="col-md-9 col-lg-10 ml-sm-auto mt-4 mt-md-1 mt-lg-3" id="main-element">
+        <main class="col-md-9 col-lg-10 ml-sm-auto mt-1 mt-lg-3" id="main-element">
           <div class="disclaimer" data-cy-disclaimer>
             <p>
               Do NOT base actual trades on the data from this site.  <router-link to="/about">Find out why.</router-link>
@@ -104,6 +114,24 @@
       }
     },
     methods: {
+      // on collabsable nav menu click, collapse nav
+      addNavMenuHideListeners() {
+        const addHideListener = function addHideListener(domElement) {
+          domElement.addEventListener('click', () => {
+            $('#expandable-nav-menu').collapse('hide');
+          });
+        };
+
+        const collapsableNavElements = [
+          '[data-cy="home-sm-nav"]',
+          '[data-cy="graph-sm-nav"]',
+          '[data-cy="monitored-sm-nav"]',
+          '[data-cy="about-sm-nav"]',
+          '[data-cy="help-sm-nav"]',
+        ];
+
+        collapsableNavElements.forEach((el) => addHideListener(document.querySelector(el)));
+      },
       goHome() {
         this.$router.push('/');
       },
@@ -124,6 +152,7 @@
       }
     },
     mounted() {
+      this.addNavMenuHideListeners();
       this.updatePortfolioValues();
 
       const updateInterval = setInterval(() => {
@@ -161,13 +190,6 @@
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto;
-  }
-
-  // add extra top margin on iPhone SE so content isn't cut off
-  @media screen and (max-width: 320px) {
-    #main-element {
-      margin-top: 3rem !important;
-    }
   }
 
   // fix ipad styling

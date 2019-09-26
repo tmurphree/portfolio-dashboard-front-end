@@ -7,12 +7,11 @@
       </small>
       <canvas
         aria-label="Chart by asset class"
-        class="chart-canvas"
         id="by-asset-class"
         role="img"
       >
       </canvas>
-      <graph-legend :chart-data="byAssetClassChartData" data-legend-for="by-asset-class"></graph-legend>
+      <pie-chart-legend :chart-data="byAssetClassChartData" data-legend-for="by-asset-class"></pie-chart-legend>
     </section>
     <section class="align-items-center col-12 col-lg-6">
       <div class="col-12">
@@ -22,13 +21,12 @@
         </small>
         <canvas
           aria-label="Chart by security"
-          class="chart-canvas"
           id="by-security"
           role="img"
         >
         </canvas>
       </div>
-      <graph-legend :chart-data="bySecurityChartData" data-legend-for="by-security"></graph-legend>
+      <pie-chart-legend :chart-data="bySecurityChartData" data-legend-for="by-security"></pie-chart-legend>
     </section>
   </div><!-- immediate child of template element -->
 </template>
@@ -36,14 +34,14 @@
 <script>
 import { mapState } from 'vuex';
 
-import GraphLegend from '@/components/graph-legend';
+import PieChartLegend from '@/components/pie-chart-legend';
 
 import roundToPrecision from '@/lib/roundToPrecision';
 import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 import securityFactory from '@/lib/securityFactory';
 
 export default {
-  components: { GraphLegend },
+  components: { PieChartLegend },
   mixins: [expandAssetClassShorthand],
   data: function data() {
     return {

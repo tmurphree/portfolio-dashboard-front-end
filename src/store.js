@@ -90,8 +90,8 @@ export default new Vuex.Store({
       if (totalValue > 0) {
         state.portfolio
           .forEach((el) => {
-            el.pctOfPortfolio = roundToPrecision((el.value * 100) / totalValue, 0.01)
-              .toFixed(2);
+            el.pctOfPortfolio = parseFloat(roundToPrecision((el.value * 100) / totalValue, 0.01)
+              .toFixed(2));
           });
       }
     },
