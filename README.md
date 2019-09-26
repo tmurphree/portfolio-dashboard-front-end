@@ -11,7 +11,7 @@ This site attempts to be accurate, but **I cannot guarantee that it is accurate*
 **Do not make financial decisions based on this site.**  
 
 ## Business Problem Solved  
-Save time and effort on checking important but time-consuming tasks.  It's important to maintain a portfolio composition / asset allocation that matches your risk profile, but it takes time to do it.  This site automates the process so you can spend more time thinking strategically.  
+Save time and effort on checking important but time-consuming tasks.  It's important to maintain a portfolio composition / asset allocation that matches your risk profile, but it takes time to run all of the calculations.  This site does the calculations so you can spend more time thinking strategically.  
 
 Convey information in a dashboard with graphics.    
 
@@ -43,8 +43,7 @@ npm run test:e2e
 * Chart.js to show the data in a chart  
 * Twitter Bootstrap  
 
-## Future Implementations    
-* Tag a security as needing monitoring and set thresholds for it.  Show the security against the specified thresholds in the "Monitored securities" page.  
+## Future Implementations  
 * Add a page where the user can do what-if analysis so that they can quicky compare the impact of different trades.  
 
 ## Known issues  
