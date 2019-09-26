@@ -22,7 +22,7 @@
       </p>
       <small class="col-12 pl-0">
         Prices are updated once a minute.  A word on <router-link to="/about">rounding</router-link>.
-        This is a demo site, to at most 5 securities are supported.
+        This is a demo site, so at most 5 securities are supported.
       </small>
       <table class="table table-bordered table-hover table-responsive-md table-striped" data-cy="portfolio-table">
           <thead class="thead-dark">
