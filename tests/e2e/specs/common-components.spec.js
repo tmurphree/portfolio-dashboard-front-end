@@ -15,20 +15,51 @@ describe('top bar', () => {
     cy.contains('div', 'Portfolio Dashboard');
   });
 
-  it('has the appropriate menu items', () => {
-    cy.get('[data-cy-home]')
-      .should('have.attr', 'href', '#/');
+  it('has the appropriate menu items on small screens', () => {
+    const collapsableNavElements = [
+      '[data-cy="home-sm-nav"]',
+      '[data-cy="graph-sm-nav"]',
+      '[data-cy="monitored-sm-nav"]',
+      '[data-cy="about-sm-nav"]',
+      '[data-cy="help-sm-nav"]',
+    ];
 
-    ['Graph', 'About', 'Help'].forEach((element) => {
-      cy.get(`[data-cy-${element.toLocaleLowerCase()}]`)
-        .should('have.attr', 'href', `#/${element.toLocaleLowerCase()}`);
-    });
-
-    cy.viewport('macbook-11');
-    ['[data-cy-home]', '[data-cy-graph]'].forEach((el) => checkIsHidden(el));
     cy.viewport('iphone-5');
-    ['[data-cy-home]', '[data-cy-graph]'].forEach((el) => checkIsVisible(el));
-    cy.viewport('macbook-11');
+
+    // open the nav dropdown
+    cy.get('[data-cy="top-nav-toggle"]').click();
+
+    // look for the sm nav elements
+    collapsableNavElements.forEach((el) => checkIsVisible(el));
+
+    // close the nav dropdown
+    cy.get('[data-cy="top-nav-toggle"]').click();
+
+    // make sure the md nav elements are hidden
+    [
+      '[data-cy="about-md-nav"]',
+      '[data-cy="help-md-nav"]',
+    ].forEach((el) => checkIsHidden(el));
+  });
+
+  it('has the appropriate menu items on medium screens', () => {
+    cy.viewport('ipad-2');
+
+    // look for the md nav elements
+    [
+      '[data-cy="about-md-nav"]',
+      '[data-cy="help-md-nav"]',
+    ].forEach((el) => checkIsVisible(el));
+
+    // make sure the sm nav elements are hidden
+    [
+      '[data-cy="top-nav-toggle"]',
+      '[data-cy="home-sm-nav"]',
+      '[data-cy="graph-sm-nav"]',
+      '[data-cy="monitored-sm-nav"]',
+      '[data-cy="about-sm-nav"]',
+      '[data-cy="help-sm-nav"]',
+    ].forEach((el) => checkIsHidden(el));
   });
 
   it('has a disclaimer', () => {
