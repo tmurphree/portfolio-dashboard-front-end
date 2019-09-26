@@ -114,6 +114,24 @@
       }
     },
     methods: {
+      // on collabsable nav menu click, collapse nav
+      addNavMenuHideListeners() {
+        const addHideListener = function addHideListener(domElement) {
+          domElement.addEventListener('click', () => {
+            $('#expandable-nav-menu').collapse('hide');
+          });
+        };
+
+        const collapsableNavElements = [
+          '[data-cy="home-sm-nav"]',
+          '[data-cy="graph-sm-nav"]',
+          '[data-cy="monitored-sm-nav"]',
+          '[data-cy="about-sm-nav"]',
+          '[data-cy="help-sm-nav"]',
+        ];
+
+        collapsableNavElements.forEach((el) => addHideListener(document.querySelector(el)));
+      },
       goHome() {
         this.$router.push('/');
       },
@@ -134,6 +152,7 @@
       }
     },
     mounted() {
+      this.addNavMenuHideListeners();
       this.updatePortfolioValues();
 
       const updateInterval = setInterval(() => {
