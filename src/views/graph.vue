@@ -191,10 +191,6 @@ export default {
     ...mapState(['portfolio']),
   },
   methods: {
-    f() {
-      console.log(`hi from f ${window.innerWidth}`);
-      this.windowWidth = window.innerWidth;
-    },
     /**
      * @description Draw a chart.
      * @param {string} selector Query selector specific to the <canvas> you want to draw
@@ -208,15 +204,23 @@ export default {
      * @prop {string} label The label for the data point.
     */
     drawChart(selector, chartInfo) {
-      const context = document.querySelector(selector).getContext('2d');
+      let context;
+
+      try {
+        context = document.querySelector(selector).getContext('2d');
+      } catch(e) {
+        console.error(e);
+        return;
+      }
+
       const data = {
-            labels: chartInfo.map((el) => el.label),
-            datasets: [{
-              backgroundColor: chartInfo.map((el) => el.backgroundColor),
-              data: chartInfo.map((el) => el.data),
-              borderWidth: 1
-            }]
-        };
+        labels: chartInfo.map((el) => el.label),
+        datasets: [{
+          backgroundColor: chartInfo.map((el) => el.backgroundColor),
+          data: chartInfo.map((el) => el.data),
+          borderWidth: 1
+        }]
+      };
 
       return new Chart(
         context,
@@ -230,10 +234,6 @@ export default {
           },
         }
       );
-    },
-    updateAllCharts() {
-        this.updateChart(this.byAssetClassChart, this.byAssetClassChartData);
-        this.updateChart(this.bySecurityChart, this.bySecurityChartData);
     },
     updateChart(chart, newChartInfo) {
       chart.data.labels = [];
