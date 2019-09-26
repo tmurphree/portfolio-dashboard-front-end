@@ -4,9 +4,10 @@
       <div class="col-12" id="welcome-text">
           <h1>Monitored securities</h1>
           <p>
-            Some securities are riskier than others.   You can tag a security as needing monitoring and set
-            thresholds for it on the Home screen (it's an option when you Edit or add a security).This page
-            shows you where the value of the security is compared to those thresholds.
+            Some securities are riskier than others.   You can tag a security as needing extra monitoring and set
+            thresholds for it on the Home screen (it's the "This security needs extra monitoring" option when
+            you edit or add a security).  This page shows you where the value of the security is compared to
+            those thresholds.
           </p>
       </div>
     </div>

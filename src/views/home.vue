@@ -90,18 +90,26 @@
               <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
             </div>
             <div class="form-group form-row">
-              <input type="checkbox" id="checkbox" v-model="editedSecurity.monitored">
-              <label for="checkbox">Monitor this security</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="checkbox" v-model="editedSecurity.monitored">
+                <label for="checkbox" class="form-check-label">This security needs extra monitoring</label>
+              </div>
             </div>
             <div class="form-group form-row">
-              <label for="friendly-name">Maximum % of portfolio</label>
-              <input v-model="editedSecurity.monitoredUpperBound" class="form-control" id="friendly-name" name="friendly-name" type="number"
+              <small>Minimum threshold must be &gt;= 0.</small>
+              <small>Minimum threshold must be &lt; maximum.</small>
+              <small>Maximum threshold must be &lt;= 100.</small>
+              <small>You can't save if any of these are false.</small>
+            </div>
+            <div class="form-group form-row">
+              <label for="monitored-minimum-pct">Minimum % of portfolio</label>
+              <input v-model="editedSecurity.monitoredLowerBound" class="form-control" id="monitored-minimum-pct" name="monitored-minimum-pct" type="number"
                 :disabled="!(editedSecurity.monitored)"
               >
             </div>
             <div class="form-group form-row">
-              <label for="friendly-name">Minimum % of portfolio</label>
-              <input v-model="editedSecurity.monitoredLowerBound" class="form-control" id="friendly-name" name="friendly-name" type="number"
+              <label for="monitored-maximum-pct">Maximum % of portfolio</label>
+              <input v-model="editedSecurity.monitoredUpperBound" class="form-control" id="monitored-maximum-pct" name="monitored-maximum-pct" type="number"
                 :disabled="!(editedSecurity.monitored)"
               >
             </div>
