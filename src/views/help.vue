@@ -12,7 +12,7 @@
       <div class="card-body">
         <p class="card-text" data-cy="help-text">
           Probably, someone else is looking at the site.  This is causing the app to exceed the rate limit
-          on the pricing API.  Adding UX for this is already in the backlog.
+          on the pricing API.  An alert shows up on the home screen if this happens.
         </p>
         <p class="card-text" data-cy="help-text">
           This is a demo application, and as such I have a limited budget for it.  I'm using the free tier
