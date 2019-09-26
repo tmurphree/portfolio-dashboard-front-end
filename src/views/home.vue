@@ -89,6 +89,22 @@
               <label for="friendly-name">Friendly name (optional):</label>
               <input v-model="editedSecurity.friendlyName" class="form-control" id="friendly-name" name="friendly-name" type="text">
             </div>
+            <div class="form-group form-row">
+              <input type="checkbox" id="checkbox" v-model="editedSecurity.monitored">
+              <label for="checkbox">Monitor this security</label>
+            </div>
+            <div class="form-group form-row">
+              <label for="friendly-name">Maximum % of portfolio</label>
+              <input v-model="editedSecurity.monitoredUpperBound" class="form-control" id="friendly-name" name="friendly-name" type="number"
+                :disabled="!(editedSecurity.monitored)"
+              >
+            </div>
+            <div class="form-group form-row">
+              <label for="friendly-name">Minimum % of portfolio</label>
+              <input v-model="editedSecurity.monitoredLowerBound" class="form-control" id="friendly-name" name="friendly-name" type="number"
+                :disabled="!(editedSecurity.monitored)"
+              >
+            </div>
           </div>
           <div class="col-md-5" id="asset-classes">
             <div class="row">
