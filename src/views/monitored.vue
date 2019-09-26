@@ -1,20 +1,22 @@
 <template>
-  <div class="row">
-    <section class="col-12" id="welcome-text">
-        <h1>Monitored securities</h1>
-        <p>
-          Some securities are riskier than others.   You can tag a security as needing monitoring and set
-          thresholds for it on the Home screen (it's an option when you Edit or add a security).This page
-          shows you where the value of the security is compared to those thresholds.
-        </p>
-    </section>
-    <section class="d-flex justify-content-center justify-content-lg-start row" id="graph-section">
+  <div>
+    <div class="row">
+      <div class="col-12" id="welcome-text">
+          <h1>Monitored securities</h1>
+          <p>
+            Some securities are riskier than others.   You can tag a security as needing monitoring and set
+            thresholds for it on the Home screen (it's an option when you Edit or add a security).This page
+            shows you where the value of the security is compared to those thresholds.
+          </p>
+      </div>
+    </div>
+    <div class="row" id="graph-section">
       <monitored-security-graph
         v-for="element in monitoredSecurities"
         :chartData="element"
         :key="element.symbol"
       ></monitored-security-graph>
-    </section>
+    </div>
   </div>
 </template>
 
@@ -22,6 +24,12 @@
 import { mapState } from 'vuex';
 
 import MonitoredSecurityGraph from '@/components/monitored-security-graph';
+
+const sortBySymbol = function sortBySymbol(a,b) {
+  if (a.symbol < b.symbol) { return -1; }
+  if (a.symbol > b.symbol) { return 1; }
+  return 0;
+};
 
 export default {
   components: {
@@ -42,7 +50,7 @@ export default {
             upperBound: el.monitoredUpperBound,
           }
         })
-        .sort((el) => el.symbol);
+        .sort(sortBySymbol);
     },
     ...mapState(['portfolio']),
   },
