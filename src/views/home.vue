@@ -96,20 +96,21 @@
               </div>
             </div>
             <div class="form-group form-row">
+              <small>Neither minimum threshold nor maximum threshold can be blank.</small>
               <small>Minimum threshold must be &gt;= 0.</small>
-              <small>Minimum threshold must be &lt; maximum.</small>
+              <small>Minimum threshold must be &lt;= maximum threshold.</small>
               <small>Maximum threshold must be &lt;= 100.</small>
               <small>You can't save if any of these are false.</small>
             </div>
             <div class="form-group form-row">
               <label for="monitored-minimum-pct">Minimum % of portfolio</label>
-              <input v-model="editedSecurity.monitoredLowerBound" class="form-control" id="monitored-minimum-pct" name="monitored-minimum-pct" type="number"
+              <input v-model.number="editedSecurity.monitoredLowerBound" class="form-control" id="monitored-minimum-pct" name="monitored-minimum-pct" type="number"
                 :disabled="!(editedSecurity.monitored)"
               >
             </div>
             <div class="form-group form-row">
               <label for="monitored-maximum-pct">Maximum % of portfolio</label>
-              <input v-model="editedSecurity.monitoredUpperBound" class="form-control" id="monitored-maximum-pct" name="monitored-maximum-pct" type="number"
+              <input v-model.number="editedSecurity.monitoredUpperBound" class="form-control" id="monitored-maximum-pct" name="monitored-maximum-pct" type="number"
                 :disabled="!(editedSecurity.monitored)"
               >
             </div>
@@ -211,6 +212,19 @@ export default {
   },
   computed: {
     disableAddButton() {
+      const monitoringThresholdsAreValid = (function monitoringThresholdsAreValid(editedSecurity) {
+        const lower = editedSecurity.monitoredLowerBound;
+        const upper = editedSecurity.monitoredUpperBound;
+        
+        if (!editedSecurity.monitored) { return true; }
+
+        return lower !== '' &&
+          upper !== '' &&
+          lower >= 0 &&
+          lower <= upper &&
+          upper <= 100;
+      })(this.editedSecurity);
+
       const assetClassesSum = Object.values(this.editedSecurity.assetClasses)
         .map(el => isNaN(parseFloat(el)) ? 0 : parseFloat(el))
         .reduce((sum, current) => sum + current, 0);
@@ -219,7 +233,8 @@ export default {
 
       return this.editedSecurity.symbol.length <= 0 ||
         numSharesToFloat <= 0 ||
-        assetClassesSum !== 100;
+        assetClassesSum !== 100 ||
+        !(monitoringThresholdsAreValid);
     },
     ...mapState(['portfolio', 'showHomeViewWelcome']),
   },
