@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
 import About from './views/about.vue';
-import AssetAllocation from './views/asset-allocation.vue';
 import CurrentGraph from './views/graph.vue';
 import Help from './views/help.vue';
 import Monitored from './views/monitored.vue';
@@ -17,11 +15,6 @@ export default new Router({
       path: '/about',
       name: 'about',
       component: About,
-    },
-    {
-      path: '/asset-allocation',
-      name: 'asset-allocation',
-      component: AssetAllocation,
     },
     {
       path: '/graph',
