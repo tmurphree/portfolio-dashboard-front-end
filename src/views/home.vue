@@ -96,11 +96,11 @@
               </div>
             </div>
             <div class="form-group form-row">
-              <small>Neither minimum threshold nor maximum threshold can be blank.</small>
-              <small>Minimum threshold must be &gt;= 0.</small>
-              <small>Minimum threshold must be &lt;= maximum threshold.</small>
-              <small>Maximum threshold must be &lt;= 100.</small>
-              <small>You can't save if any of these are false.</small>
+              <small>
+                Neither minimum threshold nor maximum threshold can be blank.  Minimum threshold must 
+                be &gt;= 0.  Minimum threshold must be &lt;= maximum threshold.  Maximum threshold must
+                be &lt;= 100.  You can't save if any of these are false.
+              </small>
             </div>
             <div class="form-group form-row">
               <label for="monitored-minimum-pct">Minimum % of portfolio</label>
