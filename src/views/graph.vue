@@ -32,13 +32,15 @@
 </template>
 
 <script>
+
 import { mapState } from 'vuex';
 
 import PieChartLegend from '@/components/pie-chart-legend';
 
-import roundToPrecision from '@/lib/roundToPrecision';
 import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
+import roundToPrecision from '@/lib/roundToPrecision';
 import securityFactory from '@/lib/securityFactory';
+import * as isValid from '@/lib/validations/graph.validations.js';
 
 export default {
   components: { PieChartLegend },
@@ -204,6 +206,14 @@ export default {
      * @prop {string} label The label for the data point.
     */
     drawChart(selector, chartInfo) {
+      if (!(isValid.drawChart.selector(selector))) {
+        throw new Error('selector is invalid');
+      }
+
+      if (!(isValid.drawChart.chartInfo(chartInfo))) {
+        throw new Error('chartInfo is invalid');
+      }
+
       let context;
 
       try {
@@ -235,7 +245,28 @@ export default {
         }
       );
     },
+    /**
+     * @description Update a chart.
+     * @param {string} selector Query selector specific to the <canvas> you want to draw
+     *    the chart on.
+     * @param {ChartInfo[]} newChartInfo Data to chart.
+     * @returns {undefined}
+     * 
+     * @typedef ChartInfo
+     * @prop {string} backgroundColor 'rgba(255, 99, 132, 1)'
+     * @prop {number} data The data you want to show in the chart.
+     * @prop {string} label The label for the data point.
+    */
     updateChart(chart, newChartInfo) {
+
+      if (!(isValid.updateChart.chart(chart))) {
+        throw new Error('chart is invalid');
+      }
+
+      if (!(isValid.updateChart.newChartInfo(newChartInfo))) {
+        throw new Error('newChartInfo is invalid');
+      }
+
       chart.data.labels = [];
       chart.data.labels = newChartInfo.map((el) => el.label);
 
