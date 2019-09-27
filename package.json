@@ -14,7 +14,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "@tmurphree/validation-predicates": "1.0.2",
+    "@tmurphree/validation-predicates": "1.1.0",
     "axios": "0.19.0",
     "vue": "2.5.17",
     "vue-router": "3.0.1",

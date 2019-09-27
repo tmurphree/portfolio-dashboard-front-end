@@ -189,6 +189,7 @@
 <script>
 import { mapState } from 'vuex';
 
+import * as isValid from '@/lib/validations/home.validations.js';
 import securityFactory from '@/lib/securityFactory';
 import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 
@@ -289,6 +290,10 @@ export default {
       this.$store.commit('clearPortfolio');
     },
     displayAssetClasses: function displayAssetClasses(classesObject) {
+      if (!(isValid.displayAssetClasses.classesObject(classesObject))) {
+        throw new Error('classesObject is not valid');
+      }
+
       return Object.keys(classesObject)
         .filter(el => classesObject[el] !== 0)
         .map(el => `${classesObject[el]}% ${this.expandAssetClassShorthand(el)}`);
@@ -351,6 +356,10 @@ export default {
       this.scrollToForm();
     },
     removeSecurity: function removeSecurity(symbol) {
+      if (!(isValid.removeSecurity.symbol(symbol))) {
+        throw new Error('symbol is not valid');
+      }
+
       this.$store.commit('trimPortfolio', symbol);
     },
     resetEditedSecurity: function resetEditedSecurity() {
