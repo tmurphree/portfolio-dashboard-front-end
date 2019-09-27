@@ -7,10 +7,10 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
+import * as isValid from './lib/validations/store.validations';
 
 import initialData from './lib/initialData';
 import roundToPrecision from './lib/roundToPrecision';
-import securityFactory from './lib/securityFactory';
 
 Vue.use(Vuex);
 
@@ -21,17 +21,13 @@ export default new Vuex.Store({
   },
   mutations: {
     addToPortfolio: function addToPortfolio(state, payload) {
-      if (typeof payload !== 'object') {
-        throw new Error('Non-object received in portfolio mutation.');
+      if (!(isValid.addToPortfolio.state(state))) {
+        throw new Error('state is not valid');
       }
 
-      Object
-        .keys(securityFactory())
-        .forEach((el) => {
-          if (!Object.keys(payload).includes(el)) {
-            throw new Error(`Missing expected property: ${el}`);
-          }
-        });
+      if (!(isValid.addToPortfolio.payload(payload))) {
+        throw new Error('payload is not valid');
+      }
 
       const existingRow = state.portfolio
         .find((el) => el.symbol === payload.symbol);

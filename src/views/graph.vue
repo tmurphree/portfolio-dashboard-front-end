@@ -40,7 +40,7 @@ import PieChartLegend from '@/components/pie-chart-legend';
 import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 import roundToPrecision from '@/lib/roundToPrecision';
 import securityFactory from '@/lib/securityFactory';
-import * as isValid from '@/lib/validations/graph.validations.js';
+import * as isValid from '@/lib/validations/graph.validations';
 
 export default {
   components: { PieChartLegend },

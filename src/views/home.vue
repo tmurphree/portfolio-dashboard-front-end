@@ -189,7 +189,7 @@
 <script>
 import { mapState } from 'vuex';
 
-import * as isValid from '@/lib/validations/home.validations.js';
+import * as isValid from '@/lib/validations/home.validations';
 import securityFactory from '@/lib/securityFactory';
 import expandAssetClassShorthand from '@/mixins/expandAssetClassShorthand.mixin';
 
