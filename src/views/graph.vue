@@ -80,17 +80,6 @@ export default {
       */
       const aggregateWeightedAssetClassPercentages = (function(portfolio) {
         const assetClassKeys = Object.keys(securityFactory().assetClasses);
-        
-        // make object with appriate keys set to 0
-        const makeInitialObject = function makeInitialObject() {
-          const result = {};
-
-          assetClassKeys.forEach((key) => {
-            result[key] = 0;
-          });
-
-          return result;
-        };
 
         const grabRelevantProps = function grabRelevantProps(el) {
           return { 
@@ -120,7 +109,7 @@ export default {
         return portfolio
           .map(grabRelevantProps)
           .map(calculatePerSecurityContribution)
-          .reduce(addThePercentages, makeInitialObject());
+          .reduce(addThePercentages, { ...securityFactory().assetClasses });
       })(this.portfolio);
 
       const calculateBackgroundColor = function calculateBackgroundColor(shorthand) {
