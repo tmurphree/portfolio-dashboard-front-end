@@ -16,7 +16,7 @@ const securityFactory = function securityFactory() {
     monitored: false,
     monitoredUpperBound: 0,
     monitoredLowerBound: 0,
-    numShares: '',
+    numShares: 0,
     pctOfPortfolio: 0,
     symbol: '',
     value: 0,

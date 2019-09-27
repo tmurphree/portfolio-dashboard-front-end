@@ -48,22 +48,46 @@ export default new Vuex.Store({
       }
     },
     clearPortfolio: function clearPortfolio(state) {
+      if (!(isValid.clearPortfolio.state(state))) {
+        throw new Error('state is not valid');
+      }
+
       state.portfolio = [];
     },
     showHomeViewWelcome: function showHomeViewWelcome(state, payload) {
-      if (typeof payload !== 'boolean') {
-        throw new Error('Non-boolean received in showHomeViewWelcome mutation.');
+      if (!(isValid.showHomeViewWelcome.state(state))) {
+        throw new Error('state is not valid');
+      }
+
+      if (!(isValid.showHomeViewWelcome.payload(payload))) {
+        throw new Error('payload is not valid');
       }
 
       state.showHomeViewWelcome = payload;
     },
     trimPortfolio: function trimPortfolio(state, payload) {
+      if (!(isValid.trimPortfolio.state(state))) {
+        throw new Error('state is not valid');
+      }
+
+      if (!(isValid.trimPortfolio.payload(payload))) {
+        throw new Error('payload is not valid');
+      }
+
       state.portfolio.splice(
         state.portfolio.findIndex((el) => el.symbol === payload),
         1,
       );
     },
     updatePriceValuePercentage: function updatePriceValuePercentage(state, payload) {
+      if (!(isValid.updatePriceValuePercentage.state(state))) {
+        throw new Error('state is not valid');
+      }
+
+      if (!(isValid.updatePriceValuePercentage.payload(payload))) {
+        throw new Error('payload is not valid');
+      }
+
       const standardInput = Array.isArray(payload) ? [...payload] : [payload];
       let totalValue = 0;
 
