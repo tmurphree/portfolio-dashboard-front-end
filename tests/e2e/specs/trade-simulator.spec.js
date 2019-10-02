@@ -9,29 +9,29 @@ describe('the trade simulator view', () => {
     cy.get('p[data-cy="instructions"]')
       .should(($p) => {
         expect($p).to.have.length(1);
-        console.log($p[0]);
-        expect($p[0].innerText.length).to.be(1);
+        expect($p[0].innerText.length).to.be.greaterThan(1);
       });
   });
 
   it('shows the current state', () => {
-    cy.get('canvas[data-cy="current-chart"');
+    cy.get('canvas[data-cy="current-chart"]');
   });
 
   it('hides the simulated chart and differences table initially', () => {
-    cy.get('canvas[data-cy="simulated-chart"')
+    cy.get('canvas[data-cy="simulation-chart"')
       .should('not.be.visible');
 
     cy.get('table[data-cy="differences-table"')
       .should('not.be.visible');
   });
 
-  it.skip('lets you make alterations', () => {
-    cy.get('form');
+  it('lets you make alterations', () => {
+    cy.get('form[data-cy="change-dollars-form"]');
+    cy.get('form[data-cy="change-shares-form"]');
   });
 
   it('shows the state after those alterations', () => {
-    cy.get('canvas[data-cy="simulated-chart"');
+    cy.get('canvas[data-cy="simulation-chart"');
 
     cy.get('table[data-cy="differences-table" td')
       .its('length')
