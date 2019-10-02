@@ -32,7 +32,6 @@
 </template>
 
 <script>
-
 import { mapState } from 'vuex';
 
 import PieChartLegend from '@/components/pie-chart-legend';
