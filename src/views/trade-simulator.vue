@@ -14,6 +14,7 @@
           id="current-chart"
           role="img"
         >
+        </canvas>
       </div>
       <div class="col-md-6" v-if="simulationStarted">
         <canvas
@@ -22,6 +23,7 @@
           id="simulation-chart"
           role="img"
         >
+        </canvas>
       </div>
     </div> 
     <div class="row">
@@ -46,6 +48,8 @@
 
 <script>
 import { mapState } from 'vuex';
+
+import * as isValid from '@/lib/validations/trade-simulator.validations';
 
 export default {
   data: function data() {
