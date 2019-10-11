@@ -20,6 +20,7 @@ describe('top bar', () => {
       '[data-cy="home-sm-nav"]',
       '[data-cy="graph-sm-nav"]',
       '[data-cy="monitored-sm-nav"]',
+      '[data-cy="trade-simulator-sm-nav"]',
       '[data-cy="about-sm-nav"]',
       '[data-cy="help-sm-nav"]',
     ];
