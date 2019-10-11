@@ -53,7 +53,9 @@ import * as isValid from '@/lib/validations/trade-simulator.validations';
 
 export default {
   data: function data() {
-    return {};
+    return {
+      testPortfolio: {},
+    };
   },
   computed: {
     simulationStarted() {
@@ -67,6 +69,11 @@ export default {
       // Also, this does not run if the submit button is disabled.
       event.preventDefault();
     },
+  },
+  mounted() {
+    if (this.portfolio.length !== 0) {
+      this.testPortfolio = [...this.portfolio];
+    }
   },
   name: 'trade-simulator'
 }
