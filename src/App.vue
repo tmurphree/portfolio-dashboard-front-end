@@ -14,6 +14,7 @@
           <router-link to="/" class="ml-1 nav-link top-nav-link" data-cy="home-sm-nav" exact>Home</router-link>
           <router-link to="/graph" class="ml-1 nav-link top-nav-link" data-cy="graph-sm-nav">Graph view</router-link>
           <router-link to="/monitored" class="ml-1 nav-link top-nav-link" data-cy="monitored-sm-nav">Monitored securities</router-link>
+          <router-link to="/trade-simulator" class="ml-1 nav-link top-nav-link" data-cy="trade-simulator-sm-nav">Trade simulator</router-link>
           <router-link to="/about" class="ml-1 nav-link top-nav-link" data-cy="about-sm-nav">About</router-link>
           <router-link to="/help" class="ml-1 nav-link top-nav-link" data-cy="help-sm-nav">Help</router-link>
         </div>
@@ -122,15 +123,9 @@
           });
         };
 
-        const collapsableNavElements = [
-          '[data-cy="home-sm-nav"]',
-          '[data-cy="graph-sm-nav"]',
-          '[data-cy="monitored-sm-nav"]',
-          '[data-cy="about-sm-nav"]',
-          '[data-cy="help-sm-nav"]',
-        ];
-
-        collapsableNavElements.forEach((el) => addHideListener(document.querySelector(el)));
+        document
+          .querySelectorAll('div.navbar-nav a')
+          .forEach((el) => addHideListener(el));
       },
       goHome() {
         this.$router.push('/');
