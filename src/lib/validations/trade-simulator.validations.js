@@ -1,8 +1,8 @@
 import {
+  isNullOrUndefined,
   isObjectWithExpectedProps,
   isPopulatedArray,
   isPopulatedString,
-  isNotNullOrUndefined,
 } from '@tmurphree/validation-predicates';
 
 const drawChart = {
@@ -12,7 +12,7 @@ const drawChart = {
 };
 
 const updateChart = {
-  chart: (x) => isNotNullOrUndefined(x),
+  chart: (x) => !(isNullOrUndefined(x)),
   newChartInfo: drawChart.chartInfo,
 };
 

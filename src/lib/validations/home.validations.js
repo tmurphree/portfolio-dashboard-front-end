@@ -6,7 +6,7 @@ import {
 import securityFactory from '../securityFactory';
 
 const displayAssetClasses = {
-  classesObject: (x) => isObjectLike(x, securityFactory().assetClasses),
+  classesObject: (x) => isObjectLike(x, securityFactory().assetClasses, { checkType: true }),
 };
 
 const removeSecurity = {

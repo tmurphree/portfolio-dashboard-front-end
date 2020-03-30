@@ -14,7 +14,7 @@
     "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
-    "@tmurphree/validation-predicates": "1.1.0",
+    "@tmurphree/validation-predicates": "2.x",
     "axios": "0.19.0",
     "vue": "2.5.17",
     "vue-router": "3.0.1",
@@ -26,7 +26,7 @@
     "@vue/cli-plugin-unit-jest": "4.2.3",
     "@vue/cli-service": "4.2.3",
     "@vue/test-utils": "1.0.0-beta.31",
-    "acorn": "7.1.0",
+    "acorn": "7.1.1",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.1.0",
     "eslint": "6.1.0",

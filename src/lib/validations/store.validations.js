@@ -1,19 +1,19 @@
 import {
   isArray,
   isBoolean,
+  isNullOrUndefined,
   isObjectLike,
   isObjectWithExpectedProps,
-  isNotNullOrUndefined,
   isString,
 } from '@tmurphree/validation-predicates';
 
 import securityFactory from '../securityFactory';
 
-const state = (x) => isNotNullOrUndefined(x);
+const state = (x) => !(isNullOrUndefined(x));
 
 const addToPortfolio = {
   state,
-  payload: (x) => isObjectLike(x, securityFactory()),
+  payload: (x) => isObjectLike(x, securityFactory(), { checkType: true }),
 };
 
 const clearPortfolio = {
