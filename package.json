@@ -5,7 +5,7 @@
   "scripts": {
     "autotest": "nodemon --config nodemon.config.json",
     "build": "vue-cli-service build",
-    "lint": "eslint --ignore-path .eslintignore .",
+    "lint": "eslint --ignore-path .eslintignore --fix --fix-type layout .",
     "lint:fix": "eslint --ignore-path .eslintignore . --fix",
     "start:api": "docker run -d --rm -p 3000:3000 --env-file ../portfolio-dashboard-back-end/.env tmurphree/portfolio-dashboard-back-end",
     "serve": "vue-cli-service serve",
@@ -21,11 +21,11 @@
     "vuex": "3.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "3.10.0",
-    "@vue/cli-plugin-e2e-cypress": "3.0.1",
-    "@vue/cli-plugin-unit-jest": "3.11.0",
-    "@vue/cli-service": "3.10.0",
-    "@vue/test-utils": "1.0.0-beta.20",
+    "@vue/cli-plugin-babel": "4.2.3",
+    "@vue/cli-plugin-e2e-cypress": "4.2.3",
+    "@vue/cli-plugin-unit-jest": "4.2.3",
+    "@vue/cli-service": "4.2.3",
+    "@vue/test-utils": "1.0.0-beta.31",
     "acorn": "7.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "24.1.0",
