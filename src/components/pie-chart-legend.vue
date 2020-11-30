@@ -1,8 +1,8 @@
 <template>
   <div class="row">
-    <div class="col-md-6" v-for="chartDataPoint in chartData" :key="chartDataPoint.label">
+    <div class="col-md-6" v-for="chartDataPoint in formattedChartData" :key="chartDataPoint.label">
       <div class="color-box mr-1" :style="{ backgroundColor: chartDataPoint.backgroundColor }"></div>
-      <span>{{ chartDataPoint.label }}</span>
+      <span>{{ chartDataPoint.label }} {{ chartDataPoint.data }}%</span>
     </div>
   </div> <!-- class="row" -->
 </template>
@@ -11,6 +11,14 @@
 export default {
   props: {
     chartData: Array,
+  },
+  computed: {
+    formattedChartData() {
+      return this.chartData.map((el) => ({
+        ...el,
+        data: parseFloat(el.data).toFixed(2),
+      }));
+    },
   },
   data() {
     return {};
