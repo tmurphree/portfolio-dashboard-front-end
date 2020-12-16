@@ -20,7 +20,6 @@ describe('top bar', () => {
       '[data-cy="home-sm-nav"]',
       '[data-cy="graph-sm-nav"]',
       '[data-cy="monitored-sm-nav"]',
-      '[data-cy="trade-simulator-sm-nav"]',
       '[data-cy="about-sm-nav"]',
       '[data-cy="help-sm-nav"]',
     ];
@@ -105,8 +104,6 @@ describe('side bar', () => {
 
         expect($link[1].innerText).to.contain('Graph view');
         expect($link[2].innerText).to.contain('Monitored securities');
-
-        expect($link[3].innerText).to.contain('Trade simulator');
       });
   });
 
@@ -115,7 +112,6 @@ describe('side bar', () => {
       { expectedUrl: '/', linkText: 'Home' },
       { expectedUrl: '/graph', linkText: 'Graph view' },
       { expectedUrl: '/monitored', linkText: 'Monitored securities' },
-      { expectedUrl: '/trade-simulator', linkText: 'Trade simulator' },
     ];
 
     urlMapper.forEach((element) => {

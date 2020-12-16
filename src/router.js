@@ -4,7 +4,6 @@ import About from './views/about.vue';
 import CurrentGraph from './views/graph.vue';
 import Help from './views/help.vue';
 import Monitored from './views/monitored.vue';
-import TradeSimulator from './views/trade-simulator.vue';
 import Home from './views/home.vue';
 
 Vue.use(Router);
@@ -35,11 +34,6 @@ export default new Router({
       path: '/monitored',
       name: 'monitored',
       component: Monitored,
-    },
-    {
-      path: '/trade-simulator',
-      name: 'trade-simulator',
-      component: TradeSimulator,
     },
   ],
 });
