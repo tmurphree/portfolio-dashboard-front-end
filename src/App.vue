@@ -14,7 +14,6 @@
           <router-link to="/" class="ml-1 nav-link top-nav-link" data-cy="home-sm-nav" exact>Home</router-link>
           <router-link to="/graph" class="ml-1 nav-link top-nav-link" data-cy="graph-sm-nav">Graph view</router-link>
           <router-link to="/monitored" class="ml-1 nav-link top-nav-link" data-cy="monitored-sm-nav">Monitored securities</router-link>
-          <router-link to="/trade-simulator" class="ml-1 nav-link top-nav-link" data-cy="trade-simulator-sm-nav">Trade simulator</router-link>
           <router-link to="/about" class="ml-1 nav-link top-nav-link" data-cy="about-sm-nav">About</router-link>
           <router-link to="/help" class="ml-1 nav-link top-nav-link" data-cy="help-sm-nav">Help</router-link>
         </div>
@@ -70,22 +69,7 @@
               </li>
             </ul>
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>What-if analysis</span>
             </h6>
-            <ul class="nav flex-column mb-2">
-              <li class="nav-item">
-                <router-link to="/trade-simulator" class="nav-link">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-shopping-cart">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                  </svg>
-                  Trade simulator
-                </router-link>
-              </li>
-            </ul>
           </div>
         </nav>
         <main class="col-md-9 col-lg-10 ml-sm-auto mt-1 mt-lg-3" id="main-element">
