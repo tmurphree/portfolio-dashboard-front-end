@@ -1,8 +1,6 @@
 # portfolio-dashboard-front-end
 
-> Front end for the portfolio dashboard project.
-
-[Click here for portfolio dashboard in production](https://tm-portfolio-dashboard.herokuapp.com/)  
+Front end for the portfolio dashboard project.
 
 I'm interested in personal finance and wanted a tool to help me show my web development skills in a way that's interesting to me.  
 
